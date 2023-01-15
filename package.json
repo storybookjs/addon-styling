@@ -1,15 +1,15 @@
 {
-  "name": "storybook-addon-kit",
+  "name": "addon-design-tokens",
   "version": "0.0.0",
-  "description": "everything you need to build a Storybook addon",
+  "description": "A panel to view and edit your design tokens",
   "keywords": [
-    "storybook-addons"
+    "design tokens", "style", "design", "storybook-addons"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/storybook-addon-kit"
+    "url": "https://github.com/Integrayshaun/addon-design-tokens"
   },
-  "author": "package-author",
+  "author": "Shaun Evening <goodeveningshaun@gmail.com>",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -21,7 +21,6 @@
     "*.d.ts"
   ],
   "scripts": {
-    "postinstall": "node scripts/welcome.js",
     "clean": "rimraf ./dist",
     "buildBabel": "concurrently \"yarn buildBabel:cjs\" \"yarn buildBabel:esm\"",
     "buildBabel:cjs": "babel ./src -d ./dist/cjs --extensions \".js,.jsx,.ts,.tsx\"",
@@ -80,9 +79,9 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Addon Kit",
+    "displayName": "Design Tokens",
     "supportedFrameworks": [
-      "supported-frameworks"
+      "react", "vue", "angular", "web-components", "ember", "html", "svelte", "preact", "react-native"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
