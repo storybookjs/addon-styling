@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { useGlobals } from "@storybook/api";
 import { Icons, IconButton } from "@storybook/components";
-import { TOOL_ID } from "./constants";
+import { TOOL_ID } from "../constants";
 
-export const Tool = () => {
+export const ThemeSwitcher = () => {
   const [{ myAddon }, updateGlobals] = useGlobals();
 
   const toggleMyTool = useCallback(

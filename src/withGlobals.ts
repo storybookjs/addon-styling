@@ -2,7 +2,7 @@ import type { DecoratorFunction } from "@storybook/addons";
 import { useEffect, useGlobals } from "@storybook/addons";
 
 export const withGlobals: DecoratorFunction = (StoryFn, context) => {
-  const [{ myAddon }] = useGlobals();
+  const [{ designToken }] = useGlobals();
   // Is the addon being used in the docs panel
   const isInDocs = context.viewMode === "docs";
   const { theme } = context.globals;
@@ -15,11 +15,11 @@ export const withGlobals: DecoratorFunction = (StoryFn, context) => {
       : `#root`;
 
     displayToolState(selectorId, {
-      myAddon,
+      myAddon: designToken,
       isInDocs,
       theme,
     });
-  }, [myAddon, theme]);
+  }, [designToken, theme]);
 
   return StoryFn();
 };

@@ -1,9 +1,11 @@
 {
-  "name": "addon-design-tokens",
+  "name": "addon-styling-framework",
   "version": "0.0.0",
-  "description": "A panel to view and edit your design tokens",
+  "description": "A base addon for configuring popular styling tools",
   "keywords": [
-    "design tokens", "style", "design", "storybook-addons"
+    "style",
+    "design",
+    "storybook-addons"
   ],
   "repository": {
     "type": "git",
@@ -44,6 +46,7 @@
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.13.0",
     "@storybook/addon-essentials": "^6.5.8",
+    "@storybook/design-system": "^7.10.0",
     "@storybook/react": "^6.5.8",
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
@@ -81,7 +84,15 @@
   "storybook": {
     "displayName": "Design Tokens",
     "supportedFrameworks": [
-      "react", "vue", "angular", "web-components", "ember", "html", "svelte", "preact", "react-native"
+      "react",
+      "vue",
+      "angular",
+      "web-components",
+      "ember",
+      "html",
+      "svelte",
+      "preact",
+      "react-native"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
   }
