@@ -13,6 +13,7 @@ export interface DataAttributeStrategy {
 }
 
 const DEFAULT_ELEMENT_SELECTOR = "html";
+const DEFAULT_DATA_ATTRIBUTE = "data-theme";
 
 const withThemeByDataAttribute: DecoratorFunction = (storyFn) => {
   const [{ selectedThemeName }, setAddonState] = useAddonState(
@@ -24,7 +25,7 @@ const withThemeByDataAttribute: DecoratorFunction = (storyFn) => {
     themes,
     defaultTheme,
     parentSelector = DEFAULT_ELEMENT_SELECTOR,
-    attributeName = "data-theme",
+    attributeName = DEFAULT_DATA_ATTRIBUTE,
     themeOverride,
   } = useParameter<DataAttributeStrategy>(PARAM_KEY);
 
