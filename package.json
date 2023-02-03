@@ -36,8 +36,7 @@
     "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --no-manager-cache --quiet\"",
     "build-storybook": "build-storybook",
     "prerelease": "zx scripts/prepublish-checks.mjs",
-    "release": "yarn build && auto shipit",
-    "eject-ts": "zx scripts/eject-typescript.mjs"
+    "release": "yarn build && auto shipit"
   },
   "dependencies": {},
   "devDependencies": {
@@ -83,7 +82,7 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Design Tokens",
+    "displayName": "Style Toolbox",
     "supportedFrameworks": [
       "react",
       "vue",
