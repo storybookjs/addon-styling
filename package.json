@@ -39,6 +39,7 @@
     "release": "yarn build && auto shipit",
     "eject-ts": "zx scripts/eject-typescript.mjs"
   },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
@@ -65,6 +66,7 @@
     "@storybook/api": "^6.5.8",
     "@storybook/components": "^6.5.8",
     "@storybook/core-events": "^6.5.8",
+    "@storybook/manager-api": "^6.5.8",
     "@storybook/theming": "^6.5.8",
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
@@ -94,8 +96,5 @@
       "react-native"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
-  },
-  "dependencies": {
-    "@storybook/manager-api": "^7.0.0-alpha.54"
   }
 }
