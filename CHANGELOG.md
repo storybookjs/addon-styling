@@ -1,3 +1,15 @@
+# v0.0.3 (Fri Feb 03 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Update imports for 7.0 ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v0.0.2 (Fri Feb 03 2023)
 
 #### ⚠️ Pushed to `main`
