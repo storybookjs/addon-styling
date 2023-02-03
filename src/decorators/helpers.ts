@@ -1,6 +1,11 @@
 import addons, { StoryContext, useParameter } from "@storybook/addons";
-import { GLOBAL_KEY, PARAM_KEY, THEMING_EVENTS } from "../constants";
-import { DEFAULT_THEME_PARAMETERS, ThemeParameters } from "./constants";
+import {
+  GLOBAL_KEY,
+  PARAM_KEY,
+  THEMING_EVENTS,
+  DEFAULT_THEME_PARAMETERS,
+  ThemeParameters,
+} from "../constants";
 
 /**
  *

@@ -13,8 +13,15 @@ import {
   TooltipLinkList,
 } from "@storybook/components";
 
-import { PARAM_KEY, THEME_SWITCHER_ID, THEMING_EVENTS } from "../constants";
-import { DEFAULT_ADDON_STATE, ThemeAddonState } from "../decorators/constants";
+import {
+  PARAM_KEY,
+  THEME_SWITCHER_ID,
+  THEMING_EVENTS,
+  DEFAULT_ADDON_STATE,
+  DEFAULT_THEME_PARAMETERS,
+  ThemeAddonState,
+  ThemeParameters,
+} from "../constants";
 
 const IconButtonLabel = styled.div(({ theme }) => ({
   fontSize: theme.typography.size.s2 - 1,
@@ -22,14 +29,14 @@ const IconButtonLabel = styled.div(({ theme }) => ({
 }));
 
 export const ThemeSwitcher = () => {
-  const { themeOverride } = useParameter<{ themeOverride?: string }>(
+  const { themeOverride } = useParameter<ThemeParameters>(
     PARAM_KEY,
-    {}
+    DEFAULT_THEME_PARAMETERS
   );
+  const [{ theme: selected }, updateGlobals] = useGlobals();
 
   const [{ themesList, themeDefault }, updateState] =
     useAddonState<ThemeAddonState>(THEME_SWITCHER_ID, DEFAULT_ADDON_STATE);
-  const [{ theme }, updateGlobals] = useGlobals();
 
   useChannel({
     [THEMING_EVENTS.REGISTER_THEMES]: ({ themes, defaultTheme }) => {
@@ -46,10 +53,10 @@ export const ThemeSwitcher = () => {
       return `Story override`;
     }
 
-    const themeName = theme || themeDefault;
+    const themeName = selected || themeDefault;
 
     return themeName && `${themeName} theme`;
-  }, [themeOverride, themeDefault, theme]);
+  }, [themeOverride, themeDefault, selected]);
 
   return (
     <Fragment>
@@ -60,12 +67,12 @@ export const ThemeSwitcher = () => {
         tooltip={({ onHide }) => {
           return (
             <TooltipLinkList
-              links={themesList.map((name) => ({
-                id: name,
-                title: name,
-                active: theme === name,
+              links={themesList.map((theme) => ({
+                id: theme,
+                title: theme,
+                active: selected === theme,
                 onClick: () => {
-                  updateGlobals({ theme: name });
+                  updateGlobals({ theme });
                   onHide();
                 },
               }))}
