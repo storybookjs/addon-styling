@@ -1,13 +1,10 @@
-<div style="text-align:center;">
-    <span aria-hidden="true" style="font-size:5rem;">🧰<br/></span>
-    <h1>storybook-addon-style-toolbox</h1>
-</div>
+# storybook-addon-style-toolbox
 
 Configurations for popular styling tools as well as theme toggling.
 
 ## 🏁 Getting Started
 
-To get started, install the package as a dev dependency
+To get started, **install the package** as a dev dependency
 
 yarn:
 
@@ -15,19 +12,19 @@ yarn:
 yarn add -D storybook-addon-style-toolbox
 ```
 
-npm
+npm:
 
 ```zsh
 npm install -D storybook-addon-style-toolbox
 ```
 
-pnpm
+pnpm:
 
 ```zsh
 pnpm add -D storybook-addon-style-toolbox
 ```
 
-Then, include the addon in your `.storybook/main.js` file
+Then, **include the addon** in your `.storybook/main.js` file
 
 ```js
 module.exports = {
@@ -47,7 +44,7 @@ For tool-specific setup, check out the recipes below
 
 ## 🤝 Contributing
 
-If you'd like to contribute to this addon, THANK YOU 🙏
+If you'd like to contribute to this addon, **THANK YOU**, I'd love your help 🙏
 
 ### 📝 Development scripts
 

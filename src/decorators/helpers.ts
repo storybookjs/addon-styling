@@ -1,4 +1,4 @@
-import addons, { StoryContext, useParameter } from "@storybook/addons";
+import { addons, StoryContext, useParameter } from "@storybook/addons";
 import {
   GLOBAL_KEY,
   PARAM_KEY,
