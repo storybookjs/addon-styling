@@ -1,5 +1,5 @@
 {
-  "name": "addon-style-toolbox",
+  "name": "storybook-addon-style-toolbox",
   "version": "0.0.0",
   "description": "A base addon for configuring popular styling tools",
   "keywords": [
