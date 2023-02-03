@@ -46,7 +46,6 @@
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.13.0",
     "@storybook/addon-essentials": "^6.5.8",
-    "@storybook/design-system": "^7.10.0",
     "@storybook/react": "^6.5.8",
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
@@ -95,5 +94,8 @@
       "react-native"
     ],
     "icon": "https://user-images.githubusercontent.com/321738/63501763-88dbf600-c4cc-11e9-96cd-94adadc2fd72.png"
+  },
+  "dependencies": {
+    "@storybook/manager-api": "^7.0.0-alpha.54"
   }
 }
