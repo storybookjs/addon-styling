@@ -49,6 +49,7 @@ For tool-specific setup, check out the recipes below
 - [`@mui/material`](./docs/getting-started/material-ui.md)
 - [`bootstrap`](./docs/getting-started/bootstrap.md)
 - [`styled-components`](./docs/getting-started/styled-components.md)
+- [`tailwind`](./docs/getting-started/tailwind.md)
 
 ## 🤝 Contributing
 
