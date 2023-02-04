@@ -2,6 +2,8 @@
 
 Configurations for popular styling tools as well as theme toggling.
 
+![Toggling between themes](./.github/media/styles-addon.gif)
+
 ## 🏁 Getting Started
 
 To get started, **install the package** as a dev dependency
@@ -9,38 +11,41 @@ To get started, **install the package** as a dev dependency
 yarn:
 
 ```zsh
-yarn add -D storybook-addon-style-toolbox
+yarn add -D @storybook/addon-style-config
 ```
 
 npm:
 
 ```zsh
-npm install -D storybook-addon-style-toolbox
+npm install -D @storybook/addon-style-config
 ```
 
 pnpm:
 
 ```zsh
-pnpm add -D storybook-addon-style-toolbox
+pnpm add -D @storybook/addon-style-config
 ```
 
 Then, **include the addon** in your `.storybook/main.js` file
 
-```js
+```diff
 module.exports = {
   stories: [
-    "../src/stories/**/*.stories.mdx",
-    "../src/stories/**/*.stories.@(js|jsx|ts|tsx)",
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
   ],
-  addons: ["@storybook/addon-essentials", "storybook-addon-style-toolbox"],
+  addons: [
+    "@storybook/addon-essentials",
++   "@storybook/addon-style-config"
+  ],
 };
 ```
 
-### 👇 Tool specific configuration
+## 👇 Tool specific configuration
 
 For tool-specific setup, check out the recipes below
 
-- List coming soon
+- [`@mui/material`](./docs/getting-started/material-ui.md)
 
 ## 🤝 Contributing
 
