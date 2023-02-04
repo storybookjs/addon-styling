@@ -45,7 +45,9 @@ module.exports = {
 
 For tool-specific setup, check out the recipes below
 
+- [`@emotion/styled`](./docs/getting-started/emotion.md)
 - [`@mui/material`](./docs/getting-started/material-ui.md)
+- [`styled-components`](./docs/getting-started/styled-components.md)
 
 ## 🤝 Contributing
 
