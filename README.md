@@ -1,8 +1,15 @@
 # storybook-addon-style-toolbox
 
-Configurations for popular styling tools as well as theme toggling.
+Get started in Storybook faster with popular styling tools.
 
 ![Toggling between themes](./.github/media/styles-addon.gif)
+
+## ✨ Features
+
+- 🧩 Configuration templates for popular tools
+- 🎨 Provide themes
+- 🔄 Toggle between multiple themes when more than one is provided
+- ❗️ Override theme at the component and story level through parameters
 
 ## 🏁 Getting Started
 
@@ -41,7 +48,7 @@ module.exports = {
 };
 ```
 
-## 👇 Tool specific configuration
+### 👇 Tool specific configuration
 
 For tool-specific setup, check out the recipes below
 
@@ -53,6 +60,44 @@ For tool-specific setup, check out the recipes below
 - [Vuetify 3](./docs/api.md#writing-a-custom-decorator)
 
 Don't see your favorite tool listed? Don't worry! That doesn't mean this addon isn't for you. Check out the ["Writing a custom decorator"](./docs/api.md#writing-a-custom-decorator) section of the [api reference](./docs/api.md).
+
+### ❗️ Overriding theme
+
+If you want to override your theme for a particular component or story, you can use the `theming.themeOverride` parameter.
+
+```js
+import React from "react";
+import { Button } from "./Button";
+
+export default {
+  title: "Example/Button",
+  component: Button,
+  parameters: {
+    theming: {
+      themeOverride: "light", // component level override
+    },
+  },
+};
+
+const Template = (args) => <Button {...args} />;
+
+export const Primary = Template.bind({});
+Primary.args = {
+  primary: true,
+  label: "Button",
+};
+
+export const PrimaryDark = Template.bind({});
+PrimaryDark.args = {
+  primary: true,
+  label: "Button",
+};
+PrimaryDark.parameters = {
+  theming: {
+    themeOverride: "dark", // Story level override
+  },
+};
+```
 
 ## 🤝 Contributing
 
