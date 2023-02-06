@@ -28,6 +28,9 @@ const IconButtonLabel = styled.div(({ theme }) => ({
   marginLeft: 10,
 }));
 
+const hasMultipleThemes = (themesList: ThemeAddonState["themesList"]) =>
+  themesList.length > 1;
+
 export const ThemeSwitcher = () => {
   const { themeOverride } = useParameter<ThemeParameters>(
     PARAM_KEY,
@@ -59,36 +62,38 @@ export const ThemeSwitcher = () => {
   }, [themeOverride, themeDefault, selected]);
 
   return (
-    <Fragment>
-      <WithTooltip
-        placement="top"
-        trigger="click"
-        closeOnClick
-        tooltip={({ onHide }) => {
-          return (
-            <TooltipLinkList
-              links={themesList.map((theme) => ({
-                id: theme,
-                title: theme,
-                active: selected === theme,
-                onClick: () => {
-                  updateGlobals({ theme });
-                  onHide();
-                },
-              }))}
-            />
-          );
-        }}
-      >
-        <IconButton
-          key={THEME_SWITCHER_ID}
-          active={themesList.length > 1 && !themeOverride}
-          title="Theme"
+    hasMultipleThemes(themesList) && (
+      <Fragment>
+        <WithTooltip
+          placement="top"
+          trigger="click"
+          closeOnClick
+          tooltip={({ onHide }) => {
+            return (
+              <TooltipLinkList
+                links={themesList.map((theme) => ({
+                  id: theme,
+                  title: theme,
+                  active: selected === theme,
+                  onClick: () => {
+                    updateGlobals({ theme });
+                    onHide();
+                  },
+                }))}
+              />
+            );
+          }}
         >
-          <Icons icon="paintbrush" />
-          {label && <IconButtonLabel>{label}</IconButtonLabel>}
-        </IconButton>
-      </WithTooltip>
-    </Fragment>
+          <IconButton
+            key={THEME_SWITCHER_ID}
+            active={!themeOverride}
+            title="Theme"
+          >
+            <Icons icon="paintbrush" />
+            {label && <IconButtonLabel>{label}</IconButtonLabel>}
+          </IconButton>
+        </WithTooltip>
+      </Fragment>
+    )
   );
 };

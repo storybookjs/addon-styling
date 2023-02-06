@@ -11,19 +11,19 @@ To get started, **install the package** as a dev dependency
 yarn:
 
 ```zsh
-yarn add -D @storybook/addon-style-config
+yarn add -D storybook-addon-style-toolbox
 ```
 
 npm:
 
 ```zsh
-npm install -D @storybook/addon-style-config
+npm install -D storybook-addon-style-toolbox
 ```
 
 pnpm:
 
 ```zsh
-pnpm add -D @storybook/addon-style-config
+pnpm add -D storybook-addon-style-toolbox
 ```
 
 Then, **include the addon** in your `.storybook/main.js` file
@@ -50,6 +50,9 @@ For tool-specific setup, check out the recipes below
 - [`bootstrap`](./docs/getting-started/bootstrap.md)
 - [`styled-components`](./docs/getting-started/styled-components.md)
 - [`tailwind`](./docs/getting-started/tailwind.md)
+- [Vuetify 3](./docs/api.md#writing-a-custom-decorator)
+
+Don't see your favorite tool listed? Don't worry! That doesn't mean this addon isn't for you. Check out the ["Writing a custom decorator"](./docs/api.md#writing-a-custom-decorator) section of the [api reference](./docs/api.md).
 
 ## 🤝 Contributing
 
