@@ -86,7 +86,7 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Style Configuration",
+    "displayName": "Styling",
     "supportedFrameworks": [
       "react",
       "vue",
