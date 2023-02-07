@@ -7,19 +7,19 @@ To get started, **install the package** as a dev dependency
 yarn:
 
 ```zsh
-yarn add -D storybook-addon-style-toolbox
+yarn add -D @storybook/addon-styling
 ```
 
 npm:
 
 ```zsh
-npm install -D storybook-addon-style-toolbox
+npm install -D @storybook/addon-styling
 ```
 
 pnpm:
 
 ```zsh
-pnpm add -D storybook-addon-style-toolbox
+pnpm add -D @storybook/addon-styling
 ```
 
 ## 🧩 Register Addon
@@ -84,7 +84,7 @@ Tailwind supports light and dark color modes out of the box. These modes can be 
 To enable switching between these modes in a click for your stories, use our `withThemeByClassName` decorator by adding the following code to your `.storybook/preview.js` file.
 
 ```diff
-+import { withThemeByClassName } from "storybook-addon-style-toolbox";
++import { withThemeByClassName } from "@storybook/addon-styling";
 import "../src/index.css";
 
 
@@ -116,7 +116,7 @@ export const parameters = {
 If you've configured Tailwind to toggle themes with a data attribute, use our `withThemeByDataAttribute` decorator by adding the following code to your `.storybook/preview.js` file.
 
 ```diff
-+import { withThemeByDataAttribute } from "storybook-addon-style-toolbox";
++import { withThemeByDataAttribute } from "@storybook/addon-styling";
 import "../src/index.css";
 
 

@@ -7,19 +7,19 @@ To get started, **install the package** as a dev dependency
 yarn:
 
 ```zsh
-yarn add -D storybook-addon-style-toolbox
+yarn add -D @storybook/addon-styling
 ```
 
 npm:
 
 ```zsh
-npm install -D storybook-addon-style-toolbox
+npm install -D @storybook/addon-styling
 ```
 
 pnpm:
 
 ```zsh
-pnpm add -D storybook-addon-style-toolbox
+pnpm add -D @storybook/addon-styling
 ```
 
 ## 🧩 Register Addon
@@ -67,7 +67,7 @@ Bootstrap now supports light and dark color modes out of the box as well as the 
 To enable switching between these modes in a click for your stories, use our `withThemeByDataAttribute` decorator by adding the following code to your `.storybook/preview.js` file.
 
 ```diff
-+import { withThemeByDataAttribute } from "storybook-addon-style-toolbox";
++import { withThemeByDataAttribute } from "@storybook/addon-styling";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle";

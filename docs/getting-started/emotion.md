@@ -7,19 +7,19 @@ To get started, **install the package** as a dev dependency
 yarn:
 
 ```zsh
-yarn add -D storybook-addon-style-toolbox
+yarn add -D @storybook/addon-styling
 ```
 
 npm:
 
 ```zsh
-npm install -D storybook-addon-style-toolbox
+npm install -D @storybook/addon-styling
 ```
 
 pnpm:
 
 ```zsh
-pnpm add -D storybook-addon-style-toolbox
+pnpm add -D @storybook/addon-styling
 ```
 
 ## 🧩 Register Addon
@@ -46,7 +46,7 @@ Finally, provide your theme(s) and global styles component to your stories with 
 Make the following changes to your `.storybook/preview.js`
 
 ```diff
-+import { withThemeFromJSXProvider } from "storybook-addon-style-toolbox";
++import { withThemeFromJSXProvider } from "@storybook/addon-styling";
 +import { ThemeProvider } from '@emotion/react';
 +import { GlobalStyles, lightTheme, darkTheme } from "../src/themes"; // import your custom theme configs
 

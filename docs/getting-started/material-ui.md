@@ -73,7 +73,7 @@ While Material UI comes with a default theme that works out of the box. You can 
 Make the following changes to your `.storybook/preview.js`
 
 ```diff
-+import { withThemeFromJSXProvider } from "storybook-addon-style-toolbox";
++import { withThemeFromJSXProvider } from "@storybook/addon-styling";
 +import { CssBaseline, ThemeProvider } from "@mui/material";
 +import { lightTheme, darkTheme } from "../src/themes"; // import your custom theme configs
 

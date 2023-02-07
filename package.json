@@ -1,17 +1,22 @@
 {
-  "name": "storybook-addon-style-toolbox",
+  "name": "@storybook/addon-styling",
   "version": "0.0.3",
   "description": "A base addon for configuring popular styling tools",
   "keywords": [
     "style",
     "design",
+    "themes",
+    "configuration",
     "storybook-addons"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Integrayshaun/addon-style-toolbox"
+    "url": "https://github.com/storybookjs/addon-style-toolbox"
   },
-  "author": "Shaun Evening <goodeveningshaun@gmail.com>",
+  "author": {
+    "name": "Shaun Evening",
+    "email": "goodeveningshaun@gmail.com"
+  },
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -38,7 +43,6 @@
     "prerelease": "zx scripts/prepublish-checks.mjs",
     "release": "yarn build && auto shipit"
   },
-  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.12.1",
     "@babel/core": "^7.12.3",
@@ -82,7 +86,7 @@
     "access": "public"
   },
   "storybook": {
-    "displayName": "Style Toolbox",
+    "displayName": "Style Configuration",
     "supportedFrameworks": [
       "react",
       "vue",
