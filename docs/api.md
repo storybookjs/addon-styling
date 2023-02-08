@@ -7,7 +7,7 @@
 Takes your provider component, global styles, and theme(s)to wrap your stories in.
 
 ```js
-import { withThemeFromJSXProvider } from "storybook-addon-style-toolbox";
+import { withThemeFromJSXProvider } from "@storybook/addon-styling";
 
 export const decorators = [
   withThemeFromJSXProvider({
@@ -36,7 +36,7 @@ Available options:
 Takes your theme class names to apply your parent element to enable your theme(s).
 
 ```js
-import { withThemeByClassName } from "storybook-addon-style-toolbox";
+import { withThemeByClassName } from "@storybook/addon-styling";
 
 export const decorators = [
   withThemeByClassName({
@@ -62,7 +62,7 @@ Available options:
 Takes your theme names and data attribute to apply your parent element to enable your theme(s).
 
 ```js
-import { withThemeByDataAttribute } from "storybook-addon-style-toolbox";
+import { withThemeByDataAttribute } from "@storybook/addon-styling";
 
 export const decorators = [
   withThemeByDataAttribute({

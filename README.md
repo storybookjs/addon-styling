@@ -1,4 +1,4 @@
-# storybook-addon-style-toolbox
+# `@storybook/addon-styling`
 
 Get started in Storybook faster with popular styling tools.
 
@@ -18,19 +18,19 @@ To get started, **install the package** as a dev dependency
 yarn:
 
 ```zsh
-yarn add -D storybook-addon-style-toolbox
+yarn add -D @storybook/addon-styling
 ```
 
 npm:
 
 ```zsh
-npm install -D storybook-addon-style-toolbox
+npm install -D @storybook/addon-styling
 ```
 
 pnpm:
 
 ```zsh
-pnpm add -D storybook-addon-style-toolbox
+pnpm add -D @storybook/addon-styling
 ```
 
 Then, **include the addon** in your `.storybook/main.js` file
