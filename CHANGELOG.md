@@ -1,3 +1,19 @@
+# v0.0.4 (Wed Feb 08 2023)
+
+#### 🐛 Bug Fix
+
+- Rename package [#1](https://github.com/storybookjs/addon-styling/pull/1) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### ⚠️ Pushed to `main`
+
+- Add tailwind recipe ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v0.0.3 (Fri Feb 03 2023)
 
 #### ⚠️ Pushed to `main`
