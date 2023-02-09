@@ -94,7 +94,7 @@ If none of these decorators work for your library there is still hope. We've pro
 Pulls the selected theme from storybook's global state.
 
 ```js
-import { pluckThemeFromContext } from "@storybook/addon-style-config";
+import { pluckThemeFromContext } from "@storybook/addon-styling";
 
 export const myCustomDecorator =
   ({ themes, defaultState, ...rest }) =>
@@ -110,7 +110,7 @@ export const myCustomDecorator =
 Returns the theme parameters for this addon.
 
 ```js
-import { useThemeParameters } from "@storybook/addon-style-config";
+import { useThemeParameters } from "@storybook/addon-styling";
 
 export const myCustomDecorator =
   ({ themes, defaultState, ...rest }) =>

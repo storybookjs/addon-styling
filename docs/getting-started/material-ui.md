@@ -7,19 +7,19 @@ To get started, **install the package** as a dev dependency
 yarn:
 
 ```zsh
-yarn add -D @storybook/addon-style-config
+yarn add -D @storybook/addon-styling
 ```
 
 npm:
 
 ```zsh
-npm install -D @storybook/addon-style-config
+npm install -D @storybook/addon-styling
 ```
 
 pnpm:
 
 ```zsh
-pnpm add -D @storybook/addon-style-config
+pnpm add -D @storybook/addon-styling
 ```
 
 ## 🧩 Register Addon
@@ -34,7 +34,7 @@ module.exports = {
   ],
   addons: [
     "@storybook/addon-essentials",
-+   "@storybook/addon-style-config",
++   "@storybook/addon-styling",
   ],
 };
 ```

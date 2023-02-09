@@ -34,7 +34,7 @@ module.exports = {
   ],
   addons: [
     "@storybook/addon-essentials",
-+   "@storybook/addon-style-config"
++   "@storybook/addon-styling"
   ],
 };
 ```
@@ -52,7 +52,7 @@ module.exports = {
   addons: [
     "@storybook/addon-essentials",
 +   "@storybook/addon-postcss"
-    "@storybook/addon-style-config"
+    "@storybook/addon-styling"
   ],
 };
 ```
