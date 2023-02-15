@@ -1,3 +1,15 @@
+# v0.1.0 (Wed Feb 15 2023)
+
+#### 🚀 Enhancement
+
+- Allow provider to be optional [#2](https://github.com/storybookjs/addon-styling/pull/2) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v0.0.4 (Wed Feb 08 2023)
 
 #### 🐛 Bug Fix
