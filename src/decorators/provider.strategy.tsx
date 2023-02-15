@@ -11,10 +11,10 @@ type Theme = Record<string, any>;
 type ThemeMap = Record<string, Theme>;
 
 export interface ProviderStrategyConfiguration {
-  Provider: any;
+  Provider?: any;
   GlobalStyles?: any;
   defaultTheme?: string;
-  themes: ThemeMap;
+  themes?: ThemeMap;
 }
 
 const pluckThemeFromKeyPairTuple = ([_, themeConfig]: [string, Theme]): Theme =>
@@ -24,9 +24,11 @@ export const withThemeFromJSXProvider = ({
   Provider,
   GlobalStyles,
   defaultTheme,
-  themes,
+  themes = {},
 }: ProviderStrategyConfiguration): DecoratorFunction => {
-  initializeThemeState(Object.keys(themes), defaultTheme);
+  const themeNames = Object.keys(themes);
+
+  initializeThemeState(themeNames, defaultTheme || themeNames[0]);
 
   return (storyFn, context) => {
     const { themeOverride } = useThemeParameters();
@@ -41,11 +43,13 @@ export const withThemeFromJSXProvider = ({
         : themes[selectedThemeName];
     }, [themes, selected, themeOverride]);
 
+    const ProviderComponent = Provider || React.Fragment;
+
     return (
-      <Provider theme={theme}>
+      <ProviderComponent theme={theme}>
         {GlobalStyles && <GlobalStyles />}
         {storyFn()}
-      </Provider>
+      </ProviderComponent>
     );
   };
 };

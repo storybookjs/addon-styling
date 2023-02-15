@@ -26,9 +26,9 @@ Available options:
 
 | option       | type                  | required? | Description                                                                                                                                                                                         |
 | ------------ | --------------------- | :-------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| themes       | `Record<string, any>` |    ✅     | An object of theme configurations where the key is the name of the theme and the value is the theme object. If multiple themes are provided, a toolbar item will be added to switch between themes. |
-| defaultTheme | `string`              |    ✅     | The name of the default theme to use                                                                                                                                                                |
-| Provider     |                       |    ✅     | The JSX component to provide themes                                                                                                                                                                 |
+| themes       | `Record<string, any>` |           | An object of theme configurations where the key is the name of the theme and the value is the theme object. If multiple themes are provided, a toolbar item will be added to switch between themes. |
+| defaultTheme | `string`              |           | The name of the default theme to use                                                                                                                                                                |
+| Provider     |                       |           | The JSX component to provide themes                                                                                                                                                                 |
 | GlobalStyles |                       |           | A JSX component containing global css styles.                                                                                                                                                       |
 
 ### `withThemeByClassName`
