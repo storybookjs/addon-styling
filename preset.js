@@ -1,4 +1,4 @@
-const { webpackFinal } = require.resolve("./dist/esm/preset/webpack");
+const { webpackFinal } = require("./dist/esm/preset/webpack");
 
 function config(entry = []) {
   return [...entry, require.resolve("./dist/esm/preset/preview")];
