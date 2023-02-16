@@ -10,9 +10,9 @@ const buildStyleLoader = (options: AddonStylingOptions) => ({
   loader: "style-loader",
 });
 
-const buildCssLoader = ({ useCssModules, usePostCss }: AddonStylingOptions) => {
-  const importSettings = usePostCss ? { importLoaders: 1 } : {};
-  const moduleSettings = useCssModules ? { modules: "auto" } : {};
+const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
+  const importSettings = postCss ? { importLoaders: 1 } : {};
+  const moduleSettings = cssModules ? { modules: "auto" } : {};
 
   return {
     loader: "css-loader",
@@ -23,10 +23,9 @@ const buildCssLoader = ({ useCssModules, usePostCss }: AddonStylingOptions) => {
   };
 };
 
-const buildPostCssLoader = ({
-  postCssImplementation: implementation,
-}: AddonStylingOptions) => {
-  const implementationOptions = implementation ? { implementation } : {};
+const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
+  const implementationOptions =
+    typeof postCss === "object" ? { ...postCss } : {};
 
   return {
     loader: "postcss-loader",
@@ -43,7 +42,7 @@ export const buildCssRule = (options: AddonStylingOptions): RuleSetRule => {
   const buildRule = [
     buildStyleLoader(options),
     buildCssLoader(options),
-    ...(options.usePostCss ? [buildPostCssLoader(options)] : []),
+    ...(options.postCss ? [buildPostCssLoader(options)] : []),
   ];
   return {
     test: CSS_FILE_REGEX,

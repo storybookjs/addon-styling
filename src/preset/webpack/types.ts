@@ -1,8 +1,7 @@
 import type { RuleSetRule } from "webpack";
 
 export interface AddonStylingOptions {
-  usePostCss?: boolean;
-  postCssImplementation?: unknown;
-  useCssModules?: boolean;
+  postCss?: boolean | object;
+  cssModules?: boolean;
   cssBuildRule?: RuleSetRule;
 }

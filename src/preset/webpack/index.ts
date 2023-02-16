@@ -8,7 +8,7 @@ export function webpackFinal(
   options: AddonStylingOptions = {}
 ) {
   // If the user doesn't want to patch webpack for postcss or css modules
-  if (!options.usePostCss && !options.useCssModules) {
+  if (!options.postCss && !options.cssModules && !options.cssBuildRule) {
     // return config unchanged
     return config;
   }
