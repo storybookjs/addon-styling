@@ -3,7 +3,7 @@ import type { Configuration as WebpackConfig } from "webpack";
 import { buildCssRule, isRuleForCSS } from "./helpers";
 import type { AddonStylingOptions } from "./types";
 
-export async function webpackFinal(
+export function webpackFinal(
   config: WebpackConfig,
   options: AddonStylingOptions = {}
 ) {
