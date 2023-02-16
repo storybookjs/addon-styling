@@ -1,3 +1,5 @@
+const { webpackFinal } = require.resolve("./dist/esm/preset/webpack");
+
 function config(entry = []) {
   return [...entry, require.resolve("./dist/esm/preset/preview")];
 }
@@ -9,4 +11,5 @@ function managerEntries(entry = []) {
 module.exports = {
   managerEntries,
   config,
+  webpackFinal,
 };
