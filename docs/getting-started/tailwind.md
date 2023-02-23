@@ -41,7 +41,10 @@ module.exports = {
 
 ### 📝 Using PostCSS?
 
-If your project uses webpack and postCSS you will need to add the `@storybook/addon-postcss` addon as well. To do this, install it as a dependency and add it to your `.storybook/main.js` file.
+Using Vite, `@storybook/nextjs`, or `@storybook/preset-create-react-app` with `react-scripts@2.0.0` and up? **You can skip this step.**
+
+In some cases, Storybook with webpack isn't set up to use PostCSS, which is the Tailwind team's recommended approach to processing Tailwind. In these cases, let
+`@storybook/addon-styling` know to use postCSS.
 
 ```diff
 module.exports = {
@@ -51,8 +54,13 @@ module.exports = {
   ],
   addons: [
     "@storybook/addon-essentials",
-+   "@storybook/addon-postcss"
-    "@storybook/addon-styling"
+-   "@storybook/addon-styling"
++   {
++     name: "@storybook/addon-styling",
++     options: {
++       postCss: true,
++     },
++   },
   ],
 };
 ```
