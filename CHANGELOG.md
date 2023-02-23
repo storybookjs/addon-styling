@@ -1,3 +1,15 @@
+# v0.2.0 (Thu Feb 23 2023)
+
+#### 🚀 Enhancement
+
+- (feat): Add postcss support to webpack storybooks [#3](https://github.com/storybookjs/addon-styling/pull/3) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v0.1.0 (Wed Feb 15 2023)
 
 #### 🚀 Enhancement
