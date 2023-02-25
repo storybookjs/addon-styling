@@ -1,3 +1,15 @@
+# v0.2.1 (Sat Feb 25 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Fix webpackFinal ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v0.2.0 (Thu Feb 23 2023)
 
 #### 🚀 Enhancement
