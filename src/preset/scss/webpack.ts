@@ -36,7 +36,7 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
 };
 
 const buildUrlResolverLoader = (options: AddonStylingOptions) => ({
-  loader: "url-resolver-loader",
+  loader: "resolve-url-loader",
 });
 
 const buildSassLoader = ({ sass }: AddonStylingOptions) => {
