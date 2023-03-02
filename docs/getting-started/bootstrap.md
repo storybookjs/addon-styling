@@ -39,6 +39,30 @@ module.exports = {
 };
 ```
 
+**NOTE:** If you want to use Bootstrap's `.scss` files, add the styling addon like so:
+
+```js
+module.exports = {
+  stories: [
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
+  ],
+  addons: [
+    "@storybook/addon-essentials",
+    {
+      name: "@storybook/addon-styling",
+      options: {
+        sass: {
+          // Require your sass preprocessor here
+          // I recommend dart sass (yarn add -D sass)
+          implementation: require("sass"),
+        },
+      },
+    },
+  ],
+};
+```
+
 ## 🥾 Import Bootstrap
 
 To give your stories access to Bootstrap's styles and JavaScript, import them into your `.storybook/preview.js` file.
@@ -59,6 +83,8 @@ export const parameters = {
   },
 };
 ```
+
+If you're using `scss` import your `index.scss` file instead of Bootstrap's `bootstrap.min.css` file.
 
 ## 🎨 Provide your theme(s)
 
