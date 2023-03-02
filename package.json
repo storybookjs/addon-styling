@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/storybookjs/addon-style-toolbox"
+    "url": "https://github.com/storybookjs/addon-styling"
   },
   "author": {
     "name": "Shaun Evening",
