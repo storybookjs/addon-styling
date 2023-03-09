@@ -1,3 +1,15 @@
+# v0.3.1 (Thu Mar 09 2023)
+
+#### 🐛 Bug Fix
+
+- Allow react 18; Update some docs [#6](https://github.com/storybookjs/addon-styling/pull/6) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v0.3.0 (Thu Mar 02 2023)
 
 #### 🚀 Enhancement
