@@ -7,6 +7,7 @@ Get started in Storybook faster with popular styling tools.
 ## ✨ Features
 
 - 🧩 Configuration templates for popular tools
+- ⚡️ Options for css modules, postCss, and Sass
 - 🎨 Provide themes
 - 🔄 Toggle between multiple themes when more than one is provided
 - ❗️ Override theme at the component and story level through parameters
@@ -55,9 +56,12 @@ For tool-specific setup, check out the recipes below
 - [`@emotion/styled`](./docs/getting-started/emotion.md)
 - [`@mui/material`](./docs/getting-started/material-ui.md)
 - [`bootstrap`](./docs/getting-started/bootstrap.md)
+- [`cssModules`](./docs/api.md#optionscssmodules)
+- [`postcss`](./docs/api.md#optionspostcss)
+- [`sass`](./docs/api.md#optionssass)
 - [`styled-components`](./docs/getting-started/styled-components.md)
 - [`tailwind`](./docs/getting-started/tailwind.md)
-- [Vuetify 3](./docs/api.md#writing-a-custom-decorator)
+- [`vuetify@3.x`](./docs/api.md#writing-a-custom-decorator)
 
 Don't see your favorite tool listed? Don't worry! That doesn't mean this addon isn't for you. Check out the ["Writing a custom decorator"](./docs/api.md#writing-a-custom-decorator) section of the [api reference](./docs/api.md).
 

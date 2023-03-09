@@ -1,5 +1,127 @@
 # API
 
+## Addon options
+
+If your app is using webpack and you want to use css modules, postCss, or Sass, it's possible that you'll need to tell Storybook's webpack how to use them. Below are the options available.
+
+```ts
+// From src/preset/types.ts
+import type { RuleSetRule } from "webpack";
+
+export interface AddonStylingOptions {
+  postCss?: boolean | object;
+  sass?: object;
+  cssModules?: boolean;
+  cssBuildRule?: RuleSetRule;
+  scssBuildRule?: RuleSetRule;
+}
+```
+
+### `options.postCss`
+
+**Required?** false
+
+Setting `options.postCss` to true will enable postCss in your storybook. This will read the
+`postcss.config.js` file in the root of your project.
+
+**Using PostCss 8+**? You'll need to share your version of postCss like so:
+
+```js
+module.exports = {
+  stories: [
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
+  ],
+  addons: [
+    "@storybook/addon-essentials",
+    {
+      name: "@storybook/addon-styling",
+      options: {
+        postCss: {
+          implementation: require("postcss"),
+        },
+      },
+    },
+  ],
+};
+```
+
+### `options.sass`
+
+**Required?** false
+
+To use Sass, you'll need to install a few extra dependencies
+
+```shell
+# You can replace sass with you preferred sass preprocessor
+yarn add -D sass sass-loader resolve-url-loader
+```
+
+need to share your preferred Sass preprocessor like so:
+
+```js
+module.exports = {
+  stories: [
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
+  ],
+  addons: [
+    "@storybook/addon-essentials",
+    {
+      name: "@storybook/addon-styling",
+      options: {
+        sass: {
+          // Require your preprocessor
+          implementation: require("sass"),
+        },
+      },
+    },
+  ],
+};
+```
+
+### `options.cssModules`
+
+**Required?** false
+
+Setting `options.cssModules` to true will give you a basic setup of css modules for your css (and scss if you're using it). If you're looking for something more robust, keep reading 👇
+
+### Advanced
+
+If the above options aren't working for you, you likely have a more advanced set up.
+In those cases, you can give the addon the webpack rules for css and sass files using
+`options.cssBuildRule` and `options.scssBuildRule`.
+
+Example:
+
+```js
+module.exports = {
+  stories: [
+    "../stories/**/*.stories.mdx",
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)",
+  ],
+  addons: [
+    "@storybook/addon-essentials",
+    {
+      name: "@storybook/addon-styling",
+      options: {
+        cssBuildRule: {
+          test: /\.css$/,
+          use: [
+            'style-loader',
+            {
+              loader: 'css-loader',
+              options: {...}
+            },
+            // snipped for brevity
+          ]
+        },
+      },
+    },
+  ],
+};
+```
+
 ## Decorators
 
 ### `withThemeFromJSXProvider`
