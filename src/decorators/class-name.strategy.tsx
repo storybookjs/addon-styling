@@ -1,4 +1,5 @@
-import { DecoratorFunction, useEffect } from "@storybook/addons";
+import { useEffect } from "@storybook/preview-api";
+import type { DecoratorFunction } from "@storybook/types";
 import {
   initializeThemeState,
   pluckThemeFromContext,
