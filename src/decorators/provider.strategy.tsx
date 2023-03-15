@@ -1,5 +1,6 @@
 import React from "react";
-import { DecoratorFunction, useMemo } from "@storybook/addons";
+import { useMemo } from "@storybook/preview-api";
+import type { DecoratorFunction } from "@storybook/types";
 
 import {
   initializeThemeState,

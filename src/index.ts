@@ -1,4 +1,6 @@
+// @ts-expect-error
 if (module && module.hot && module.hot.decline) {
+  // @ts-expect-error
   module.hot.decline();
 }
 
