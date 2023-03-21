@@ -29,7 +29,7 @@ export const withThemeByClassName = ({
       const parentElement = document.querySelector(parentSelector);
 
       Object.entries(themes).forEach(([themeName, className]) => {
-        const classNames = className.split(' ');
+        const classNames = className.split(' ').filter(Boolean);
 
         if (themeName === selectedThemeName) {
           parentElement.classList.add(...classNames);
