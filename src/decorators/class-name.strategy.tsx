@@ -30,13 +30,15 @@ export const withThemeByClassName = ({
       const parentElement = document.querySelector(parentSelector);
 
       Object.entries(themes).forEach(([themeName, className]) => {
-        if (!className) {
+        const classes = className.split(" ").filter(Boolean);
+        if (classes.length === 0) {
           return;
         }
+
         if (themeName === selectedThemeName) {
-          parentElement.classList.add(className);
+          parentElement.classList.add(...classes);
         } else {
-          parentElement.classList.remove(className);
+          parentElement.classList.remove(...classes);
         }
       });
     }, [themeOverride, selected, parentSelector]);
