@@ -1,3 +1,15 @@
+# v0.3.2 (Fri Mar 24 2023)
+
+#### 🐛 Bug Fix
+
+- feat: Support multiple classes per theme in withThemeByClassName [#10](https://github.com/storybookjs/addon-styling/pull/10) ([@damianstasik](https://github.com/damianstasik))
+
+#### Authors: 1
+
+- Damian Stasik ([@damianstasik](https://github.com/damianstasik))
+
+---
+
 # v0.3.1 (Thu Mar 09 2023)
 
 #### 🐛 Bug Fix
