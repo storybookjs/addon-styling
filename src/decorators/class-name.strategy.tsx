@@ -30,6 +30,9 @@ export const withThemeByClassName = ({
       const parentElement = document.querySelector(parentSelector);
 
       Object.entries(themes).forEach(([themeName, className]) => {
+        if (!className) {
+          return;
+        }
         if (themeName === selectedThemeName) {
           parentElement.classList.add(className);
         } else {
