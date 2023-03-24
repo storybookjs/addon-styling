@@ -111,3 +111,15 @@ If you'd like to contribute to this addon, **THANK YOU**, I'd love your help �
 
 - `yarn start` runs babel in watch mode and starts Storybook
 - `yarn build` build and package your addon code
+
+### 🌲 Branch structure
+
+- **next** - the `next` version on npm, and the development branch where most work occurs
+- **main** - the `latest` version on npm and the stable version that most users use
+
+### 🚀 Release process
+
+1. All PRs should target the `next` branch, which depends on the `next` version of Storybook.
+2. When merged, a new version of this package will be released on the `next` NPM tag.
+3. If the change contains a bugfix that needs to be patched back to the stable version, please note that in PR description.
+4. PRs labeled `pick` will get cherry-picked back to the `main` branch and will generate a release on the `latest` npm tag.
