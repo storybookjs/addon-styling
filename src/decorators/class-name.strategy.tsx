@@ -1,5 +1,6 @@
 import { useEffect } from "@storybook/preview-api";
 import type { DecoratorFunction } from "@storybook/types";
+
 import {
   initializeThemeState,
   pluckThemeFromContext,
@@ -13,6 +14,9 @@ export interface ClassNameStrategyConfiguration {
 }
 
 const DEFAULT_ELEMENT_SELECTOR = "html";
+
+const classStringToArray = (classString: string) =>
+  classString.split(" ").filter(Boolean);
 
 export const withThemeByClassName = ({
   themes,
@@ -29,18 +33,20 @@ export const withThemeByClassName = ({
       const selectedThemeName = themeOverride || selected || defaultTheme;
       const parentElement = document.querySelector(parentSelector);
 
-      Object.entries(themes).forEach(([themeName, className]) => {
-        const classes = className.split(" ").filter(Boolean);
-        if (classes.length === 0) {
-          return;
-        }
+      Object.entries(themes)
+        .filter(([themeName]) => themeName !== selectedThemeName)
+        .forEach(([themeName, className]) => {
+          const classes = classStringToArray(className);
+          if (classes.length > 0) {
+            parentElement.classList.remove(...classes);
+          }
+        });
 
-        if (themeName === selectedThemeName) {
-          parentElement.classList.add(...classes);
-        } else {
-          parentElement.classList.remove(...classes);
-        }
-      });
+      const newThemeClasses = classStringToArray(themes[selectedThemeName]);
+
+      if (newThemeClasses.length > 0) {
+        parentElement.classList.add(...newThemeClasses);
+      }
     }, [themeOverride, selected, parentSelector]);
 
     return storyFn();
