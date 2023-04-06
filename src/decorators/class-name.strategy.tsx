@@ -1,5 +1,5 @@
 import { useEffect } from "@storybook/preview-api";
-import type { DecoratorFunction } from "@storybook/types";
+import type { DecoratorFunction, Renderer } from "@storybook/types";
 
 import {
   initializeThemeState,
@@ -18,11 +18,11 @@ const DEFAULT_ELEMENT_SELECTOR = "html";
 const classStringToArray = (classString: string) =>
   classString.split(" ").filter(Boolean);
 
-export const withThemeByClassName = ({
+export const withThemeByClassName = <TRenderer extends Renderer = Renderer>({
   themes,
   defaultTheme,
   parentSelector = DEFAULT_ELEMENT_SELECTOR,
-}: ClassNameStrategyConfiguration): DecoratorFunction => {
+}: ClassNameStrategyConfiguration): DecoratorFunction<TRenderer> => {
   initializeThemeState(Object.keys(themes), defaultTheme);
 
   return (storyFn, context) => {
