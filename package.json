@@ -18,9 +18,32 @@
     "email": "goodeveningshaun@gmail.com"
   },
   "license": "MIT",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/ts/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./manager": {
+      "require": "./dist/manager.js",
+      "import": "./dist/manager.mjs",
+      "types": "./dist/manager.d.ts"
+    },
+    "./preview": {
+      "require": "./dist/preview.js",
+      "import": "./dist/preview.mjs",
+      "types": "./dist/preview.d.ts"
+    },
+    "./preset": {
+      "require": "./dist/preset.js",
+      "import": "./dist/preset.mjs",
+      "types": "./dist/preset.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
     "dist/**/*",
     "README.md",
@@ -29,28 +52,29 @@
   ],
   "scripts": {
     "clean": "rimraf ./dist",
-    "buildBabel": "concurrently \"yarn buildBabel:cjs\" \"yarn buildBabel:esm\"",
-    "buildBabel:cjs": "babel ./src -d ./dist/cjs --extensions \".js,.jsx,.ts,.tsx\"",
-    "buildBabel:esm": "babel ./src -d ./dist/esm --env-name esm --extensions \".js,.jsx,.ts,.tsx\"",
-    "buildTsc": "tsc --declaration --emitDeclarationOnly --outDir ./dist/ts",
     "prebuild": "yarn clean",
-    "build": "concurrently \"yarn buildBabel\" \"yarn buildTsc\"",
-    "build:watch": "concurrently \"yarn buildBabel:esm -- --watch\" \"yarn buildTsc -- --watch\"",
+    "build": "tsup",
+    "build:watch": "yarn build --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "storybook dev -p 6006",
-    "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --no-manager-cache --quiet\"",
+    "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --quiet\"",
     "build-storybook": "storybook build",
     "prerelease": "zx scripts/prepublish-checks.mjs",
     "release": "yarn build && auto shipit"
   },
   "dependencies": {
-    "@storybook/api": "next",
-    "@storybook/components": "next",
-    "@storybook/core-events": "next",
-    "@storybook/manager-api": "next",
-    "@storybook/preview-api": "next",
-    "@storybook/theming": "next",
-    "@storybook/types": "next"
+    "@storybook/api": "^7.0.2",
+    "@storybook/components": "^7.0.2",
+    "@storybook/core-events": "^7.0.2",
+    "@storybook/manager-api": "^7.0.2",
+    "@storybook/preview-api": "^7.0.2",
+    "@storybook/theming": "^7.0.2",
+    "@storybook/types": "^7.0.2",
+    "css-loader": "^6.7.3",
+    "postcss-loader": "^7.2.4",
+    "resolve-url-loader": "^5.0.0",
+    "sass-loader": "^13.2.2",
+    "style-loader": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.1",
@@ -58,9 +82,11 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.13.0",
-    "@storybook/addon-essentials": "^7.0.0-rc.3",
-    "@storybook/react": "^7.0.0-rc.3",
-    "@storybook/react-webpack5": "^7.0.0-rc.3",
+    "@storybook/addon-essentials": "^7.0.2",
+    "@storybook/builder-webpack5": "^7.0.2",
+    "@storybook/react": "^7.0.2",
+    "@storybook/react-vite": "^7.0.2",
+    "@vitejs/plugin-react": "^3.1.0",
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
     "boxen": "^5.0.1",
@@ -71,27 +97,21 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
-    "storybook": "^7.0.0-rc.3",
-    "typescript": "^4.2.4",
+    "storybook": "^7.0.2",
+    "tsup": "^6.7.0",
+    "typescript": "^4.9.0",
+    "vite": "^4.2.1",
     "zx": "^1.14.1"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
-    "resolve-url-loader": "^5.0.0",
-    "sass-loader": "^10.4.1"
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "peerDependenciesMeta": {
     "react": {
       "optional": true
     },
     "react-dom": {
-      "optional": true
-    },
-    "resolve-url-loader": {
-      "optional": true
-    },
-    "sass-loader": {
       "optional": true
     }
   },

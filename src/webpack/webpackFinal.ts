@@ -4,7 +4,7 @@ import type { AddonStylingOptions } from "./types";
 import { patchOrAddCssRule } from "./css/webpack";
 import { patchOrAddScssRule } from "./scss/webpack";
 
-function webpackFinal(
+export function webpackFinal(
   config: WebpackConfig,
   options: AddonStylingOptions = {}
 ) {
@@ -13,5 +13,3 @@ function webpackFinal(
 
   return config;
 }
-
-export { webpackFinal };

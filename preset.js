@@ -1,15 +1,5 @@
-const { webpackFinal } = require("./dist/cjs/preset/webpackFinal");
+export const previewAnnotations = [require.resolve("./dist/preview")];
 
-function config(entry = []) {
-  return [...entry, require.resolve("./dist/esm/preset/preview")];
-}
+export const managerEntries = [require.resolve("./dist/manager")];
 
-function managerEntries(entry = []) {
-  return [...entry, require.resolve("./dist/esm/preset/manager")];
-}
-
-module.exports = {
-  managerEntries,
-  config,
-  webpackFinal,
-};
+export * from "./dist/preset";

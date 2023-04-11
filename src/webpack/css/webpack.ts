@@ -7,15 +7,15 @@ const isRuleForCSS = (rule: RuleSetRule) =>
   rule.test.test("test.css");
 
 const buildStyleLoader = (options: AddonStylingOptions) => ({
-  loader: "style-loader",
+  loader: require.resolve("style-loader"),
 });
 
 const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
   const importSettings = postCss ? { importLoaders: 1 } : {};
-  const moduleSettings = cssModules ? { modules: "auto" } : {};
+  const moduleSettings = cssModules ? { modules: { auto: true } } : {};
 
   return {
-    loader: "css-loader",
+    loader: require.resolve("css-loader"),
     options: {
       ...importSettings,
       ...moduleSettings,
@@ -28,7 +28,7 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
     typeof postCss === "object" ? { ...postCss } : {};
 
   return {
-    loader: "postcss-loader",
+    loader: require.resolve("postcss-loader"),
     options: {
       ...implementationOptions,
     },
