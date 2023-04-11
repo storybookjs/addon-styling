@@ -1,5 +1,6 @@
 import React from "react";
-import { DecoratorFunction, useMemo } from "@storybook/addons";
+import { useMemo } from "@storybook/preview-api";
+import { DecoratorFunction, Renderer } from "@storybook/types";
 
 import {
   initializeThemeState,
@@ -20,12 +21,14 @@ export interface ProviderStrategyConfiguration {
 const pluckThemeFromKeyPairTuple = ([_, themeConfig]: [string, Theme]): Theme =>
   themeConfig;
 
-export const withThemeFromJSXProvider = ({
+export const withThemeFromJSXProvider = <
+  TRenderer extends Renderer = Renderer
+>({
   Provider,
   GlobalStyles,
   defaultTheme,
   themes = {},
-}: ProviderStrategyConfiguration): DecoratorFunction => {
+}: ProviderStrategyConfiguration): DecoratorFunction<TRenderer> => {
   const themeNames = Object.keys(themes);
 
   initializeThemeState(themeNames, defaultTheme || themeNames[0]);

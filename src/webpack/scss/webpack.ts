@@ -7,15 +7,15 @@ const isRuleForSCSS = (rule: RuleSetRule) =>
   (rule.test.test("test.scss") || rule.test.test("test.sass"));
 
 const buildStyleLoader = (options: AddonStylingOptions) => ({
-  loader: "style-loader",
+  loader: require.resolve("style-loader"),
 });
 
 const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
   const importSettings = { importLoaders: postCss ? 3 : 2 };
-  const moduleSettings = cssModules ? { modules: "auto" } : {};
+  const moduleSettings = cssModules ? { modules: { auto: true } } : {};
 
   return {
-    loader: "css-loader",
+    loader: require.resolve("css-loader"),
     options: {
       ...importSettings,
       ...moduleSettings,
@@ -28,7 +28,7 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
     typeof postCss === "object" ? { ...postCss } : {};
 
   return {
-    loader: "postcss-loader",
+    loader: require.resolve("postcss-loader"),
     options: {
       ...implementationOptions,
     },
@@ -36,7 +36,7 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
 };
 
 const buildUrlResolverLoader = (options: AddonStylingOptions) => ({
-  loader: "resolve-url-loader",
+  loader: require.resolve("resolve-url-loader"),
 });
 
 const buildSassLoader = ({ sass }: AddonStylingOptions) => {
@@ -57,7 +57,7 @@ const buildSassLoader = ({ sass }: AddonStylingOptions) => {
       : {};
 
   return {
-    loader: "sass-loader",
+    loader: require.resolve("sass-loader"),
     options: {
       sourceMap: true,
       ...sassOptions,

@@ -1,4 +1,5 @@
-import { DecoratorFunction, useEffect } from "@storybook/addons";
+import { useEffect } from "@storybook/preview-api";
+import type { DecoratorFunction, Renderer } from "@storybook/types";
 import {
   initializeThemeState,
   pluckThemeFromContext,
@@ -15,12 +16,14 @@ export interface DataAttributeStrategyConfiguration {
 const DEFAULT_ELEMENT_SELECTOR = "html";
 const DEFAULT_DATA_ATTRIBUTE = "data-theme";
 
-export const withThemeByDataAttribute = ({
+export const withThemeByDataAttribute = <
+  TRenderer extends Renderer = Renderer
+>({
   themes,
   defaultTheme,
   parentSelector = DEFAULT_ELEMENT_SELECTOR,
   attributeName = DEFAULT_DATA_ATTRIBUTE,
-}: DataAttributeStrategyConfiguration): DecoratorFunction => {
+}: DataAttributeStrategyConfiguration): DecoratorFunction<TRenderer> => {
   initializeThemeState(Object.keys(themes), defaultTheme);
   return (storyFn, context) => {
     const { themeOverride } = useThemeParameters();
