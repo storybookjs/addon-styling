@@ -1,6 +1,8 @@
 # `@storybook/addon-styling`
 
-Get started in Storybook faster with popular styling tools.
+Get started in Storybook 7 faster with popular styling tools.
+
+**Using Storybook 6?** Check out the [`release-0-3` branch](https://github.com/storybookjs/addon-styling/tree/release-0-3)
 
 ![Toggling between themes](./.github/media/styles-addon.gif)
 
