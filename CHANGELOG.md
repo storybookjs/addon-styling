@@ -1,3 +1,16 @@
+# v1.0.0 (Tue Apr 11 2023)
+
+#### 💥 Breaking Change
+
+- Upgrade to storybook 7 [#25](https://github.com/storybookjs/addon-styling/pull/25) ([@Integrayshaun](https://github.com/Integrayshaun) [@KokiSakano](https://github.com/KokiSakano))
+
+#### Authors: 2
+
+- [@KokiSakano](https://github.com/KokiSakano)
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v0.3.2 (Fri Mar 24 2023)
 
 #### 🐛 Bug Fix
