@@ -12,7 +12,9 @@ const buildStyleLoader = (options: AddonStylingOptions) => ({
 
 const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
   const importSettings = postCss ? { importLoaders: 1 } : {};
-  const moduleSettings = cssModules ? { modules: { auto: true } } : {};
+  const moduleSettings = cssModules
+    ? { modules: { auto: true, namedExport: true } }
+    : {};
 
   return {
     loader: require.resolve("css-loader"),
