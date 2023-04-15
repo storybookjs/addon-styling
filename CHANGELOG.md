@@ -1,3 +1,15 @@
+# v1.0.1 (Sat Apr 15 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Bump version to bundle loader changes ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.0.0 (Tue Apr 11 2023)
 
 #### 💥 Breaking Change
