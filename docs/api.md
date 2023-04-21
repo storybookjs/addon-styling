@@ -216,7 +216,8 @@ If none of these decorators work for your library there is still hope. We've pro
 Pulls the selected theme from storybook's global state.
 
 ```js
-import { pluckThemeFromContext } from "@storybook/addon-styling";
+import { DecoratorHelpers } from '@storybook/addon-styling';
+const { pluckThemeFromContext } = DecoratorHelpers;
 
 export const myCustomDecorator =
   ({ themes, defaultState, ...rest }) =>
@@ -232,7 +233,8 @@ export const myCustomDecorator =
 Returns the theme parameters for this addon.
 
 ```js
-import { useThemeParameters } from "@storybook/addon-styling";
+import { DecoratorHelpers } from '@storybook/addon-styling';
+const { useThemeParameters } = DecoratorHelpers;
 
 export const myCustomDecorator =
   ({ themes, defaultState, ...rest }) =>
@@ -248,6 +250,9 @@ export const myCustomDecorator =
 Used to register the themes and defaultTheme with the addon state.
 
 ```js
+import { DecoratorHelpers } from '@storybook/addon-styling';
+const { initializeThemeState } = DecoratorHelpers;
+
 export const myCustomDecorator = ({ themes, defaultState, ...rest }) => {
   initializeThemeState(Object.keys(themes), defaultTheme);
 
@@ -264,7 +269,10 @@ Let's use Vuetify as an example. Vuetify uses it's own global state to know whic
 ```js
 // .storybook/withVeutifyTheme.decorator.js
 
+import { DecoratorHelpers } from '@storybook/addon-styling';
 import { useTheme } from "vuetify";
+
+const { initializeThemeState, pluckThemeFromContext, useThemeParameters } = DecoratorHelpers;
 
 export const withVuetifyTheme = ({ themes, defaultTheme }) => {
   initializeThemeState(Object.keys(themes), defaultTheme);
