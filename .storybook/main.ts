@@ -6,9 +6,7 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     {
       name: "./local-preset.js",
-      options: {
-        less: {},
-      },
+      options: {},
     },
   ],
   framework: {
