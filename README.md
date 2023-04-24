@@ -9,7 +9,7 @@ Get started in Storybook 7 faster with popular styling tools.
 ## ✨ Features
 
 - 🧩 Configuration templates for popular tools
-- ⚡️ Options for css modules, postCss, and Sass
+- ⚡️ Options for css modules, postCss, Sass, and Less
 - 🎨 Provide themes
 - 🔄 Toggle between multiple themes when more than one is provided
 - ❗️ Override theme at the component and story level through parameters
@@ -59,6 +59,7 @@ For tool-specific setup, check out the recipes below
 - [`@mui/material`](./docs/getting-started/material-ui.md)
 - [`bootstrap`](./docs/getting-started/bootstrap.md)
 - [`cssModules`](./docs/api.md#optionscssmodules)
+- [`less`](./docs/api.md#optionsless)
 - [`postcss`](./docs/api.md#optionspostcss)
 - [`sass`](./docs/api.md#optionssass)
 - [`styled-components`](./docs/getting-started/styled-components.md)
