@@ -7006,7 +7006,7 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-klona@^2.0.6:
+klona@^2.0.4, klona@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.6.tgz#85bffbf819c03b2f53270412420a4555ef882e22"
   integrity sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==
@@ -7019,6 +7019,13 @@ lazy-universal-dotenv@^4.0.0:
     app-root-dir "^1.0.2"
     dotenv "^16.0.0"
     dotenv-expand "^10.0.0"
+
+less-loader@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/less-loader/-/less-loader-11.1.0.tgz#a452384259bdf8e4f6d5fdcc39543609e6313f82"
+  integrity sha512-C+uDBV7kS7W5fJlUjq5mPBeBVhYpTIm5gB09APT9o3n/ILeaXVsiSFTbZpTJCJwQ/Crczfn3DmfQFwxYusWFug==
+  dependencies:
+    klona "^2.0.4"
 
 leven@^3.1.0:
   version "3.1.0"

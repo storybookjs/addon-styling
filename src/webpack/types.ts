@@ -1,9 +1,17 @@
 import type { RuleSetRule } from "webpack";
 
+interface LessConfig {
+  lessOptions?: Record<string, any>;
+  implementation?: string;
+  additionalData?: unknown;
+}
+
 export interface AddonStylingOptions {
+  cssBuildRule?: RuleSetRule;
+  cssModules?: boolean;
+  less?: LessConfig;
+  lessBuildRule?: RuleSetRule;
   postCss?: boolean | object;
   sass?: boolean | object;
-  cssModules?: boolean;
-  cssBuildRule?: RuleSetRule;
   scssBuildRule?: RuleSetRule;
 }

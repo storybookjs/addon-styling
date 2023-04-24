@@ -71,6 +71,7 @@
     "@storybook/theming": "^7.0.2",
     "@storybook/types": "^7.0.2",
     "css-loader": "^6.7.3",
+    "less-loader": "^11.1.0",
     "postcss-loader": "^7.2.4",
     "resolve-url-loader": "^5.0.0",
     "sass-loader": "^13.2.2",
