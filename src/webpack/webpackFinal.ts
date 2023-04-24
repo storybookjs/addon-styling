@@ -1,5 +1,5 @@
 import type { Configuration as WebpackConfig } from "webpack";
-import type { AddonStylingOptions } from "./types";
+import type { AddonStylingOptions } from "../types";
 
 import { patchOrAddCssRule } from "./css/webpack";
 import { patchOrAddScssRule } from "./scss/webpack";

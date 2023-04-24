@@ -1,5 +1,5 @@
 import type { RuleSetRule, Configuration as WebpackConfig } from "webpack";
-import type { AddonStylingOptions } from "../types";
+import type { AddonStylingOptions } from "../../types";
 
 const isRuleForLESS = (rule: RuleSetRule) =>
   typeof rule !== "string" &&
