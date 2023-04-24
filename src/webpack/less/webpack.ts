@@ -1,17 +1,17 @@
 import type { RuleSetRule, Configuration as WebpackConfig } from "webpack";
 import type { AddonStylingOptions } from "../../types";
 
-const isRuleForSCSS = (rule: RuleSetRule) =>
+const isRuleForLESS = (rule: RuleSetRule) =>
   typeof rule !== "string" &&
   rule.test instanceof RegExp &&
-  (rule.test.test("test.scss") || rule.test.test("test.sass"));
+  rule.test.test("test.less");
 
 const buildStyleLoader = (options: AddonStylingOptions) => ({
   loader: require.resolve("style-loader"),
 });
 
 const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
-  const importSettings = { importLoaders: postCss ? 3 : 2 };
+  const importSettings = { importLoaders: postCss ? 2 : 1 };
   const moduleSettings = cssModules ? { modules: { auto: true } } : {};
 
   return {
@@ -35,69 +35,59 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
   };
 };
 
-const buildUrlResolverLoader = (options: AddonStylingOptions) => ({
-  loader: require.resolve("resolve-url-loader"),
-});
-
-const buildSassLoader = ({ sass }: AddonStylingOptions) => {
-  const sassOptions = typeof sass === "object" ? { sassOptions: sass } : {};
-
+const buildLessLoader = ({ less }: AddonStylingOptions) => {
   const implementationOptions =
-    typeof sass === "object" && sass.hasOwnProperty("implementation")
-      ? // @ts-expect-error
-        { implementation: sass.implementation }
+    typeof less === "object" && less.hasOwnProperty("implementation")
+      ? { implementation: less.implementation }
       : {};
 
   const additionalData =
-    typeof sass === "object" &&
-    (sass.hasOwnProperty("prependData") ||
-      sass.hasOwnProperty("additionalData"))
-      ? // @ts-expect-error
-        { additionalData: sass.prependData || sass.additionalData }
+    typeof less === "object" && less.hasOwnProperty("additionalData")
+      ? { additionalData: less.additionalData }
       : {};
 
   return {
-    loader: require.resolve("sass-loader"),
+    loader: require.resolve("less-loader"),
     options: {
       sourceMap: true,
-      ...sassOptions,
+      lessOptions: less.lessOptions ?? {},
       ...implementationOptions,
       ...additionalData,
     },
   };
 };
 
-const SCSS_FILE_REGEX = /\.s[ac]ss$/;
-const buildScssRule = (options: AddonStylingOptions): RuleSetRule => {
+const LESS_FILE_REGEX = /\.less$/i;
+const buildLessRule = (options: AddonStylingOptions): RuleSetRule => {
   if (options.scssBuildRule) return options.scssBuildRule;
 
   const buildRule = [
     buildStyleLoader(options),
     buildCssLoader(options),
     ...(options.postCss ? [buildPostCssLoader(options)] : []),
-    buildUrlResolverLoader(options),
-    buildSassLoader(options),
+    buildLessLoader(options),
   ];
   return {
-    test: SCSS_FILE_REGEX,
+    test: LESS_FILE_REGEX,
     use: buildRule,
+    sideEffects: true,
   };
 };
 
-export const patchOrAddScssRule = (
+export const patchOrAddLessRule = (
   config: WebpackConfig,
   options: AddonStylingOptions
 ): void => {
   // If the user doesn't want to patch webpack for postcss or css modules
-  if (!options.sass && !options.scssBuildRule) {
+  if (!options.less && !options.lessBuildRule) {
     // return without adjusting config
     return;
   }
 
   const rules = config.module?.rules;
 
-  const rule = buildScssRule(options);
-  const ruleIndex = rules?.findIndex(isRuleForSCSS);
+  const rule = buildLessRule(options);
+  const ruleIndex = rules?.findIndex(isRuleForLESS);
 
   if (ruleIndex === -1) {
     // If no existing css rule, add it
