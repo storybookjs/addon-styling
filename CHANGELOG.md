@@ -1,3 +1,20 @@
+# v1.0.2 (Mon Apr 24 2023)
+
+#### 🐛 Bug Fix
+
+- Add Less support [#31](https://github.com/storybookjs/addon-styling/pull/31) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### 📝 Documentation
+
+- Replace imports for decorators with ones that match the current exports. [#30](https://github.com/storybookjs/addon-styling/pull/30) ([@RegisFrey](https://github.com/RegisFrey))
+
+#### Authors: 2
+
+- Regis Frey ([@RegisFrey](https://github.com/RegisFrey))
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.0.1 (Sat Apr 15 2023)
 
 #### ⚠️ Pushed to `main`
