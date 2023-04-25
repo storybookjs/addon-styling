@@ -1,3 +1,15 @@
+# v1.0.3 (Tue Apr 25 2023)
+
+#### 🐛 Bug Fix
+
+- fix: default theme handling when defaultTheme is not provided [#33](https://github.com/storybookjs/addon-styling/pull/33) ([@pahan35](https://github.com/pahan35))
+
+#### Authors: 1
+
+- Pavlo Zhukov ([@pahan35](https://github.com/pahan35))
+
+---
+
 # v1.0.2 (Mon Apr 24 2023)
 
 #### 🐛 Bug Fix
