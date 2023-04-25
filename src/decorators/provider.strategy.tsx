@@ -30,15 +30,16 @@ export const withThemeFromJSXProvider = <
   themes = {},
 }: ProviderStrategyConfiguration): DecoratorFunction<TRenderer> => {
   const themeNames = Object.keys(themes);
+  const initialTheme = defaultTheme || themeNames[0];
 
-  initializeThemeState(themeNames, defaultTheme || themeNames[0]);
+  initializeThemeState(themeNames, initialTheme);
 
   return (storyFn, context) => {
     const { themeOverride } = useThemeParameters();
     const selected = pluckThemeFromContext(context);
 
     const theme = useMemo(() => {
-      const selectedThemeName = themeOverride || selected || defaultTheme;
+      const selectedThemeName = themeOverride || selected || initialTheme;
       const pairs = Object.entries(themes);
 
       return pairs.length === 1
