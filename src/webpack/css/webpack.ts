@@ -47,6 +47,7 @@ const buildCssRule = (options: AddonStylingOptions): RuleSetRule => {
   return {
     test: CSS_FILE_REGEX,
     use: buildRule,
+    sideEffects: true,
   };
 };
 

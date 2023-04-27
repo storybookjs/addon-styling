@@ -81,6 +81,7 @@ const buildScssRule = (options: AddonStylingOptions): RuleSetRule => {
   return {
     test: SCSS_FILE_REGEX,
     use: buildRule,
+    sideEffects: true,
   };
 };
 
