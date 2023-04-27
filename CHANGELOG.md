@@ -1,3 +1,15 @@
+# v1.0.4 (Thu Apr 27 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Move to absolute links in docs ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.0.3 (Tue Apr 25 2023)
 
 #### 🐛 Bug Fix
