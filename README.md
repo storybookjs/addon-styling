@@ -55,18 +55,18 @@ module.exports = {
 
 For tool-specific setup, check out the recipes below
 
-- [`@emotion/styled`](./docs/getting-started/emotion.md)
-- [`@mui/material`](./docs/getting-started/material-ui.md)
-- [`bootstrap`](./docs/getting-started/bootstrap.md)
-- [`cssModules`](./docs/api.md#optionscssmodules)
-- [`less`](./docs/api.md#optionsless)
-- [`postcss`](./docs/api.md#optionspostcss)
-- [`sass`](./docs/api.md#optionssass)
-- [`styled-components`](./docs/getting-started/styled-components.md)
-- [`tailwind`](./docs/getting-started/tailwind.md)
+- [`@emotion/styled`](https://github.com/storybookjs/addon-styling/tree/main/docs/getting-started/emotion.md)
+- [`@mui/material`](https://github.com/storybookjs/addon-styling/tree/main/docs/getting-started/material-ui.md)
+- [`bootstrap`](https://github.com/storybookjs/addon-styling/tree/main/docs/getting-started/bootstrap.md)
+- [`cssModules`](https://github.com/storybookjs/addon-styling/blob/main/docs/api.md#optionscssmodules)
+- [`less`](https://github.com/storybookjs/addon-styling/blob/main/docs/api.md#optionsless)
+- [`postcss`](https://github.com/storybookjs/addon-styling/blob/main/docs/api.md#optionspostcss)
+- [`sass`](https://github.com/storybookjs/addon-styling/blob/main/docs/api.md#optionssass)
+- [`styled-components`](https://github.com/storybookjs/addon-styling/tree/main/docs/getting-started/styled-components.md)
+- [`tailwind`](https://github.com/storybookjs/addon-styling/tree/main/docs/getting-started/tailwind.md)
 - [`vuetify@3.x`](./docs/api.md#writing-a-custom-decorator)
 
-Don't see your favorite tool listed? Don't worry! That doesn't mean this addon isn't for you. Check out the ["Writing a custom decorator"](./docs/api.md#writing-a-custom-decorator) section of the [api reference](./docs/api.md).
+Don't see your favorite tool listed? Don't worry! That doesn't mean this addon isn't for you. Check out the ["Writing a custom decorator"](https://github.com/storybookjs/addon-styling/blob/main/docs/api.md#writing-a-custom-decorator) section of the [api reference](https://github.com/storybookjs/addon-styling/blob/main/docs/api.md).
 
 ### ❗️ Overriding theme
 
