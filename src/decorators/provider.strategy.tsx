@@ -47,13 +47,20 @@ export const withThemeFromJSXProvider = <
         : themes[selectedThemeName];
     }, [themes, selected, themeOverride]);
 
-    const ProviderComponent = Provider || React.Fragment;
+    if(!Provider) {
+      return (
+        <>
+          {GlobalStyles && <GlobalStyles />}
+          {storyFn()}
+        </>
+      );
+    }
 
     return (
-      <ProviderComponent theme={theme}>
+      <Provider theme={theme}>
         {GlobalStyles && <GlobalStyles />}
         {storyFn()}
-      </ProviderComponent>
+      </Provider>
     );
   };
 };
