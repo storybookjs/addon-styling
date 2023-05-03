@@ -1,3 +1,15 @@
+# v1.0.6 (Wed May 03 2023)
+
+#### 🐛 Bug Fix
+
+- React warnings when using Emotion global styling [#36](https://github.com/storybookjs/addon-styling/pull/36) ([@munawiki](https://github.com/munawiki))
+
+#### Authors: 1
+
+- munawiki ([@munawiki](https://github.com/munawiki))
+
+---
+
 # v1.0.5 (Thu Apr 27 2023)
 
 #### 🐛 Bug Fix
