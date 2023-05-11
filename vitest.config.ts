@@ -7,6 +7,7 @@ export default mergeConfig(
     test: {
       passWithNoTests: true,
       reporters: "verbose",
+      setupFiles: ["./vitest/setup.ts"],
     },
   })
 );
