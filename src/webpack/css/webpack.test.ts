@@ -1,4 +1,4 @@
-import { beforeEach, describe, it } from "vitest";
+import { describe, it } from "vitest";
 import {
   isRuleForCSS,
   buildStyleLoader,
@@ -196,13 +196,35 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
       expect,
     }) => {
       const config = createTestWebpackConfig("postcss");
-
-      patchOrAddCssRule(config, {
+      const addonOptions = {
         postCss: { implementation: require.resolve("postcss") },
-      });
+      };
+
+      patchOrAddCssRule(config, addonOptions);
 
       expect(config.module.rules.length).toEqual(1);
       expect(config.module.rules).not.toContain(EXISTING_CSS_RULES);
+      expect(config.module.rules[0].sideEffects).toBeTruthy();
+      expect(config.module.rules[0].test.test("test.css")).toBeTruthy();
+      expect(config.module.rules[0].use).toMatchInlineSnapshot(`
+        [
+          {
+            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+          },
+          {
+            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "options": {
+              "importLoaders": 1,
+            },
+          },
+          {
+            "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
+            "options": {
+              "implementation": "path/to/project/node_modules/postcss/lib/postcss.js",
+            },
+          },
+        ]
+      `);
     });
 
     it("ENABLE CSS MODULES: it should replace existing css rules to enable css modules", async ({
@@ -216,6 +238,21 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
 
       expect(config.module.rules.length).toEqual(1);
       expect(config.module.rules).not.toContain(EXISTING_CSS_RULES);
+      expect(config.module.rules[0].use).toMatchInlineSnapshot(`
+        [
+          {
+            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+          },
+          {
+            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "options": {
+              "modules": {
+                "auto": true,
+              },
+            },
+          },
+        ]
+      `);
     });
 
     it("ENABLE POSTCSS & CSS MODULES: it should replace existing css rules to enable postcss & css modules", async ({
@@ -231,6 +268,28 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
       expect(config.module.rules.length).toEqual(1);
       expect(config.module.rules[0]?.sideEffects).toBeTruthy();
       expect(config.module.rules).not.toContain(EXISTING_CSS_RULES);
+      expect(config.module.rules[0].use).toMatchInlineSnapshot(`
+      [
+        {
+          "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+        },
+        {
+          "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+          "options": {
+            "importLoaders": 1,
+            "modules": {
+              "auto": true,
+            },
+          },
+        },
+        {
+          "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
+          "options": {
+            "implementation": "path/to/project/node_modules/postcss/lib/postcss.js",
+          },
+        },
+      ]
+    `);
     });
 
     it("OVERRIDE RULE: it should replace existing css rules with the given rule", async ({
