@@ -1,14 +1,16 @@
-name: Run unit tests
+name: Vitest unit tests
 
 on:
   push:
     branches:
+      - main
       - next
   pull_request:
     types: [opened, synchronize, reopened]
 
 jobs:
   build:
+    name: Testing
     runs-on: ubuntu-latest
     strategy:
       matrix:
