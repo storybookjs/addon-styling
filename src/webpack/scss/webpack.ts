@@ -1,18 +1,31 @@
 import type { RuleSetRule, Configuration as WebpackConfig } from "webpack";
 import type { AddonStylingOptions } from "../../types";
 
-const isRuleForSCSS = (rule: RuleSetRule) =>
+export const isRuleForSCSS = (rule: RuleSetRule) =>
   typeof rule !== "string" &&
   rule.test instanceof RegExp &&
   (rule.test.test("test.scss") || rule.test.test("test.sass"));
 
-const buildStyleLoader = (options: AddonStylingOptions) => ({
+export const buildStyleLoader = (options: AddonStylingOptions) => ({
   loader: require.resolve("style-loader"),
 });
 
-const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
+export const buildCssModuleRules = ({ cssModules }: AddonStylingOptions) => {
+  if (!cssModules) {
+    return {};
+  }
+
+  return typeof cssModules === "object"
+    ? { modules: { ...cssModules } }
+    : { modules: { auto: true } };
+};
+
+export const buildCssLoader = ({
+  cssModules,
+  postCss,
+}: AddonStylingOptions) => {
   const importSettings = { importLoaders: postCss ? 3 : 2 };
-  const moduleSettings = cssModules ? { modules: { auto: true } } : {};
+  const moduleSettings = buildCssModuleRules({ cssModules });
 
   return {
     loader: require.resolve("css-loader"),
@@ -23,7 +36,7 @@ const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
   };
 };
 
-const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
+export const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
   const implementationOptions =
     typeof postCss === "object" ? { ...postCss } : {};
 
@@ -35,11 +48,11 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
   };
 };
 
-const buildUrlResolverLoader = (options: AddonStylingOptions) => ({
+export const buildUrlResolverLoader = (options: AddonStylingOptions) => ({
   loader: require.resolve("resolve-url-loader"),
 });
 
-const buildSassLoader = ({ sass }: AddonStylingOptions) => {
+export const buildSassLoader = ({ sass }: AddonStylingOptions) => {
   const sassOptions = typeof sass === "object" ? { sassOptions: sass } : {};
 
   const implementationOptions =
@@ -67,7 +80,7 @@ const buildSassLoader = ({ sass }: AddonStylingOptions) => {
   };
 };
 
-const SCSS_FILE_REGEX = /\.s[ac]ss$/;
+export const SCSS_FILE_REGEX = /\.s[ac]ss$/;
 const buildScssRule = (options: AddonStylingOptions): RuleSetRule => {
   if (options.scssBuildRule) return options.scssBuildRule;
 

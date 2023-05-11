@@ -1,18 +1,31 @@
 import type { RuleSetRule, Configuration as WebpackConfig } from "webpack";
 import type { AddonStylingOptions } from "../../types";
 
-const isRuleForCSS = (rule: RuleSetRule) =>
+export const isRuleForCSS = (rule: RuleSetRule) =>
   typeof rule !== "string" &&
   rule.test instanceof RegExp &&
   rule.test.test("test.css");
 
-const buildStyleLoader = (options: AddonStylingOptions) => ({
+export const buildStyleLoader = (options: AddonStylingOptions) => ({
   loader: require.resolve("style-loader"),
 });
 
-const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
+export const buildCssModuleRules = ({ cssModules }: AddonStylingOptions) => {
+  if (!cssModules) {
+    return {};
+  }
+
+  return typeof cssModules === "object"
+    ? { modules: { ...cssModules } }
+    : { modules: { auto: true } };
+};
+
+export const buildCssLoader = ({
+  cssModules,
+  postCss,
+}: AddonStylingOptions) => {
   const importSettings = postCss ? { importLoaders: 1 } : {};
-  const moduleSettings = cssModules ? { modules: { auto: true } } : {};
+  const moduleSettings = buildCssModuleRules({ cssModules });
 
   return {
     loader: require.resolve("css-loader"),
@@ -23,7 +36,7 @@ const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
   };
 };
 
-const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
+export const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
   const implementationOptions =
     typeof postCss === "object" ? { ...postCss } : {};
 
@@ -35,8 +48,8 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
   };
 };
 
-const CSS_FILE_REGEX = /\.css$/;
-const buildCssRule = (options: AddonStylingOptions): RuleSetRule => {
+export const CSS_FILE_REGEX = /\.css$/;
+export const buildCssRule = (options: AddonStylingOptions): RuleSetRule => {
   if (options.cssBuildRule) return options.cssBuildRule;
 
   const buildRule = [
