@@ -1,18 +1,31 @@
 import type { RuleSetRule, Configuration as WebpackConfig } from "webpack";
 import type { AddonStylingOptions } from "../../types";
 
-const isRuleForLESS = (rule: RuleSetRule) =>
+export const isRuleForLESS = (rule: RuleSetRule) =>
   typeof rule !== "string" &&
   rule.test instanceof RegExp &&
   rule.test.test("test.less");
 
-const buildStyleLoader = (options: AddonStylingOptions) => ({
+export const buildStyleLoader = (options: AddonStylingOptions) => ({
   loader: require.resolve("style-loader"),
 });
 
-const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
+export const buildCssModuleRules = ({ cssModules }: AddonStylingOptions) => {
+  if (!cssModules) {
+    return {};
+  }
+
+  return typeof cssModules === "object"
+    ? { modules: { ...cssModules } }
+    : { modules: { auto: true } };
+};
+
+export const buildCssLoader = ({
+  cssModules,
+  postCss,
+}: AddonStylingOptions) => {
   const importSettings = { importLoaders: postCss ? 2 : 1 };
-  const moduleSettings = cssModules ? { modules: { auto: true } } : {};
+  const moduleSettings = buildCssModuleRules({ cssModules });
 
   return {
     loader: require.resolve("css-loader"),
@@ -23,7 +36,7 @@ const buildCssLoader = ({ cssModules, postCss }: AddonStylingOptions) => {
   };
 };
 
-const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
+export const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
   const implementationOptions =
     typeof postCss === "object" ? { ...postCss } : {};
 
@@ -35,7 +48,7 @@ const buildPostCssLoader = ({ postCss }: AddonStylingOptions) => {
   };
 };
 
-const buildLessLoader = ({ less }: AddonStylingOptions) => {
+export const buildLessLoader = ({ less }: AddonStylingOptions) => {
   const implementationOptions =
     typeof less === "object" && less.hasOwnProperty("implementation")
       ? { implementation: less.implementation }
@@ -46,20 +59,25 @@ const buildLessLoader = ({ less }: AddonStylingOptions) => {
       ? { additionalData: less.additionalData }
       : {};
 
+  const lessOptions =
+    typeof less === "object" && less.hasOwnProperty("lessOptions")
+      ? { lessOptions: less.lessOptions }
+      : {};
+
   return {
     loader: require.resolve("less-loader"),
     options: {
       sourceMap: true,
-      lessOptions: less.lessOptions ?? {},
       ...implementationOptions,
       ...additionalData,
+      ...lessOptions,
     },
   };
 };
 
-const LESS_FILE_REGEX = /\.less$/i;
+export const LESS_FILE_REGEX = /\.less$/i;
 const buildLessRule = (options: AddonStylingOptions): RuleSetRule => {
-  if (options.scssBuildRule) return options.scssBuildRule;
+  if (options.lessBuildRule) return options.lessBuildRule;
 
   const buildRule = [
     buildStyleLoader(options),
