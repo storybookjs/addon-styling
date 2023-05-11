@@ -1,4 +1,4 @@
-name: Vitest unit tests
+name: Run test suite
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Testing
+    name: Unit tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
