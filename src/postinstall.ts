@@ -25,7 +25,7 @@ const automigrate = async () => {
 =========================================
 `);
 
-  const packageJson: PackageJson = TEST_PACKAGE_JSON; // getPackageJson();
+  const packageJson: PackageJson = getPackageJson();
   const strategy = selectStrategy(packageJson);
 
   const mainPath = await findConfig("main");
