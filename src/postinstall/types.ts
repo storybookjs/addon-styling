@@ -35,24 +35,28 @@ export interface ToolConfigurationStrategy {
   predicate: (packageJson: PackageJson) => Boolean;
   /**
    * Transform function for a `.storybook/main.ts` file
-   * @param builder The builder used to build the project's stories
    * @param mainConfig Babel AST for the main.ts file
+   * @param packageJson The project's package.json
+   * @param builder The builder used to build the project's stories
    * @param logger logging utilities
    */
   main?: (
-    builder: SupportedBuilders,
     mainConfig: ConfigFile,
+    packageJson: PackageJson,
+    builder: SupportedBuilders,
     logger: NodeLogger
   ) => void;
   /**
    * Transform function for a `.storybook/preview.ts` file
+   * @param previewConfig Babel AST for the preview.ts file
+   * @param packageJson The project's package.json
    * @param builder The builder used to build the project's stories
-   * @param mainConfig Babel AST for the preview.ts file
    * @param logger logging utilities
    */
   preview?: (
-    builder: SupportedBuilders,
     previewConfig: ConfigFile,
+    packageJson: PackageJson,
+    builder: SupportedBuilders,
     logger: NodeLogger
   ) => void;
 }

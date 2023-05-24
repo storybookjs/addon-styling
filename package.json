@@ -65,6 +65,8 @@
     "release": "yarn build && auto shipit"
   },
   "dependencies": {
+    "@babel/template": "^7.20.7",
+    "@babel/types": "^7.21.5",
     "@storybook/api": "^7.0.12",
     "@storybook/components": "^7.0.12",
     "@storybook/core-common": "^7.0.12",
