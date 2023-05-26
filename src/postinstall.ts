@@ -1,13 +1,14 @@
 import { PackageJson } from "@storybook/types";
 import { logger, colors } from "@storybook/node-logger";
-import { readConfig, writeConfig } from "@storybook/csf-tools";
+import { readConfig } from "@storybook/csf-tools";
 
 import type { ToolConfigurationStrategy } from "./postinstall/types";
 import { getPackageJson } from "./postinstall/utils/package-json.utils";
-import { findConfig } from "./postinstall/utils/configs.utils";
+import {
+  findConfig,
+  writePrettyConfig,
+} from "./postinstall/utils/configs.utils";
 import { determineBuilder } from "./postinstall/utils/dependencies.utils";
-
-import { TEST_PACKAGE_JSON } from "./postinstall/utils/test.pkg";
 
 import { tailwindStrategy } from "./postinstall/tailwind/tailwind.strategy";
 
@@ -30,6 +31,7 @@ const automigrate = async () => {
 
   const mainPath = await findConfig("main");
   const mainConfig = await readConfig(mainPath);
+
   const builder = determineBuilder(mainConfig);
 
   const previewPath = await findConfig("preview");
@@ -57,7 +59,7 @@ const automigrate = async () => {
   logger.plain(`${colors.blue.bold("(2/3)")} ${colors.purple.bold(mainPath)}`);
   if (strategy.main) {
     strategy.main(mainConfig, packageJson, builder, { logger, colors });
-    await writeConfig(mainConfig);
+    await writePrettyConfig(mainConfig);
   } else {
     logger.plain(`  • No updates required.`);
   }
@@ -70,7 +72,7 @@ const automigrate = async () => {
   if (strategy.preview) {
     // Make updates to preview
     strategy.preview(previewConfig, packageJson, builder, { logger, colors });
-    await writeConfig(previewConfig);
+    await writePrettyConfig(previewConfig);
   } else {
     logger.plain(`  • No updates required.`);
   }
