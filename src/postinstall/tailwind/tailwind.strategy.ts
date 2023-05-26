@@ -1,4 +1,5 @@
 import { PackageJson } from "@storybook/types";
+import * as t from "@babel/types";
 
 import { hasDependency } from "../utils/dependencies.utils";
 import {
@@ -6,11 +7,7 @@ import {
   SUPPORTED_STYLING_TOOLS,
   ToolConfigurationStrategy,
 } from "../types";
-import {
-  AddCommentBeforeBabelNode,
-  addImports,
-  parseStringToBabelNode,
-} from "../utils/babel.utils";
+import { addImports, stringToNode } from "../utils/babel.utils";
 
 const projectHasTailwind = (packageJson: PackageJson) =>
   hasDependency(packageJson, "tailwindcss") &&
@@ -28,54 +25,63 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
 
     logger.plain(`  • Configuring ${colors.green("postcss")}.`);
 
-    mainConfig.appendNodeToArray(
-      ["addons"],
-      parseStringToBabelNode(`({
-        "name": "@storybook/addon-styling",
-        "options": {
-          "postcss": { implementation: require.resolve('postcss'), },
-        },
-      })`)
-    );
+    const [addonConfigNode] = stringToNode`({
+      name: "@storybook/addon-styling",
+      options: {
+        postcss: {
+          implementation: require.resolve("postcss")
+        }
+      }
+    })`;
+
+    console.log(addonConfigNode);
+
+    const addonsNodePath = ["addons"];
+    let addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
+
+    if (!addonsArrayNode) {
+      mainConfig.setFieldNode(addonsNodePath, t.arrayExpression());
+      addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
+    }
+
+    // @ts-expect-error
+    addonsArrayNode.elements.push(addonConfigNode);
   },
   preview: (previewConfig, packageJson, builder, { logger, colors }) => {
     logger.plain(
       `  • Adding import for ${colors.blue("withThemeByClassName")} decorator`
     );
-    const decoratorImportNode = parseStringToBabelNode(
-      `import { withThemeByClassName } from '@storybook/addon-styling';`
-    );
-
     logger.plain(`  • Adding import for stylesheet`);
-    const styleImportNode = parseStringToBabelNode(`import '../src/app.css';`);
-    AddCommentBeforeBabelNode(
-      `TODO: update import to your tailwind styles file`,
-      styleImportNode,
-      true
-    );
 
-    addImports(previewConfig._ast, [decoratorImportNode, styleImportNode]);
+    const importsNode = stringToNode`import { withThemeByClassName } from '@storybook/addon-styling';
+
+    // TODO: update import to your tailwind styles file
+    import '../src/app.css';`;
+
+    addImports(previewConfig._ast, importsNode);
 
     logger.plain(
       `  • Adding ${colors.blue("withThemeByClassName")} decorator to config`
     );
-    const decoratorNode = parseStringToBabelNode(`
-withThemeByClassName({
+    const [decoratorNode] = stringToNode`// Adds theme switching support.
+    // NOTE: requires setting "darkMode" to "class" in your tailwind config
+    withThemeByClassName({
      themes: {
        light: 'light',
        dark: 'dark',
      },
      defaultTheme: 'light',
-})`).expression;
+})`;
 
-    AddCommentBeforeBabelNode(
-      `
-  Uncomment to add theme switching support
-  NOTE: requires setting "darkMode" to "class" in your tailwind config
-`,
-      decoratorNode
-    );
+    const decoratorNodePath = ["decorators"];
+    let decoratorArrayNode = previewConfig.getFieldNode(decoratorNodePath);
 
-    previewConfig.appendNodeToArray(["decorators"], decoratorNode);
+    if (!decoratorArrayNode) {
+      previewConfig.setFieldNode(decoratorNodePath, t.arrayExpression());
+      decoratorArrayNode = previewConfig.getFieldNode(decoratorNodePath);
+    }
+
+    // @ts-expect-error
+    decoratorArrayNode.elements.push(decoratorNode);
   },
 };
