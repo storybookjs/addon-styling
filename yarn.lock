@@ -4145,13 +4145,6 @@ assign-symbols@^1.0.0:
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
-ast-types@0.15.2:
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.15.2.tgz#39ae4809393c4b16df751ee563411423e85fb49d"
-  integrity sha512-c27loCv9QkZinsa5ProX751khO9DJl/AcB5c2KNtA6NRvHKS0PgLfcftz72KVq504vB0Gku5s2kUZzDBvQWvHg==
-  dependencies:
-    tslib "^2.0.1"
-
 ast-types@^0.14.2:
   version "0.14.2"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.14.2.tgz#600b882df8583e3cd4f2df5fa20fa83759d4bdfd"
@@ -8327,15 +8320,15 @@ prelude-ls@~1.1.2:
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
 
-prettier@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.1.tgz#76903c3f8c4449bc9ac597acefa24dc5ad4cbea6"
-  integrity sha512-p+vNbgpLjif/+D+DwAZAbndtRrR0md0MwfmOVN9N+2RgyACMT+7tfaRnT+WDPkqnuVwleyuBIG2XBxKDme3hPA==
-
 prettier@^2.8.0:
   version "2.8.4"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.4.tgz#34dd2595629bfbb79d344ac4a91ff948694463c3"
   integrity sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==
+
+prettier@^2.8.8:
+  version "2.8.8"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
+  integrity sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==
 
 pretty-error@^4.0.0:
   version "4.0.0"
@@ -8676,20 +8669,10 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-recast@^0.21.0:
-  version "0.21.5"
-  resolved "https://registry.yarnpkg.com/recast/-/recast-0.21.5.tgz#e8cd22bb51bcd6130e54f87955d33a2b2e57b495"
-  integrity sha512-hjMmLaUXAm1hIuTqOdeYObMslq/q+Xff6QE3Y2P+uoHAg2nmVlLBps2hzh1UJDdMtDTMXOFewK6ky51JQIeECg==
-  dependencies:
-    ast-types "0.15.2"
-    esprima "~4.0.0"
-    source-map "~0.6.1"
-    tslib "^2.0.1"
-
-recast@^0.23.1:
-  version "0.23.1"
-  resolved "https://registry.yarnpkg.com/recast/-/recast-0.23.1.tgz#ee415a5561d2f99f02318ea8db81ad3a2267a6ff"
-  integrity sha512-RokaBcoxSjXUDzz1TXSZmZsSW6ZpLmlA3GGqJ8uuTrQ9hZhEz+4Tpsc+gRvYRJ2BU4H+ZyUlg91eSGDw7bwy7g==
+recast@^0.21.0, recast@^0.23.1, recast@^0.23.2:
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/recast/-/recast-0.23.2.tgz#d3dda3e8f0a3366860d7508c00e34a338ac52b41"
+  integrity sha512-Qv6cPfVZyMOtPszK6PgW70pUgm7gPlFitAPf0Q69rlOA0zLw2XdDcNmPbVGYicFGT9O8I7TZ/0ryJD+6COvIPw==
   dependencies:
     assert "^2.0.0"
     ast-types "^0.16.1"
