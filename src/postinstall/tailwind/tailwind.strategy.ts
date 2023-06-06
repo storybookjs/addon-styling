@@ -34,8 +34,6 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
       }
     })`;
 
-    console.log(addonConfigNode);
-
     const addonsNodePath = ["addons"];
     let addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
 
