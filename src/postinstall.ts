@@ -11,8 +11,14 @@ import {
 import { determineBuilder } from "./postinstall/utils/dependencies.utils";
 
 import { tailwindStrategy } from "./postinstall/tailwind/tailwind.strategy";
+import { materialUIStrategy } from "./postinstall/material-ui/material-ui.strategy";
+import { sassStrategy } from "./postinstall/sass/sass.strategy";
 
-const AUTO_CONFIG_STRATEGIES: ToolConfigurationStrategy[] = [tailwindStrategy];
+const AUTO_CONFIG_STRATEGIES: ToolConfigurationStrategy[] = [
+  tailwindStrategy,
+  materialUIStrategy,
+  sassStrategy,
+];
 
 const selectStrategy = (packageJson: PackageJson) =>
   AUTO_CONFIG_STRATEGIES.find(({ predicate }) => predicate(packageJson));

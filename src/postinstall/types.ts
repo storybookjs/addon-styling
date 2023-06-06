@@ -17,6 +17,8 @@ export type SupportedBuilders =
 
 export const SUPPORTED_STYLING_TOOLS = {
   TAILWIND: "tailwind",
+  MATERIAL_UI: "material-ui",
+  SASS: "sass",
 } as const;
 
 export type SupportedStylingTools =
