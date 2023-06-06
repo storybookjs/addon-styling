@@ -34,7 +34,7 @@ export const getMainConfig = async (): Promise<ConfigFile> => {
   return mainConfig;
 };
 
-export const writePrettyConfig = async (config: ConfigFile): Promise<void> => {
+export const formatFileContents = (config: ConfigFile): string => {
   const fname = config.fileName;
   if (!fname) throw new Error('Please specify a fileName for writeConfig');
 
@@ -54,9 +54,14 @@ export const writePrettyConfig = async (config: ConfigFile): Promise<void> => {
     logger.info(`Failed applying prettier to ${fname}.`);
   }
 
-  await fs.writeFile(fname, output);
-  
+  return output;
+}
 
+export const writePrettyConfig = async (config: ConfigFile): Promise<void> => {
+  const fname = config.fileName;
+  const output = formatFileContents(config);
+
+  await fs.writeFile(fname, output);
 }
 
 
