@@ -39,7 +39,8 @@
       "import": "./dist/preset.mjs",
       "types": "./dist/preset.d.ts"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./postinstall": "./bin/postinstall.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -56,13 +57,14 @@
     "build:addon": "tsup --config=\"./tsup.browser.config.js\"",
     "build:config": "tsup --config=\"./tsup.node.config.js\"",
     "build:watch": "yarn build:addon --watch",
+    "build:all": "concurrently \"yarn build:addon\" \"yarn build:config\"",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --quiet\"",
     "build-storybook": "storybook build",
     "prerelease": "zx scripts/prepublish-checks.mjs",
-    "release": "yarn build && auto shipit"
+    "release": "yarn build:all && auto shipit"
   },
   "dependencies": {
     "@babel/template": "^7.20.7",
