@@ -8,7 +8,7 @@ import {
   needsSassConfiguration,
 } from "./dependencies.utils";
 
-import { TEST_PACKAGE_JSON } from "./test.pkg";
+import { TEST_PACKAGE_JSON } from "../fixtures/package.fixture";
 import { SUPPORTED_BUILDERS } from "../types";
 
 describe("POSTINSTALL UTILITIES", () => {

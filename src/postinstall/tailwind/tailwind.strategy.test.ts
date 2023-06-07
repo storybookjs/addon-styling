@@ -1,15 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
 import { PackageJson } from "@storybook/types";
 import { readConfig } from "@storybook/csf-tools";
-import { logger, colors } from "@storybook/node-logger";
 import { resolve } from "node:path";
 
 import { tailwindStrategy } from "./tailwind.strategy";
 import { SUPPORTED_BUILDERS } from "../types";
 import { formatFileContents } from "../utils/configs.utils";
-
-vi.importMock("@storybook/node-logger");
-const mockedLogger = { logger, colors };
 
 describe("CODEMOD: tailwind configuration", () => {
   describe("PREDICATE: should project be configured for tailwind?", () => {
@@ -45,12 +41,7 @@ describe("CODEMOD: tailwind configuration", () => {
         devDependencies: { postcss: " latest" },
       };
 
-      tailwindStrategy.main(
-        mainConfig,
-        packageJson,
-        SUPPORTED_BUILDERS.VITE,
-        mockedLogger
-      );
+      tailwindStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.VITE);
 
       const result = formatFileContents(mainConfig);
 
@@ -90,8 +81,7 @@ describe("CODEMOD: tailwind configuration", () => {
       tailwindStrategy.main(
         mainConfig,
         packageJson,
-        SUPPORTED_BUILDERS.WEBPACK,
-        mockedLogger
+        SUPPORTED_BUILDERS.WEBPACK
       );
 
       const result = formatFileContents(mainConfig);
@@ -138,8 +128,7 @@ describe("CODEMOD: tailwind configuration", () => {
       tailwindStrategy.preview(
         previewConfig,
         packageJson,
-        SUPPORTED_BUILDERS.WEBPACK,
-        mockedLogger
+        SUPPORTED_BUILDERS.WEBPACK
       );
 
       const result = formatFileContents(previewConfig);
@@ -149,7 +138,7 @@ describe("CODEMOD: tailwind configuration", () => {
 
         import { withThemeByClassName } from \\"@storybook/addon-styling\\";
 
-        // TODO: update import to your tailwind styles file
+        /* TODO: update import to your tailwind styles file */
         import \\"../src/app.css\\";
 
         const preview: Preview = {

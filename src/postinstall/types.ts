@@ -2,11 +2,6 @@ import { PackageJson } from "@storybook/types";
 import type { ConfigFile } from "@storybook/csf-tools";
 import { logger, colors } from "@storybook/node-logger";
 
-interface NodeLogger {
-  logger: typeof logger;
-  colors: typeof colors;
-}
-
 export const SUPPORTED_BUILDERS = {
   VITE: "vite",
   WEBPACK: "webpack",
@@ -40,25 +35,21 @@ export interface ToolConfigurationStrategy {
    * @param mainConfig Babel AST for the main.ts file
    * @param packageJson The project's package.json
    * @param builder The builder used to build the project's stories
-   * @param logger logging utilities
    */
   main?: (
     mainConfig: ConfigFile,
     packageJson: PackageJson,
-    builder: SupportedBuilders,
-    logger: NodeLogger
+    builder: SupportedBuilders
   ) => void;
   /**
    * Transform function for a `.storybook/preview.ts` file
    * @param previewConfig Babel AST for the preview.ts file
    * @param packageJson The project's package.json
    * @param builder The builder used to build the project's stories
-   * @param logger logging utilities
    */
   preview?: (
     previewConfig: ConfigFile,
     packageJson: PackageJson,
-    builder: SupportedBuilders,
-    logger: NodeLogger
+    builder: SupportedBuilders
   ) => void;
 }

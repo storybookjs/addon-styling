@@ -12,12 +12,10 @@ import { determineBuilder } from "./postinstall/utils/dependencies.utils";
 
 import { tailwindStrategy } from "./postinstall/tailwind/tailwind.strategy";
 import { materialUIStrategy } from "./postinstall/material-ui/material-ui.strategy";
-import { sassStrategy } from "./postinstall/sass/sass.strategy";
 
 const AUTO_CONFIG_STRATEGIES: ToolConfigurationStrategy[] = [
   tailwindStrategy,
   materialUIStrategy,
-  // sassStrategy,
 ];
 
 const selectStrategy = (packageJson: PackageJson) =>
@@ -32,16 +30,9 @@ const automigrate = async () => {
 =========================================
 `);
 
+  // Step 1: Find configuration strategy
   const packageJson: PackageJson = getPackageJson();
   const strategy = selectStrategy(packageJson);
-
-  const mainPath = await findConfig("main");
-  const mainConfig = await readConfig(mainPath);
-
-  const builder = determineBuilder(mainConfig);
-
-  const previewPath = await findConfig("preview");
-  const previewConfig = await readConfig(previewPath);
 
   if (!strategy) {
     logger.plain(
@@ -55,13 +46,21 @@ const automigrate = async () => {
     return;
   }
 
-  // Step 1: Determine project details
+  const mainPath = await findConfig("main");
+  const mainConfig = await readConfig(mainPath);
+
+  const builder = determineBuilder(mainConfig);
+
+  const previewPath = await findConfig("preview");
+  const previewConfig = await readConfig(previewPath);
+
+  // Step 2: Determine project details
   logger.plain(`${colors.blue.bold("(1/3)")} Project summary`);
   logger.plain(`  • Built with ${colors.green.bold(builder)}`);
   logger.plain(`  • Styled with ${colors.green.bold(strategy.name)}`);
   logger.line(1);
 
-  // Step 2: Make any required updates to .storybook/main.ts
+  // Step 3: Make any required updates to .storybook/main.ts
   logger.plain(`${colors.blue.bold("(2/3)")} ${colors.purple.bold(mainPath)}`);
   if (strategy.main) {
     strategy.main(mainConfig, packageJson, builder, { logger, colors });
@@ -71,7 +70,7 @@ const automigrate = async () => {
   }
   logger.line(1);
 
-  // Step 3: Make any required updates to .storybook/preview.ts
+  // Step 4: Make any required updates to .storybook/preview.ts
   logger.plain(
     `${colors.blue.bold("(3/3)")} ${colors.purple.bold(previewPath)}`
   );
@@ -84,7 +83,7 @@ const automigrate = async () => {
   }
   logger.line(1);
 
-  // Step 4: Profit
+  // Step 5: Profit
   logger.plain("✨ Done");
 };
 

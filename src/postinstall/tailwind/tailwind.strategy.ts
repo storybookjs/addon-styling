@@ -1,4 +1,5 @@
 import { PackageJson } from "@storybook/types";
+import { logger, colors } from "@storybook/node-logger";
 import * as t from "@babel/types";
 
 import { hasDependency } from "../utils/dependencies.utils";
@@ -16,7 +17,7 @@ const projectHasTailwind = (packageJson: PackageJson) =>
 export const tailwindStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.TAILWIND,
   predicate: projectHasTailwind,
-  main: (mainConfig, packageJson, builder, { logger, colors }) => {
+  main: (mainConfig, packageJson, builder) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
     if (builder === SUPPORTED_BUILDERS.WEBPACK) {
@@ -49,7 +50,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
     // @ts-expect-error
     addonsArrayNode.elements.push(addonConfigNode);
   },
-  preview: (previewConfig, packageJson, builder, { logger, colors }) => {
+  preview: (previewConfig, packageJson, builder) => {
     logger.plain(
       `  • Adding import for ${colors.blue("withThemeByClassName")} decorator`
     );
@@ -57,7 +58,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
 
     const importsNode = stringToNode`import { withThemeByClassName } from '@storybook/addon-styling';
 
-    // TODO: update import to your tailwind styles file
+    /* TODO: update import to your tailwind styles file */
     import '../src/app.css';`;
 
     addImports(previewConfig._ast, importsNode);

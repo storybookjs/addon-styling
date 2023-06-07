@@ -1,15 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
 import { PackageJson } from "@storybook/types";
 import { readConfig } from "@storybook/csf-tools";
-import { logger, colors } from "@storybook/node-logger";
 import { resolve } from "node:path";
 
 import { materialUIStrategy } from "./material-ui.strategy";
 import { SUPPORTED_BUILDERS } from "../types";
 import { formatFileContents } from "../utils/configs.utils";
-
-vi.importMock("@storybook/node-logger");
-const mockedLogger = { logger, colors };
 
 describe("CODEMOD: Material UI configuration", () => {
   describe("PREDICATE: should project be configured for Material UI?", () => {
@@ -53,12 +49,7 @@ describe("CODEMOD: Material UI configuration", () => {
         devDependencies: { postcss: " latest" },
       };
 
-      materialUIStrategy.main(
-        mainConfig,
-        packageJson,
-        SUPPORTED_BUILDERS.VITE,
-        mockedLogger
-      );
+      materialUIStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.VITE);
 
       const result = formatFileContents(mainConfig);
 
@@ -104,8 +95,7 @@ describe("CODEMOD: Material UI configuration", () => {
       materialUIStrategy.preview(
         previewConfig,
         packageJson,
-        SUPPORTED_BUILDERS.WEBPACK,
-        mockedLogger
+        SUPPORTED_BUILDERS.WEBPACK
       );
 
       const result = formatFileContents(previewConfig);
@@ -116,7 +106,7 @@ describe("CODEMOD: Material UI configuration", () => {
         import { ThemeProvider, CssBaseline } from \\"@mui/material\\";
         import { withThemeFromJSXProvider } from \\"@storybook/addon-styling\\";
 
-        // TODO: update import for your custom Material UI themes
+        /* TODO: update import for your custom Material UI themes */
         // import { lightTheme, darkTheme } from '../path/to/themes';
 
         // Import your fontface CSS files here
@@ -165,8 +155,7 @@ describe("CODEMOD: Material UI configuration", () => {
       materialUIStrategy.preview(
         previewConfig,
         packageJson,
-        SUPPORTED_BUILDERS.WEBPACK,
-        mockedLogger
+        SUPPORTED_BUILDERS.WEBPACK
       );
 
       const result = formatFileContents(previewConfig);
@@ -177,7 +166,7 @@ describe("CODEMOD: Material UI configuration", () => {
         import { ThemeProvider, CssBaseline } from \\"@mui/material\\";
         import { withThemeFromJSXProvider } from \\"@storybook/addon-styling\\";
 
-        // TODO: update import for your custom Material UI themes
+        /* TODO: update import for your custom Material UI themes */
         // import { lightTheme, darkTheme } from '../path/to/themes';
 
         import \\"@fontsource/roboto/300.css\\";

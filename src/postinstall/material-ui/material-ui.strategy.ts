@@ -1,4 +1,5 @@
 import { PackageJson } from "@storybook/types";
+import { logger, colors } from "@storybook/node-logger";
 import * as t from "@babel/types";
 
 import { hasDependency } from "../utils/dependencies.utils";
@@ -13,7 +14,7 @@ const projectHasMaterialUI = (packageJson: PackageJson) =>
 export const materialUIStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.MATERIAL_UI,
   predicate: projectHasMaterialUI,
-  main: (mainConfig, packageJson, builder, { logger, colors }) => {
+  main: (mainConfig, packageJson, builder) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
     const [addonConfigNode] = stringToNode`({
@@ -32,7 +33,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
     // @ts-expect-error
     addonsArrayNode.elements.push(addonConfigNode);
   },
-  preview: (previewConfig, packageJson, builder, { logger, colors }) => {
+  preview: (previewConfig, packageJson, builder) => {
     logger.plain(
       `  • Adding imports for ${colors.green(
         SUPPORTED_STYLING_TOOLS.MATERIAL_UI
@@ -70,7 +71,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
     import { ThemeProvider, CssBaseline } from '@mui/material';
     import { withThemeFromJSXProvider } from '@storybook/addon-styling';
 
-    // TODO: update import for your custom Material UI themes
+    /* TODO: update import for your custom Material UI themes */
     // import { lightTheme, darkTheme } from '../path/to/themes';
     
     // Import your fontface CSS files here
@@ -107,6 +108,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
     }
 
     // @ts-expect-error
+    // There are specific types for each kind of node and only array nodes have the elements property
     decoratorArrayNode.elements.push(decoratorNode);
   },
 };
