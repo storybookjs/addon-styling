@@ -1,6 +1,5 @@
 import { PackageJson } from "@storybook/types";
 import type { ConfigFile } from "@storybook/csf-tools";
-import { logger, colors } from "@storybook/node-logger";
 
 export const SUPPORTED_BUILDERS = {
   VITE: "vite",
