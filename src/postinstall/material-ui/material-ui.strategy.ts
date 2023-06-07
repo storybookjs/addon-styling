@@ -36,7 +36,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
     logger.plain(
       `  • Adding imports for ${colors.green(
         SUPPORTED_STYLING_TOOLS.MATERIAL_UI
-      )} ${colors.blue("ThemeProvider")} and ${colors.blue(
+      )}, ${colors.blue("ThemeProvider")}, and ${colors.blue(
         "CssBaseline"
       )} components`
     );
@@ -58,7 +58,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
     import { ThemeProvider, CssBaseline } from '@mui/material';
     import { withThemeFromJSXProvider } from '@storybook/addon-styling';
 
-    // TODO: update import for your custom Material UI themes
+    /* TODO: update import for your custom Material UI themes */
     // import { lightTheme, darkTheme } from '../path/to/themes';
     
     import '@fontsource/roboto/300.css';

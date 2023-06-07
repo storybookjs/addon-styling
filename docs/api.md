@@ -120,7 +120,7 @@ module.exports = {
 
 Setting `options.cssModules` to true will give you a basic setup of css modules for your css (and scss if you're using it). If you're looking for something more robust, keep reading 👇
 
-If you'll like to customize your CSS Module configuration, `options.cssModules` can also take an object that takes the same options webpack's `css-loader` [modules property](https://www.npmjs.com/package/css-loader#modules).
+If you'd like to customize your CSS Module configuration, `options.cssModules` can also take an object that takes the same options as webpack's `css-loader` [modules property](https://www.npmjs.com/package/css-loader#modules).
 
 ### Advanced
 

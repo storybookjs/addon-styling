@@ -13,7 +13,7 @@ export const hasDependency = (
 export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
   const frameworkValue = mainConfig.getFieldValue(["framework"]);
 
-  const framework = (frameworkValue?.name || frameworkValue) as string;
+  const framework = typeof frameworkValue === 'string' ? frameworkValue : frameworkValue?.name;
 
   return framework.includes("vite") || framework.includes("sveltekit")
     ? SUPPORTED_BUILDERS.VITE
