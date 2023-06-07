@@ -17,7 +17,7 @@ import { sassStrategy } from "./postinstall/sass/sass.strategy";
 const AUTO_CONFIG_STRATEGIES: ToolConfigurationStrategy[] = [
   tailwindStrategy,
   materialUIStrategy,
-  sassStrategy,
+  // sassStrategy,
 ];
 
 const selectStrategy = (packageJson: PackageJson) =>
