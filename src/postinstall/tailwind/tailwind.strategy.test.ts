@@ -36,7 +36,7 @@ describe("CODEMOD: tailwind configuration", () => {
   });
 
   describe("MAIN: how should storybook be configured for tailwind", () => {
-    it("VITE: No changes should be made to storybook's main.ts file", async () => {
+    it("VITE: addon-styling should be registered without options", async () => {
       const mainConfig = await readConfig(
         resolve(__dirname, "../fixtures/main.fixture.ts")
       );
@@ -58,7 +58,13 @@ describe("CODEMOD: tailwind configuration", () => {
         "import type { StorybookConfig } from \\"@storybook/react-vite\\";
         const config: StorybookConfig = {
           stories: [\\"../stories/**/*.stories.@(js|jsx|ts|tsx)\\"],
-          addons: [\\"@storybook/addon-essentials\\"],
+          addons: [
+            \\"@storybook/addon-essentials\\",
+            {
+              name: \\"@storybook/addon-styling\\",
+              options: {},
+            },
+          ],
           framework: {
             name: \\"@storybook/react-vite\\",
             options: {},

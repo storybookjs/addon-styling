@@ -14,8 +14,23 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.MATERIAL_UI,
   predicate: projectHasMaterialUI,
   main: (mainConfig, packageJson, builder, { logger, colors }) => {
-    logger.plain(`  • No changes required.`);
-    return;
+    logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
+
+    const [addonConfigNode] = stringToNode`({
+      name: "@storybook/addon-styling",
+      options: {}
+    })`;
+
+    const addonsNodePath = ["addons"];
+    let addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
+
+    if (!addonsArrayNode) {
+      mainConfig.setFieldNode(addonsNodePath, t.arrayExpression());
+      addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
+    }
+
+    // @ts-expect-error
+    addonsArrayNode.elements.push(addonConfigNode);
   },
   preview: (previewConfig, packageJson, builder, { logger, colors }) => {
     logger.plain(

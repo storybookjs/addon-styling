@@ -17,15 +17,19 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.TAILWIND,
   predicate: projectHasTailwind,
   main: (mainConfig, packageJson, builder, { logger, colors }) => {
-    if (builder === SUPPORTED_BUILDERS.VITE) {
-      // Vite does not require extra configuration
-      logger.plain(`  • No changes required.`);
-      return;
+    logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
+
+    if (builder === SUPPORTED_BUILDERS.WEBPACK) {
+      logger.plain(`    • Configuring ${colors.green("postcss")}.`);
     }
 
-    logger.plain(`  • Configuring ${colors.green("postcss")}.`);
-
-    const [addonConfigNode] = stringToNode`({
+    const [addonConfigNode] =
+      builder === SUPPORTED_BUILDERS.VITE
+        ? stringToNode`({
+      name: "@storybook/addon-styling",
+      options: {}
+    })`
+        : stringToNode`({
       name: "@storybook/addon-styling",
       options: {
         postcss: {
