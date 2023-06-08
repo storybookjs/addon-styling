@@ -39,12 +39,14 @@
       "import": "./dist/preset.mjs",
       "types": "./dist/preset.d.ts"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./postinstall": "./bin/postinstall.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
+    "bin/**/*",
     "dist/**/*",
     "README.md",
     "*.js",
@@ -53,28 +55,35 @@
   "scripts": {
     "clean": "rimraf ./dist",
     "prebuild": "yarn clean",
-    "build": "tsup",
-    "build:watch": "yarn build --watch",
+    "build:addon": "tsup --config=\"./tsup.browser.config.js\"",
+    "build:config": "tsup --config=\"./tsup.node.config.js\"",
+    "build:watch": "yarn build:addon --watch",
+    "build:all": "concurrently \"yarn build:addon\" \"yarn build:config\"",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --quiet\"",
     "build-storybook": "storybook build",
     "prerelease": "zx scripts/prepublish-checks.mjs",
-    "release": "yarn build && auto shipit"
+    "release": "yarn build:all && auto shipit"
   },
   "dependencies": {
-    "@storybook/api": "^7.0.2",
-    "@storybook/components": "^7.0.2",
-    "@storybook/core-events": "^7.0.2",
-    "@storybook/manager-api": "^7.0.2",
-    "@storybook/node-logger": "^7.0.7",
-    "@storybook/preview-api": "^7.0.2",
-    "@storybook/theming": "^7.0.2",
-    "@storybook/types": "^7.0.2",
+    "@babel/template": "^7.20.7",
+    "@babel/types": "^7.21.5",
+    "@storybook/api": "^7.0.12",
+    "@storybook/components": "^7.0.12",
+    "@storybook/core-common": "^7.0.12",
+    "@storybook/core-events": "^7.0.12",
+    "@storybook/csf-tools": "^7.0.12",
+    "@storybook/manager-api": "^7.0.12",
+    "@storybook/node-logger": "^7.0.12",
+    "@storybook/preview-api": "^7.0.12",
+    "@storybook/theming": "^7.0.12",
+    "@storybook/types": "^7.0.12",
     "css-loader": "^6.7.3",
     "less-loader": "^11.1.0",
     "postcss-loader": "^7.2.4",
+    "recast": "^0.23.2",
     "resolve-url-loader": "^5.0.0",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2"
@@ -85,22 +94,22 @@
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.5",
     "@babel/preset-typescript": "^7.13.0",
-    "@storybook/addon-essentials": "^7.0.2",
-    "@storybook/builder-webpack5": "^7.0.2",
-    "@storybook/react": "^7.0.2",
-    "@storybook/react-vite": "^7.0.2",
+    "@storybook/addon-essentials": "^7.0.12",
+    "@storybook/builder-webpack5": "^7.0.12",
+    "@storybook/react": "^7.0.12",
+    "@storybook/react-vite": "^7.0.12",
     "@vitejs/plugin-react": "^3.1.0",
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
     "boxen": "^5.0.1",
     "concurrently": "^6.2.0",
     "dedent": "^0.7.0",
-    "prettier": "^2.3.1",
+    "prettier": "^2.8.8",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
-    "storybook": "^7.0.2",
+    "storybook": "^7.0.12",
     "tsup": "^6.7.0",
     "typescript": "^4.9.0",
     "vite": "^4.2.1",
@@ -118,6 +127,9 @@
     "react-dom": {
       "optional": true
     }
+  },
+  "resolutions": {
+    "recast": "^0.23.2"
   },
   "publishConfig": {
     "access": "public"

@@ -8,6 +8,7 @@ Get started in Storybook 7 faster with popular styling tools.
 
 ## ✨ Features
 
+- 🤖 **NEW**: Zero-config for popular tools through codemods. [Read more](https://github.com/storybookjs/addon-styling/tree/main/docs/auto-configuration.md).
 - 🧩 Configuration templates for popular tools
 - ⚡️ Options for css modules, postCss, Sass, and Less
 - 🎨 Provide themes
