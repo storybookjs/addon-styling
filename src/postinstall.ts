@@ -12,10 +12,14 @@ import { determineBuilder } from "./postinstall/utils/dependencies.utils";
 
 import { tailwindStrategy } from "./postinstall/tailwind/tailwind.strategy";
 import { materialUIStrategy } from "./postinstall/material-ui/material-ui.strategy";
+import { emotionStrategy } from "./postinstall/emotion/emotion.strategy";
+import { styledComponentsStrategy } from "./postinstall/styled-components/styled-components.strategy";
 
 const AUTO_CONFIG_STRATEGIES: ToolConfigurationStrategy[] = [
   tailwindStrategy,
   materialUIStrategy,
+  emotionStrategy,
+  styledComponentsStrategy,
 ];
 
 const selectStrategy = (packageJson: PackageJson) =>

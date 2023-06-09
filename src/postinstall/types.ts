@@ -7,16 +7,18 @@ export const SUPPORTED_BUILDERS = {
 } as const;
 
 export type SupportedBuilders =
-  typeof SUPPORTED_BUILDERS[keyof typeof SUPPORTED_BUILDERS];
+  (typeof SUPPORTED_BUILDERS)[keyof typeof SUPPORTED_BUILDERS];
 
 export const SUPPORTED_STYLING_TOOLS = {
-  TAILWIND: "tailwind",
+  EMOTION: "emotion",
   MATERIAL_UI: "material-ui",
   SASS: "sass",
+  STYLED_COMPONENTS: "styled-components",
+  TAILWIND: "tailwind",
 } as const;
 
 export type SupportedStylingTools =
-  typeof SUPPORTED_STYLING_TOOLS[keyof typeof SUPPORTED_STYLING_TOOLS];
+  (typeof SUPPORTED_STYLING_TOOLS)[keyof typeof SUPPORTED_STYLING_TOOLS];
 
 export interface ToolConfigurationStrategy {
   /**
