@@ -1,3 +1,20 @@
+# v1.1.0 (Fri Jun 09 2023)
+
+#### 🚀 Enhancement
+
+- Create autoconfig script for tailwindcss & Material UI [#42](https://github.com/storybookjs/addon-styling/pull/42) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### 🐛 Bug Fix
+
+- Add auto configs for emotion and styled components [#51](https://github.com/storybookjs/addon-styling/pull/51) ([@Integrayshaun](https://github.com/Integrayshaun))
+- Add advanced config options for css modules [#39](https://github.com/storybookjs/addon-styling/pull/39) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.0.6 (Wed May 03 2023)
 
 #### 🐛 Bug Fix
