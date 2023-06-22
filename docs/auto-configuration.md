@@ -6,9 +6,16 @@ This feature currently works for the following tools in Storybook 7.0:
 
 - Tailwind
 - Material UI
+- Styled-components
+- Emotion
+- ...more on the way
 
 ## How to use
 
 1. Make sure you're using Storybook 7.0 and `@storybook/addon-styling` >=1.1.0
 2. Run `node node_modules/@storybook/addon-styling/bin/postinstall.js`
 3. Confirm the results
+
+## Known issues
+
+- The codemods currently have issues configuring Storybook for monorepo setups
