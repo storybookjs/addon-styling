@@ -17,8 +17,11 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: Install dependencies
-        run: pnpm install
+      - uses: pnpm/action-setup@v2
+        name: Install dependencies
+        with:
+          version: 8
+          run_install: true
 
       - name: Create Release
         env:
