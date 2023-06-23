@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "bin": {
-    "addon-styling-setup": "./bin/postinstall.js"
+    "addon-styling-setup": "./postinstall.js"
   },
   "exports": {
     ".": {
@@ -43,7 +43,7 @@
       "types": "./dist/preset.d.ts"
     },
     "./package.json": "./package.json",
-    "./postinstall": "./bin/postinstall.js"
+    "./postinstall": "./postinstall.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
