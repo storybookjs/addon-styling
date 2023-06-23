@@ -28,4 +28,4 @@ jobs:
           run_install: true
 
       - name: Run Vitest
-        run: pnpm test --run
+        run: pnpm test:ci
