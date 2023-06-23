@@ -67,7 +67,7 @@ const automigrate = async () => {
   // Step 3: Make any required updates to .storybook/main.ts
   logger.plain(`${colors.blue.bold("(2/3)")} ${colors.purple.bold(mainPath)}`);
   if (strategy.main) {
-    strategy.main(mainConfig, packageJson, builder, { logger, colors });
+    strategy.main(mainConfig, packageJson, builder);
     await writePrettyConfig(mainConfig);
   } else {
     logger.plain(`  • No updates required.`);
@@ -80,7 +80,7 @@ const automigrate = async () => {
   );
   if (strategy.preview) {
     // Make updates to preview
-    strategy.preview(previewConfig, packageJson, builder, { logger, colors });
+    strategy.preview(previewConfig, packageJson, builder);
     await writePrettyConfig(previewConfig);
   } else {
     logger.plain(`  • No updates required.`);
