@@ -17,6 +17,10 @@
     "name": "Shaun Evening",
     "email": "goodeveningshaun@gmail.com"
   },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.6.2"
+  },
   "license": "MIT",
   "exports": {
     ".": {
@@ -131,8 +135,10 @@
       "optional": true
     }
   },
-  "resolutions": {
-    "recast": "^0.23.2"
+  "pnpm": {
+    "overrides": {
+      "recast": "^0.23.2"
+    }
   },
   "publishConfig": {
     "access": "public"
