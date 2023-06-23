@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "@babel/template": "^7.20.7",
+    "@babel/traverse": "^7.22.5",
     "@babel/types": "^7.21.5",
     "@storybook/api": "^7.0.12",
     "@storybook/components": "^7.0.12",
@@ -98,6 +99,8 @@
     "@storybook/builder-webpack5": "^7.0.12",
     "@storybook/react": "^7.0.12",
     "@storybook/react-vite": "^7.0.12",
+    "@types/react": "^18.2.13",
+    "@types/react-dom": "^18.2.6",
     "@vitejs/plugin-react": "^3.1.0",
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
