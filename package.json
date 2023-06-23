@@ -18,6 +18,9 @@
     "email": "goodeveningshaun@gmail.com"
   },
   "license": "MIT",
+  "bin": {
+    "addon-styling-setup": "./bin/postinstall.js"
+  },
   "exports": {
     ".": {
       "require": "./dist/index.js",
