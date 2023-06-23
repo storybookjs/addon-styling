@@ -209,18 +209,18 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
       expect(config.module.rules[0].use).toMatchInlineSnapshot(`
         [
           {
-            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
           },
           {
-            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
             "options": {
               "importLoaders": 1,
             },
           },
           {
-            "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/postcss-loader@7.2.4_@types+node@16.18.16_postcss@8.4.23_ts-node@10.9.1_typescript@4.9.5_webpack@5.77.0/node_modules/postcss-loader/dist/cjs.js",
             "options": {
-              "implementation": "path/to/project/node_modules/postcss/lib/postcss.js",
+              "implementation": "path/to/project/node_modules/.pnpm/postcss@8.4.23/node_modules/postcss/lib/postcss.js",
             },
           },
         ]
@@ -241,10 +241,10 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
       expect(config.module.rules[0].use).toMatchInlineSnapshot(`
         [
           {
-            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
           },
           {
-            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
             "options": {
               "modules": {
                 "auto": true,
@@ -269,27 +269,27 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
       expect(config.module.rules[0]?.sideEffects).toBeTruthy();
       expect(config.module.rules).not.toContain(EXISTING_CSS_RULES);
       expect(config.module.rules[0].use).toMatchInlineSnapshot(`
-      [
-        {
-          "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
-        },
-        {
-          "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
-          "options": {
-            "importLoaders": 1,
-            "modules": {
-              "auto": true,
+        [
+          {
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
+          },
+          {
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
+            "options": {
+              "importLoaders": 1,
+              "modules": {
+                "auto": true,
+              },
             },
           },
-        },
-        {
-          "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
-          "options": {
-            "implementation": "path/to/project/node_modules/postcss/lib/postcss.js",
+          {
+            "loader": "path/to/project/node_modules/.pnpm/postcss-loader@7.2.4_@types+node@16.18.16_postcss@8.4.23_ts-node@10.9.1_typescript@4.9.5_webpack@5.77.0/node_modules/postcss-loader/dist/cjs.js",
+            "options": {
+              "implementation": "path/to/project/node_modules/.pnpm/postcss@8.4.23/node_modules/postcss/lib/postcss.js",
+            },
           },
-        },
-      ]
-    `);
+        ]
+      `);
     });
 
     it("OVERRIDE RULE: it should replace existing css rules with the given rule", async ({

@@ -219,22 +219,22 @@ describe("WEBPACK/LESS: configuration builders for less files", () => {
       expect(config.module.rules[0]?.use).toMatchInlineSnapshot(`
         [
           {
-            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
           },
           {
-            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
             "options": {
               "importLoaders": 2,
             },
           },
           {
-            "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/postcss-loader@7.2.4_@types+node@16.18.16_postcss@8.4.23_ts-node@10.9.1_typescript@4.9.5_webpack@5.77.0/node_modules/postcss-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"postcss\\")",
             },
           },
           {
-            "loader": "path/to/project/node_modules/less-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/less-loader@11.1.0_less@4.1.3_webpack@5.77.0/node_modules/less-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"less\\")",
               "sourceMap": true,
@@ -259,10 +259,10 @@ describe("WEBPACK/LESS: configuration builders for less files", () => {
       expect(config.module.rules[0]?.use).toMatchInlineSnapshot(`
         [
           {
-            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
           },
           {
-            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
             "options": {
               "importLoaders": 1,
               "modules": {
@@ -271,7 +271,7 @@ describe("WEBPACK/LESS: configuration builders for less files", () => {
             },
           },
           {
-            "loader": "path/to/project/node_modules/less-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/less-loader@11.1.0_less@4.1.3_webpack@5.77.0/node_modules/less-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"less\\")",
               "sourceMap": true,
@@ -298,10 +298,10 @@ describe("WEBPACK/LESS: configuration builders for less files", () => {
       expect(config.module.rules[0]?.use).toMatchInlineSnapshot(`
         [
           {
-            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
           },
           {
-            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
             "options": {
               "importLoaders": 2,
               "modules": {
@@ -311,13 +311,13 @@ describe("WEBPACK/LESS: configuration builders for less files", () => {
             },
           },
           {
-            "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/postcss-loader@7.2.4_@types+node@16.18.16_postcss@8.4.23_ts-node@10.9.1_typescript@4.9.5_webpack@5.77.0/node_modules/postcss-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"postcss\\")",
             },
           },
           {
-            "loader": "path/to/project/node_modules/less-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/less-loader@11.1.0_less@4.1.3_webpack@5.77.0/node_modules/less-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"less\\")",
               "sourceMap": true,

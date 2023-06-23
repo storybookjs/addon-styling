@@ -231,25 +231,25 @@ describe("WEBPACK/SCSS: configuration builders for scss files", () => {
       expect(config.module.rules[0]?.use).toMatchInlineSnapshot(`
         [
           {
-            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
           },
           {
-            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
             "options": {
               "importLoaders": 3,
             },
           },
           {
-            "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/postcss-loader@7.2.4_@types+node@16.18.16_postcss@8.4.23_ts-node@10.9.1_typescript@4.9.5_webpack@5.77.0/node_modules/postcss-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"postcss\\")",
             },
           },
           {
-            "loader": "path/to/project/node_modules/resolve-url-loader/index.js",
+            "loader": "path/to/project/node_modules/.pnpm/resolve-url-loader@5.0.0/node_modules/resolve-url-loader/index.js",
           },
           {
-            "loader": "path/to/project/node_modules/sass-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/sass-loader@13.2.2_webpack@5.77.0/node_modules/sass-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"sass\\")",
               "sassOptions": {
@@ -275,34 +275,34 @@ describe("WEBPACK/SCSS: configuration builders for scss files", () => {
       expect(config.module.rules.length).toEqual(1);
       expect(config.module.rules).not.toContain(EXISTING_SCSS_RULES);
       expect(config.module.rules[0]?.use).toMatchInlineSnapshot(`
-              [
-                {
-                  "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
-                },
-                {
-                  "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
-                  "options": {
-                    "importLoaders": 2,
-                    "modules": {
-                      "auto": true,
-                    },
-                  },
-                },
-                {
-                  "loader": "path/to/project/node_modules/resolve-url-loader/index.js",
-                },
-                {
-                  "loader": "path/to/project/node_modules/sass-loader/dist/cjs.js",
-                  "options": {
-                    "implementation": "require.resolve(\\"sass\\")",
-                    "sassOptions": {
-                      "implementation": "require.resolve(\\"sass\\")",
-                    },
-                    "sourceMap": true,
-                  },
-                },
-              ]
-            `);
+        [
+          {
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
+          },
+          {
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
+            "options": {
+              "importLoaders": 2,
+              "modules": {
+                "auto": true,
+              },
+            },
+          },
+          {
+            "loader": "path/to/project/node_modules/.pnpm/resolve-url-loader@5.0.0/node_modules/resolve-url-loader/index.js",
+          },
+          {
+            "loader": "path/to/project/node_modules/.pnpm/sass-loader@13.2.2_webpack@5.77.0/node_modules/sass-loader/dist/cjs.js",
+            "options": {
+              "implementation": "require.resolve(\\"sass\\")",
+              "sassOptions": {
+                "implementation": "require.resolve(\\"sass\\")",
+              },
+              "sourceMap": true,
+            },
+          },
+        ]
+      `);
     });
 
     it("ENABLE POSTCSS & CSS MODULES: it should replace existing scss rules to enable postcss & css modules", async ({
@@ -322,10 +322,10 @@ describe("WEBPACK/SCSS: configuration builders for scss files", () => {
       expect(config.module.rules[0]?.use).toMatchInlineSnapshot(`
         [
           {
-            "loader": "path/to/project/node_modules/style-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/style-loader@3.3.2_webpack@5.77.0/node_modules/style-loader/dist/cjs.js",
           },
           {
-            "loader": "path/to/project/node_modules/css-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/css-loader@6.7.3_webpack@5.77.0/node_modules/css-loader/dist/cjs.js",
             "options": {
               "importLoaders": 3,
               "modules": {
@@ -335,16 +335,16 @@ describe("WEBPACK/SCSS: configuration builders for scss files", () => {
             },
           },
           {
-            "loader": "path/to/project/node_modules/postcss-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/postcss-loader@7.2.4_@types+node@16.18.16_postcss@8.4.23_ts-node@10.9.1_typescript@4.9.5_webpack@5.77.0/node_modules/postcss-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"postcss\\")",
             },
           },
           {
-            "loader": "path/to/project/node_modules/resolve-url-loader/index.js",
+            "loader": "path/to/project/node_modules/.pnpm/resolve-url-loader@5.0.0/node_modules/resolve-url-loader/index.js",
           },
           {
-            "loader": "path/to/project/node_modules/sass-loader/dist/cjs.js",
+            "loader": "path/to/project/node_modules/.pnpm/sass-loader@13.2.2_webpack@5.77.0/node_modules/sass-loader/dist/cjs.js",
             "options": {
               "implementation": "require.resolve(\\"sass\\")",
               "sassOptions": {
