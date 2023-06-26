@@ -5,15 +5,18 @@ import { SUPPORTED_BUILDERS, SupportedBuilders } from "../types";
 export const hasDependency = (
   packageJson: PackageJson,
   depName: string
-): boolean =>
-  Boolean(
-    packageJson?.dependencies[depName] || packageJson?.devDependencies[depName]
-  );
+): boolean => {
+  const deps = packageJson?.dependencies || {};
+  const devDeps = packageJson?.devDependencies || {};
+
+  return !!deps[depName] || !!devDeps[depName];
+};
 
 export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
   const frameworkValue = mainConfig.getFieldValue(["framework"]);
 
-  const framework = typeof frameworkValue === 'string' ? frameworkValue : frameworkValue?.name;
+  const framework =
+    typeof frameworkValue === "string" ? frameworkValue : frameworkValue?.name;
 
   return framework.includes("vite") || framework.includes("sveltekit")
     ? SUPPORTED_BUILDERS.VITE

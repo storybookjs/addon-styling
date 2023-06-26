@@ -28,6 +28,15 @@ describe("POSTINSTALL UTILITIES", () => {
 
       expect(result).toBeFalsy();
     });
+
+    it('MISSING DEPS MAP: it should not throw an error if the given "package.json" doesn\'t include a deps map', ({
+      expect,
+    }) => {
+      const { deps, ...pkgJson } = TEST_PACKAGE_JSON;
+      const result = hasDependency(pkgJson, "fakejs");
+
+      expect(result).toBeFalsy();
+    });
   });
 
   describe("HELPER: needsCssModulesConfiguration", () => {
