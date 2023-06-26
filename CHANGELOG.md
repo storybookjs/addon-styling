@@ -1,3 +1,16 @@
+# v1.3.1 (Mon Jun 26 2023)
+
+#### ⚠️ Pushed to `main`
+
+- Make deps check more resilient ([@Integrayshaun](https://github.com/Integrayshaun))
+- [skip-ci] Update auto-configuration.md ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.1.0 (Fri Jun 09 2023)
 
 #### 🚀 Enhancement
