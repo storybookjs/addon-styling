@@ -122,6 +122,12 @@ Setting `options.cssModules` to true will give you a basic setup of css modules 
 
 If you'd like to customize your CSS Module configuration, `options.cssModules` can also take an object that takes the same options as webpack's `css-loader` [modules property](https://www.npmjs.com/package/css-loader#modules).
 
+### `options.css`
+
+**Required?** false
+
+If you'd like to customize your CSS-loader configuration, `options.css` can take an object that takes the same options as [css-loader](https://www.npmjs.com/package/css-loader#options).
+
 ### Advanced
 
 If the above options aren't working for you, you likely have a more advanced set up.
