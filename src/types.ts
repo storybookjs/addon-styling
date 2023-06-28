@@ -8,6 +8,7 @@ interface LessConfig {
 
 export interface AddonStylingOptions {
   cssBuildRule?: RuleSetRule;
+  css?: Record<string, any>;
   cssModules?: boolean | Record<string, any>;
   less?: LessConfig;
   lessBuildRule?: RuleSetRule;

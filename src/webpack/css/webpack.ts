@@ -21,10 +21,11 @@ export const buildCssModuleRules = ({ cssModules }: AddonStylingOptions) => {
 };
 
 export const buildCssLoader = ({
+  css,
   cssModules,
   postCss,
 }: AddonStylingOptions) => {
-  const importSettings = postCss ? { importLoaders: 1 } : {};
+  const importSettings = postCss ? { importLoaders: 1, ...css } : { ...css };
   const moduleSettings = buildCssModuleRules({ cssModules });
 
   return {
