@@ -8,8 +8,9 @@ export const hasDependency = (
 ): boolean => {
   const deps = packageJson?.dependencies || {};
   const devDeps = packageJson?.devDependencies || {};
+  const peerDeps = packageJson?.peerDependencies || {};
 
-  return !!deps[depName] || !!devDeps[depName];
+  return !!deps[depName] || !!devDeps[depName] || !!peerDeps[depName];
 };
 
 export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
