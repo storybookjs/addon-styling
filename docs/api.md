@@ -17,6 +17,12 @@ export interface AddonStylingOptions {
 }
 ```
 
+### Using Angular?
+
+📣 If you're using Angular, **DO NOT** use the configuration options in this addon. This will break the Angular builder rules which are required for Angular to run.
+
+However, you can still use this addon for it's theme switching capabilities.
+
 ### `options.postCss`
 
 **Required?** false
