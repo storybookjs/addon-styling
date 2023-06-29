@@ -113,6 +113,43 @@ describe("CODEMOD: tailwind configuration", () => {
         "
       `);
     });
+
+    it("Angular: addon-styling should be registered without options", async () => {
+      const mainConfig = await readConfig(
+        resolve(__dirname, "../fixtures/main.angular.fixture.ts")
+      );
+      const packageJson: PackageJson = {
+        dependencies: { tailwindcss: "latest" },
+        devDependencies: { postcss: " latest" },
+      };
+
+      tailwindStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.VITE);
+
+      const result = formatFileContents(mainConfig);
+
+      expect(result).toMatchInlineSnapshot(`
+        "import type { StorybookConfig } from \\"@storybook/angular\\";
+        const config: StorybookConfig = {
+          stories: [\\"../stories/**/*.stories.@(js|jsx|ts|tsx)\\"],
+          addons: [
+            \\"@storybook/addon-essentials\\",
+            {
+              name: \\"@storybook/addon-styling\\",
+              options: {},
+            },
+          ],
+          framework: {
+            name: \\"@storybook/angular\\",
+            options: {},
+          },
+          docs: {
+            autodocs: true,
+          },
+        };
+        export default config;
+        "
+      `);
+    });
   });
 
   describe("PREVIEW: how should storybook preview be configured for tailwind", () => {
@@ -138,7 +175,7 @@ describe("CODEMOD: tailwind configuration", () => {
 
         import { withThemeByClassName } from \\"@storybook/addon-styling\\";
 
-        /* TODO: update import to your tailwind styles file */
+        /* TODO: update import to your tailwind styles file. If you're using Angular, inject this through your angular.json config instead */
         import \\"../src/index.css\\";
 
         const preview: Preview = {
