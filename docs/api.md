@@ -17,6 +17,12 @@ export interface AddonStylingOptions {
 }
 ```
 
+### Using Angular?
+
+📣 If you're using Angular, **DO NOT** use the configuration options in this addon. This will break the Angular builder rules which are required for Angular to run.
+
+However, you can still use this addon for it's theme switching capabilities.
+
 ### `options.postCss`
 
 **Required?** false
@@ -121,6 +127,12 @@ module.exports = {
 Setting `options.cssModules` to true will give you a basic setup of css modules for your css (and scss if you're using it). If you're looking for something more robust, keep reading 👇
 
 If you'd like to customize your CSS Module configuration, `options.cssModules` can also take an object that takes the same options as webpack's `css-loader` [modules property](https://www.npmjs.com/package/css-loader#modules).
+
+### `options.css`
+
+**Required?** false
+
+If you'd like to customize your CSS-loader configuration, `options.css` can take an object that takes the same options as [css-loader](https://www.npmjs.com/package/css-loader#options).
 
 ### Advanced
 

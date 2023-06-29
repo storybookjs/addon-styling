@@ -12,8 +12,8 @@ This feature currently works for the following tools in Storybook 7.0:
 
 ## How to use
 
-1. Make sure you're using Storybook 7.0 and `@storybook/addon-styling` >=1.1.0
-2. Run `node node_modules/@storybook/addon-styling/bin/postinstall.js`
+1. Make sure you're using Storybook 7.0 and `@storybook/addon-styling` >=1.3.x
+2. Run `yarn addon-styling-setup`
 3. Confirm the results
 
 ## Known issues

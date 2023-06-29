@@ -18,6 +18,9 @@
     "email": "goodeveningshaun@gmail.com"
   },
   "license": "MIT",
+  "bin": {
+    "addon-styling-setup": "./postinstall.js"
+  },
   "exports": {
     ".": {
       "require": "./dist/index.js",
@@ -40,7 +43,7 @@
       "types": "./dist/preset.d.ts"
     },
     "./package.json": "./package.json",
-    "./postinstall": "./bin/postinstall.js"
+    "./postinstall": "./postinstall.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -74,7 +77,6 @@
     "@storybook/components": "^7.0.12",
     "@storybook/core-common": "^7.0.12",
     "@storybook/core-events": "^7.0.12",
-    "@storybook/csf-tools": "^7.0.12",
     "@storybook/manager-api": "^7.0.12",
     "@storybook/node-logger": "^7.0.12",
     "@storybook/preview-api": "^7.0.12",
@@ -83,7 +85,6 @@
     "css-loader": "^6.7.3",
     "less-loader": "^11.1.0",
     "postcss-loader": "^7.2.4",
-    "recast": "^0.23.2",
     "resolve-url-loader": "^5.0.0",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2"
@@ -96,8 +97,10 @@
     "@babel/preset-typescript": "^7.13.0",
     "@storybook/addon-essentials": "^7.0.12",
     "@storybook/builder-webpack5": "^7.0.12",
+    "@storybook/csf-tools": "^7.0.12",
     "@storybook/react": "^7.0.12",
     "@storybook/react-vite": "^7.0.12",
+    "@storybook/types": "^7.0.12",
     "@vitejs/plugin-react": "^3.1.0",
     "auto": "^10.3.0",
     "babel-loader": "^8.1.0",
@@ -108,6 +111,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "recast": "^0.23.2",
     "rimraf": "^3.0.2",
     "storybook": "^7.0.12",
     "tsup": "^6.7.0",

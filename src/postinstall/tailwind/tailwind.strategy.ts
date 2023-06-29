@@ -2,7 +2,7 @@ import { PackageJson } from "@storybook/types";
 import { logger, colors } from "@storybook/node-logger";
 import * as t from "@babel/types";
 
-import { hasDependency } from "../utils/dependencies.utils";
+import { hasDependency, isAngular } from "../utils/dependencies.utils";
 import {
   SUPPORTED_BUILDERS,
   SUPPORTED_STYLING_TOOLS,
@@ -20,12 +20,14 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
   main: (mainConfig, packageJson, builder) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
-    if (builder === SUPPORTED_BUILDERS.WEBPACK) {
+    const usingAngular = isAngular(mainConfig);
+
+    if (builder === SUPPORTED_BUILDERS.WEBPACK || usingAngular) {
       logger.plain(`    • Configuring ${colors.green("postcss")}.`);
     }
 
     const [addonConfigNode] =
-      builder === SUPPORTED_BUILDERS.VITE
+      builder === SUPPORTED_BUILDERS.VITE || usingAngular
         ? stringToNode`({
       name: "@storybook/addon-styling",
       options: {}
@@ -33,7 +35,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
         : stringToNode`({
       name: "@storybook/addon-styling",
       options: {
-        postcss: {
+        postCss: {
           implementation: require.resolve("postcss")
         }
       }
@@ -58,8 +60,8 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
 
     const importsNode = stringToNode`import { withThemeByClassName } from '@storybook/addon-styling';
 
-    /* TODO: update import to your tailwind styles file */
-    import '../src/app.css';`;
+    /* TODO: update import to your tailwind styles file. If you're using Angular, inject this through your angular.json config instead */
+    import '../src/index.css';`;
 
     addImports(previewConfig._ast, importsNode);
 

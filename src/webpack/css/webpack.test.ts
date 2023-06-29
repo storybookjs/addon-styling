@@ -102,6 +102,16 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
       expect(result).toMatchObject(BASE_LOADER);
     });
 
+    it('CSS OPTIONS: it should configure the css-loader with extra options', async ({ expect }) => {
+      const expected = {
+        ...BASE_LOADER,
+        options: { url: false },
+      };
+
+      const result = buildCssLoader({ css: {url: false} });
+      expect(result).toMatchObject(expected)
+    })
+
     it("POSTCSS ENABLED: it should configure the css-loader to handle imports AFTER postcss", async ({
       expect,
     }) => {
@@ -116,6 +126,19 @@ describe("WEBPACK/CSS: configuration builders for css files", () => {
 
       expect(result).toMatchObject(expected);
     });
+
+    it('CSS OPTIONS & POSTCSS enabled: it should configure the css-loader with extra options', async ({ expect }) => {
+      const expected = {
+        ...BASE_LOADER,
+        options: { importLoaders: 1, url: false },
+      };
+
+      const result = buildCssLoader({
+        css: {url: false},
+        postCss: { implementation: require.resolve("postcss") },
+      });
+      expect(result).toMatchObject(expected)
+    })
 
     it("CSS MODULES ENABLED: it should configure the css-loader to support css-modules", async ({
       expect,
