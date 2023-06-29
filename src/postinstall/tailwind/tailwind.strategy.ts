@@ -33,7 +33,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
         : stringToNode`({
       name: "@storybook/addon-styling",
       options: {
-        postcss: {
+        postCss: {
           implementation: require.resolve("postcss")
         }
       }
@@ -59,7 +59,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
     const importsNode = stringToNode`import { withThemeByClassName } from '@storybook/addon-styling';
 
     /* TODO: update import to your tailwind styles file */
-    import '../src/app.css';`;
+    import '../src/index.css';`;
 
     addImports(previewConfig._ast, importsNode);
 

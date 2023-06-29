@@ -95,7 +95,7 @@ describe("CODEMOD: tailwind configuration", () => {
             {
               name: \\"@storybook/addon-styling\\",
               options: {
-                postcss: {
+                postCss: {
                   implementation: require.resolve(\\"postcss\\"),
                 },
               },
@@ -139,7 +139,7 @@ describe("CODEMOD: tailwind configuration", () => {
         import { withThemeByClassName } from \\"@storybook/addon-styling\\";
 
         /* TODO: update import to your tailwind styles file */
-        import \\"../src/app.css\\";
+        import \\"../src/index.css\\";
 
         const preview: Preview = {
           parameters: {
