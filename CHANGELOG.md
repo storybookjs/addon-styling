@@ -1,3 +1,16 @@
+# v1.3.2 (Thu Jun 29 2023)
+
+#### 🐛 Bug Fix
+
+- Release 1.3.2 [#62](https://github.com/storybookjs/addon-styling/pull/62) ([@Jeffrey-Zutt](https://github.com/Jeffrey-Zutt) [@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 2
+
+- Jeffrey Zutt ([@Jeffrey-Zutt](https://github.com/Jeffrey-Zutt))
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.3.1 (Mon Jun 26 2023)
 
 #### ⚠️ Pushed to `main`
