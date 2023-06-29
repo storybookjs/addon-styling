@@ -24,6 +24,15 @@ export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
     : SUPPORTED_BUILDERS.WEBPACK;
 };
 
+export const isAngular = (mainConfig: ConfigFile): boolean => {
+  const frameworkValue = mainConfig.getFieldValue(["framework"]);
+
+  const framework =
+    typeof frameworkValue === "string" ? frameworkValue : frameworkValue?.name;
+
+  return framework.includes("angular");
+};
+
 export const needsCssModulesConfiguration = (builder: SupportedBuilders) =>
   builder === SUPPORTED_BUILDERS.WEBPACK;
 export const needsPostCssConfiguration = (builder: SupportedBuilders) =>
