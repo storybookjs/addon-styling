@@ -82,7 +82,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
     let decoratorArrayNode = previewConfig.getFieldNode(decoratorNodePath);
 
     if (!decoratorArrayNode) {
-      previewConfig.setFieldNode(decoratorNodePath, t.arrayExpression());
+      previewConfig.setFieldNode(decoratorNodePath, t.arrayExpression([]));
       decoratorArrayNode = previewConfig.getFieldNode(decoratorNodePath);
     }
 

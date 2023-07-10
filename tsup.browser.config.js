@@ -5,6 +5,7 @@ export default defineConfig((options) => ({
   splitting: false,
   minify: !options.watch,
   format: ["cjs", "esm"],
+  external: ["react", "react-dom", "react-is", "prop-types"],
   dts: {
     resolve: true,
   },
