@@ -22,7 +22,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
 
     const usingAngular = isAngular(mainConfig);
 
-    if (builder === SUPPORTED_BUILDERS.WEBPACK || usingAngular) {
+    if (builder === SUPPORTED_BUILDERS.WEBPACK && !usingAngular) {
       logger.plain(`    • Configuring ${colors.green("postcss")}.`);
     }
 
