@@ -13,14 +13,10 @@
     "type": "git",
     "url": "https://github.com/storybookjs/addon-styling"
   },
+  "license": "MIT",
   "author": {
     "name": "Shaun Evening",
     "email": "goodeveningshaun@gmail.com"
-  },
-  "license": "MIT",
-  "packageManager": "yarn@3.6.1",
-  "bin": {
-    "addon-styling-setup": "./postinstall.js"
   },
   "exports": {
     ".": {
@@ -49,6 +45,9 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "bin": {
+    "addon-styling-setup": "./postinstall.js"
+  },
   "files": [
     "bin/**/*",
     "dist/**/*",
@@ -57,19 +56,18 @@
     "*.d.ts"
   ],
   "scripts": {
-    "clean": "rimraf ./dist",
-    "prebuild": "yarn clean",
-    "build:addon": "tsup --config=\"./tsup.browser.config.js\"",
-    "build:config": "tsup --config=\"./tsup.node.config.js\"",
-    "build:watch": "yarn build:addon --watch",
-    "build:all": "concurrently \"yarn build:addon\" \"yarn build:config\"",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "storybook": "storybook dev -p 6006",
-    "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --quiet\"",
+    "build": "tsup",
     "build-storybook": "storybook build",
+    "build:watch": "yarn build --watch",
     "prerelease": "zx scripts/prepublish-checks.mjs",
-    "release": "yarn build:all && auto shipit"
+    "release": "yarn build && auto shipit",
+    "start": "concurrently \"yarn build:watch\" \"yarn storybook -- --quiet\"",
+    "storybook": "storybook dev -p 6006",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "resolutions": {
+    "recast": "^0.23.2"
   },
   "dependencies": {
     "@babel/template": "^7.20.7",
@@ -149,9 +147,7 @@
       "optional": true
     }
   },
-  "resolutions": {
-    "recast": "^0.23.2"
-  },
+  "packageManager": "yarn@3.6.1",
   "publishConfig": {
     "access": "public"
   },
