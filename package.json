@@ -18,6 +18,7 @@
     "email": "goodeveningshaun@gmail.com"
   },
   "license": "MIT",
+  "packageManager": "yarn@3.6.1",
   "bin": {
     "addon-styling-setup": "./postinstall.js"
   },
