@@ -1,6 +1,6 @@
 {
   "name": "@storybook/addon-styling",
-  "version": "1.3.4",
+  "version": "2.0.2-next.0",
   "description": "A base addon for configuring popular styling tools",
   "keywords": [
     "style",
@@ -23,16 +23,6 @@
       "require": "./dist/index.js",
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
-    },
-    "./manager": {
-      "require": "./dist/manager.js",
-      "import": "./dist/manager.mjs",
-      "types": "./dist/manager.d.ts"
-    },
-    "./preview": {
-      "require": "./dist/preview.js",
-      "import": "./dist/preview.mjs",
-      "types": "./dist/preview.d.ts"
     },
     "./preset": {
       "require": "./dist/preset.js",
@@ -152,13 +142,10 @@
     "supportedFrameworks": [
       "react",
       "vue",
-      "angular",
       "web-components",
       "ember",
       "html",
-      "svelte",
-      "preact",
-      "react-native"
+      "preact"
     ],
     "icon": "https://raw.githubusercontent.com/storybookjs/addon-styling/1e17a71614dde4337f402dd5f00d761991d1a9d8/.github/media/styling.svg"
   }
