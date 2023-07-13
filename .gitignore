@@ -5,3 +5,10 @@ storybook-static/
 build-storybook.log
 .DS_Store
 .env
+
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
