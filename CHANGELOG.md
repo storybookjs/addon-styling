@@ -1,3 +1,16 @@
+# v1.3.3 (Thu Jul 13 2023)
+
+#### 🐛 Bug Fix
+
+- Move to yarn 3 [#69](https://github.com/storybookjs/addon-styling/pull/69) ([@Integrayshaun](https://github.com/Integrayshaun) [@ndelangen](https://github.com/ndelangen))
+
+#### Authors: 2
+
+- Norbert de Langen ([@ndelangen](https://github.com/ndelangen))
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.3.2 (Thu Jun 29 2023)
 
 #### 🐛 Bug Fix
