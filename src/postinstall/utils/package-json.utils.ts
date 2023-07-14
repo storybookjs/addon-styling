@@ -29,18 +29,6 @@ function parsePackageJson(filePath: string): PackageJson {
   }
 }
 
-// Usage example
-const startDirectory = process.cwd();
-const packageJsonPath = findPackageJson(startDirectory);
-
-if (packageJsonPath) {
-  const packageJson = parsePackageJson(packageJsonPath);
-} else {
-  console.log(
-    "No package.json found in the current directory or its ancestors."
-  );
-}
-
 export function getPackageJson(): PackageJson | undefined {
   const directory = process.cwd();
   const packageJsonPath = findPackageJson(directory);
