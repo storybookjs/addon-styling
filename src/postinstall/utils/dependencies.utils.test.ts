@@ -9,7 +9,7 @@ import {
 } from "./dependencies.utils";
 
 import { TEST_PACKAGE_JSON } from "../fixtures/package.fixture";
-import { SUPPORTED_BUILDERS } from "../types";
+import { SUPPORTED_BUILDERS, StorybookProjectMeta } from "../types";
 
 describe("POSTINSTALL UTILITIES", () => {
   describe("HELPER: hasDependency", () => {
@@ -32,7 +32,8 @@ describe("POSTINSTALL UTILITIES", () => {
     it('MISSING DEPS MAP: it should not throw an error if the given "package.json" doesn\'t include a deps map', ({
       expect,
     }) => {
-      const { deps, ...pkgJson } = TEST_PACKAGE_JSON;
+      const { dependencies, devDependencies, peerDependencies, ...pkgJson } =
+        TEST_PACKAGE_JSON;
       const result = hasDependency(pkgJson, "fakejs");
 
       expect(result).toBeFalsy();
@@ -43,7 +44,15 @@ describe("POSTINSTALL UTILITIES", () => {
     it("TRUE: should return true if given a builder that needs to be configured for CSS Modules", ({
       expect,
     }) => {
-      const result = needsCssModulesConfiguration(SUPPORTED_BUILDERS.WEBPACK);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.WEBPACK,
+        framework: "react-webpack5",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+
+      const result = needsCssModulesConfiguration(meta);
 
       expect(result).toBeTruthy();
     });
@@ -51,7 +60,14 @@ describe("POSTINSTALL UTILITIES", () => {
     it("FALSE: should return true if given a builder that doesn't need to be configured for CSS Modules", ({
       expect,
     }) => {
-      const result = needsCssModulesConfiguration(SUPPORTED_BUILDERS.VITE);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.VITE,
+        framework: "react-vite",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+      const result = needsCssModulesConfiguration(meta);
 
       expect(result).toBeFalsy();
     });
@@ -61,7 +77,14 @@ describe("POSTINSTALL UTILITIES", () => {
     it("TRUE: should return true if given a builder that needs to be configured for PostCSS", ({
       expect,
     }) => {
-      const result = needsPostCssConfiguration(SUPPORTED_BUILDERS.WEBPACK);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.WEBPACK,
+        framework: "react-webpack5",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+      const result = needsPostCssConfiguration(meta);
 
       expect(result).toBeTruthy();
     });
@@ -69,7 +92,14 @@ describe("POSTINSTALL UTILITIES", () => {
     it("FALSE: should return true if given a builder that doesn't need to be configured for PostCSS", ({
       expect,
     }) => {
-      const result = needsPostCssConfiguration(SUPPORTED_BUILDERS.VITE);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.VITE,
+        framework: "react-vite",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+      const result = needsPostCssConfiguration(meta);
 
       expect(result).toBeFalsy();
     });
@@ -79,7 +109,14 @@ describe("POSTINSTALL UTILITIES", () => {
     it("TRUE: should return true if given a builder that needs to be configured for Sass", ({
       expect,
     }) => {
-      const result = needsSassConfiguration(SUPPORTED_BUILDERS.WEBPACK);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.WEBPACK,
+        framework: "react-webpack5",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+      const result = needsSassConfiguration(meta);
 
       expect(result).toBeTruthy();
     });
@@ -87,7 +124,14 @@ describe("POSTINSTALL UTILITIES", () => {
     it("FALSE: should return true if given a builder that doesn't need to be configured for Sass", ({
       expect,
     }) => {
-      const result = needsSassConfiguration(SUPPORTED_BUILDERS.VITE);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.VITE,
+        framework: "react-vite",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+      const result = needsSassConfiguration(meta);
 
       expect(result).toBeFalsy();
     });
@@ -97,7 +141,14 @@ describe("POSTINSTALL UTILITIES", () => {
     it("TRUE: should return true if given a builder that needs to be configured for Less", ({
       expect,
     }) => {
-      const result = needsLessConfiguration(SUPPORTED_BUILDERS.WEBPACK);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.WEBPACK,
+        framework: "react-webpack5",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+      const result = needsLessConfiguration(meta);
 
       expect(result).toBeTruthy();
     });
@@ -105,7 +156,14 @@ describe("POSTINSTALL UTILITIES", () => {
     it("FALSE: should return true if given a builder that doesn't need to be configured for Less", ({
       expect,
     }) => {
-      const result = needsLessConfiguration(SUPPORTED_BUILDERS.VITE);
+      const meta = {
+        builder: SUPPORTED_BUILDERS.VITE,
+        framework: "react-vite",
+        dependencies: {},
+        devDependencies: {},
+        peerDependencies: {},
+      };
+      const result = needsLessConfiguration(meta);
 
       expect(result).toBeFalsy();
     });

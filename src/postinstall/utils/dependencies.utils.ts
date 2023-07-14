@@ -1,19 +1,30 @@
 import type { PackageJson } from "@storybook/types";
 import type { ConfigFile } from "@storybook/csf-tools";
-import { SUPPORTED_BUILDERS, SupportedBuilders } from "../types";
+import {
+  SUPPORTED_BUILDERS,
+  StorybookProjectMeta,
+  SupportedBuilders,
+} from "../types";
+
+const pluckDependencies = ({
+  dependencies = {},
+  devDependencies = {},
+  peerDependencies = {},
+}: PackageJson) => ({ dependencies, devDependencies, peerDependencies });
 
 export const hasDependency = (
-  packageJson: PackageJson,
+  {
+    dependencies = {},
+    devDependencies = {},
+    peerDependencies = {},
+  }: PackageJson | StorybookProjectMeta,
   depName: string
-): boolean => {
-  const deps = packageJson?.dependencies || {};
-  const devDeps = packageJson?.devDependencies || {};
-  const peerDeps = packageJson?.peerDependencies || {};
+): boolean =>
+  !!dependencies[depName] ||
+  !!devDependencies[depName] ||
+  !!peerDependencies[depName];
 
-  return !!deps[depName] || !!devDeps[depName] || !!peerDeps[depName];
-};
-
-export const getFramework = (mainConfig: ConfigFile): string => {
+const getFramework = (mainConfig: ConfigFile): string => {
   const frameworkValue = mainConfig.getFieldValue(["framework"]);
 
   return typeof frameworkValue === "string"
@@ -21,7 +32,7 @@ export const getFramework = (mainConfig: ConfigFile): string => {
     : frameworkValue?.name;
 };
 
-export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
+const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
   const framework = getFramework(mainConfig);
 
   return framework.includes("vite") || framework.includes("sveltekit")
@@ -29,23 +40,41 @@ export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
     : SUPPORTED_BUILDERS.WEBPACK;
 };
 
-export const isAngular = (mainConfig: ConfigFile): boolean => {
-  const framework = getFramework(mainConfig);
+export const buildStorybookProjectMeta = (
+  mainConfig: ConfigFile,
+  packageJson: PackageJson
+): StorybookProjectMeta => ({
+  ...pluckDependencies(packageJson),
+  builder: determineBuilder(mainConfig),
+  framework: getFramework(mainConfig),
+});
 
-  return framework.includes("angular");
+const isAngular = ({ framework }: StorybookProjectMeta): boolean =>
+  framework.includes("angular");
+const isNextJs = ({ framework }: StorybookProjectMeta): boolean =>
+  framework.includes("nextjs");
+
+export const Frameworks = {
+  isAngular,
+  isNextJs,
 };
 
-export const isNextJs = (mainConfig: ConfigFile): boolean => {
-  const framework = getFramework(mainConfig);
+const isWebpack = ({ builder }: StorybookProjectMeta): boolean =>
+  builder === SUPPORTED_BUILDERS.WEBPACK;
+const isVite = ({ builder }: StorybookProjectMeta): boolean =>
+  builder === SUPPORTED_BUILDERS.VITE;
 
-  return framework.includes("nextjs");
+export const Builders = {
+  isWebpack,
+  isVite,
 };
 
-export const needsCssModulesConfiguration = (builder: SupportedBuilders) =>
+export const needsCssModulesConfiguration = ({
+  builder,
+}: StorybookProjectMeta) => builder === SUPPORTED_BUILDERS.WEBPACK;
+export const needsPostCssConfiguration = ({ builder }: StorybookProjectMeta) =>
   builder === SUPPORTED_BUILDERS.WEBPACK;
-export const needsPostCssConfiguration = (builder: SupportedBuilders) =>
+export const needsSassConfiguration = ({ builder }: StorybookProjectMeta) =>
   builder === SUPPORTED_BUILDERS.WEBPACK;
-export const needsSassConfiguration = (builder: SupportedBuilders) =>
-  builder === SUPPORTED_BUILDERS.WEBPACK;
-export const needsLessConfiguration = (builder: SupportedBuilders) =>
+export const needsLessConfiguration = ({ builder }: StorybookProjectMeta) =>
   builder === SUPPORTED_BUILDERS.WEBPACK;

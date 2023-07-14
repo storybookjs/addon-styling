@@ -20,6 +20,14 @@ export const SUPPORTED_STYLING_TOOLS = {
 export type SupportedStylingTools =
   (typeof SUPPORTED_STYLING_TOOLS)[keyof typeof SUPPORTED_STYLING_TOOLS];
 
+export interface StorybookProjectMeta {
+  dependencies: PackageJson["dependencies"];
+  devDependencies: PackageJson["devDependencies"];
+  peerDependencies: PackageJson["peerDependencies"];
+  builder: SupportedBuilders;
+  framework: string;
+}
+
 export interface ToolConfigurationStrategy {
   /**
    * The name of the tool for configuration
@@ -34,23 +42,13 @@ export interface ToolConfigurationStrategy {
   /**
    * Transform function for a `.storybook/main.ts` file
    * @param mainConfig Babel AST for the main.ts file
-   * @param packageJson The project's package.json
-   * @param builder The builder used to build the project's stories
+   * @param meta The project's meta information including the builder, framework, and dependencies
    */
-  main?: (
-    mainConfig: ConfigFile,
-    packageJson: PackageJson,
-    builder: SupportedBuilders
-  ) => void;
+  main?: (mainConfig: ConfigFile, meta: StorybookProjectMeta) => void;
   /**
    * Transform function for a `.storybook/preview.ts` file
    * @param previewConfig Babel AST for the preview.ts file
-   * @param packageJson The project's package.json
-   * @param builder The builder used to build the project's stories
+   * @param meta The project's meta information including the builder, framework, and dependencies
    */
-  preview?: (
-    previewConfig: ConfigFile,
-    packageJson: PackageJson,
-    builder: SupportedBuilders
-  ) => void;
+  preview?: (previewConfig: ConfigFile, meta: StorybookProjectMeta) => void;
 }

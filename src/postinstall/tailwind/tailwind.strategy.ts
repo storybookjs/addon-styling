@@ -4,8 +4,8 @@ import * as t from "@babel/types";
 
 import {
   hasDependency,
-  isAngular,
-  isNextJs,
+  Frameworks,
+  Builders,
 } from "../utils/dependencies.utils";
 import {
   SUPPORTED_BUILDERS,
@@ -21,33 +21,30 @@ const projectHasTailwind = (packageJson: PackageJson) =>
 export const tailwindStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.TAILWIND,
   predicate: projectHasTailwind,
-  main: (mainConfig, packageJson, builder) => {
+  main: (mainConfig, meta) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
-    const usingAngular = isAngular(mainConfig);
-    const usingNextJs = isNextJs(mainConfig);
+    const shouldConfigurePostCss =
+      Builders.isWebpack(meta) &&
+      !Frameworks.isAngular(meta) &&
+      !Frameworks.isNextJs(meta);
 
-    if (
-      builder === SUPPORTED_BUILDERS.WEBPACK &&
-      !usingAngular &&
-      !usingNextJs
-    ) {
+    if (shouldConfigurePostCss) {
       logger.plain(`    • Configuring ${colors.green("postcss")}.`);
     }
 
-    const [addonConfigNode] =
-      builder === SUPPORTED_BUILDERS.VITE || usingAngular || usingNextJs
-        ? stringToNode`({
+    const [addonConfigNode] = shouldConfigurePostCss
+      ? stringToNode`({
+          name: "@storybook/addon-styling",
+          options: {
+            postCss: {
+              implementation: require.resolve("postcss")
+            }
+          }
+        })`
+      : stringToNode`({
       name: "@storybook/addon-styling",
       options: {}
-    })`
-        : stringToNode`({
-      name: "@storybook/addon-styling",
-      options: {
-        postCss: {
-          implementation: require.resolve("postcss")
-        }
-      }
     })`;
 
     const addonsNodePath = ["addons"];
@@ -61,7 +58,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
     // @ts-expect-error
     addonsArrayNode.elements.push(addonConfigNode);
   },
-  preview: (previewConfig, packageJson, builder) => {
+  preview: (previewConfig, meta) => {
     logger.plain(
       `  • Adding import for ${colors.blue("withThemeByClassName")} decorator`
     );

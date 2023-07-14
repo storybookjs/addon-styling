@@ -12,7 +12,7 @@ const projectHasStyledComponents = (packageJson: PackageJson) =>
 export const styledComponentsStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.STYLED_COMPONENTS,
   predicate: projectHasStyledComponents,
-  main: (mainConfig, packageJson, builder) => {
+  main: (mainConfig, meta) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
     const [addonConfigNode] = stringToNode`({
@@ -31,7 +31,7 @@ export const styledComponentsStrategy: ToolConfigurationStrategy = {
     // @ts-expect-error
     addonsArrayNode.elements.push(addonConfigNode);
   },
-  preview: (previewConfig, packageJson, builder) => {
+  preview: (previewConfig, meta) => {
     logger.plain(
       `  • Adding imports for ${colors.green(
         SUPPORTED_STYLING_TOOLS.EMOTION

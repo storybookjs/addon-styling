@@ -13,7 +13,7 @@ const projectHasEmotion = (packageJson: PackageJson) =>
 export const emotionStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.EMOTION,
   predicate: projectHasEmotion,
-  main: (mainConfig, packageJson, builder) => {
+  main: (mainConfig, meta) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
     const [addonConfigNode] = stringToNode`({
@@ -32,7 +32,7 @@ export const emotionStrategy: ToolConfigurationStrategy = {
     // @ts-expect-error
     addonsArrayNode.elements.push(addonConfigNode);
   },
-  preview: (previewConfig, packageJson, builder) => {
+  preview: (previewConfig, meta) => {
     logger.plain(
       `  • Adding imports for ${colors.green(
         SUPPORTED_STYLING_TOOLS.EMOTION
