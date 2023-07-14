@@ -152,6 +152,43 @@ describe("CODEMOD: tailwind configuration", () => {
     });
   });
 
+  it("NextJS: addon-styling should be registered without options", async () => {
+    const mainConfig = await readConfig(
+      resolve(__dirname, "../fixtures/main.nextjs.fixture.ts")
+    );
+    const packageJson: PackageJson = {
+      dependencies: { tailwindcss: "latest" },
+      devDependencies: { postcss: " latest" },
+    };
+
+    tailwindStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.WEBPACK);
+
+    const result = formatFileContents(mainConfig);
+
+    expect(result).toMatchInlineSnapshot(`
+      "import type { StorybookConfig } from \\"@storybook/nextjs\\";
+      const config: StorybookConfig = {
+        stories: [\\"../stories/**/*.stories.@(js|jsx|ts|tsx)\\"],
+        addons: [
+          \\"@storybook/addon-essentials\\",
+          {
+            name: \\"@storybook/addon-styling\\",
+            options: {},
+          },
+        ],
+        framework: {
+          name: \\"@storybook/nextjs\\",
+          options: {},
+        },
+        docs: {
+          autodocs: true,
+        },
+      };
+      export default config;
+      "
+    `);
+  });
+
   describe("PREVIEW: how should storybook preview be configured for tailwind", () => {
     it("CONFIGURATION: Preview.ts should be updated with the style import todo, as well as the theme decorator", async () => {
       const previewConfig = await readConfig(
