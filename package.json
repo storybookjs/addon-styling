@@ -1,6 +1,6 @@
 {
   "name": "@storybook/addon-styling",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "A base addon for configuring popular styling tools",
   "keywords": [
     "style",
