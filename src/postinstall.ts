@@ -8,10 +8,7 @@ import {
   findConfig,
   writePrettyConfig,
 } from "./postinstall/utils/configs.utils";
-import {
-  buildStorybookProjectMeta,
-  determineBuilder,
-} from "./postinstall/utils/dependencies.utils";
+import { buildStorybookProjectMeta } from "./postinstall/utils/dependencies.utils";
 
 import { tailwindStrategy } from "./postinstall/tailwind/tailwind.strategy";
 import { materialUIStrategy } from "./postinstall/material-ui/material-ui.strategy";

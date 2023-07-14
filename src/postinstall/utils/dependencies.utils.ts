@@ -17,14 +17,14 @@ export const hasDependency = (
     dependencies = {},
     devDependencies = {},
     peerDependencies = {},
-  }: PackageJson,
+  }: PackageJson | StorybookProjectMeta,
   depName: string
 ): boolean =>
   !!dependencies[depName] ||
   !!devDependencies[depName] ||
   !!peerDependencies[depName];
 
-export const getFramework = (mainConfig: ConfigFile): string => {
+const getFramework = (mainConfig: ConfigFile): string => {
   const frameworkValue = mainConfig.getFieldValue(["framework"]);
 
   return typeof frameworkValue === "string"
@@ -32,7 +32,7 @@ export const getFramework = (mainConfig: ConfigFile): string => {
     : frameworkValue?.name;
 };
 
-export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
+const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
   const framework = getFramework(mainConfig);
 
   return framework.includes("vite") || framework.includes("sveltekit")
@@ -49,17 +49,19 @@ export const buildStorybookProjectMeta = (
   framework: getFramework(mainConfig),
 });
 
-const isAngular = (framework: string): boolean => framework.includes("angular");
-const isNextJs = (framework: string): boolean => framework.includes("nextjs");
+const isAngular = ({ framework }: StorybookProjectMeta): boolean =>
+  framework.includes("angular");
+const isNextJs = ({ framework }: StorybookProjectMeta): boolean =>
+  framework.includes("nextjs");
 
 export const Frameworks = {
   isAngular,
   isNextJs,
 };
 
-const isWebpack = (builder: SupportedBuilders): boolean =>
+const isWebpack = ({ builder }: StorybookProjectMeta): boolean =>
   builder === SUPPORTED_BUILDERS.WEBPACK;
-const isVite = (builder: SupportedBuilders): boolean =>
+const isVite = ({ builder }: StorybookProjectMeta): boolean =>
   builder === SUPPORTED_BUILDERS.VITE;
 
 export const Builders = {
@@ -67,11 +69,12 @@ export const Builders = {
   isVite,
 };
 
-export const needsCssModulesConfiguration = (builder: SupportedBuilders) =>
+export const needsCssModulesConfiguration = ({
+  builder,
+}: StorybookProjectMeta) => builder === SUPPORTED_BUILDERS.WEBPACK;
+export const needsPostCssConfiguration = ({ builder }: StorybookProjectMeta) =>
   builder === SUPPORTED_BUILDERS.WEBPACK;
-export const needsPostCssConfiguration = (builder: SupportedBuilders) =>
+export const needsSassConfiguration = ({ builder }: StorybookProjectMeta) =>
   builder === SUPPORTED_BUILDERS.WEBPACK;
-export const needsSassConfiguration = (builder: SupportedBuilders) =>
-  builder === SUPPORTED_BUILDERS.WEBPACK;
-export const needsLessConfiguration = (builder: SupportedBuilders) =>
+export const needsLessConfiguration = ({ builder }: StorybookProjectMeta) =>
   builder === SUPPORTED_BUILDERS.WEBPACK;

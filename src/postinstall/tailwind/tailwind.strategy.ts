@@ -21,13 +21,13 @@ const projectHasTailwind = (packageJson: PackageJson) =>
 export const tailwindStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.TAILWIND,
   predicate: projectHasTailwind,
-  main: (mainConfig, { builder, framework }) => {
+  main: (mainConfig, meta) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
     const shouldConfigurePostCss =
-      Builders.isWebpack(builder) &&
-      !Frameworks.isAngular(framework) &&
-      !Frameworks.isNextJs(framework);
+      Builders.isWebpack(meta) &&
+      !Frameworks.isAngular(meta) &&
+      !Frameworks.isNextJs(meta);
 
     if (shouldConfigurePostCss) {
       logger.plain(`    • Configuring ${colors.green("postcss")}.`);
