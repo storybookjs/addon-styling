@@ -4,7 +4,7 @@ import { readConfig } from "@storybook/csf-tools";
 import { resolve } from "node:path";
 
 import { materialUIStrategy } from "./material-ui.strategy";
-import { SUPPORTED_BUILDERS } from "../types";
+import { SUPPORTED_BUILDERS, StorybookProjectMeta } from "../types";
 import { formatFileContents } from "../utils/configs.utils";
 
 describe("CODEMOD: Material UI configuration", () => {
@@ -38,18 +38,22 @@ describe("CODEMOD: Material UI configuration", () => {
   describe("MAIN: how should storybook be configured for Material UI", () => {
     it("REGISTER: addon-styling should be registered in the addons array without options", async () => {
       const mainConfig = await readConfig(
-        resolve(__dirname, "../fixtures/main.fixture.ts")
+        resolve(__dirname, "../fixtures/main.react-vite.fixture.ts")
       );
-      const packageJson: PackageJson = {
+
+      const meta: StorybookProjectMeta = {
         dependencies: {
           "@mui/material": "latest",
           "@emotion/react": "latest",
           "@emotion/styled": "latest",
         },
         devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/react-vite",
+        builder: SUPPORTED_BUILDERS.VITE,
       };
 
-      materialUIStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.VITE);
+      materialUIStrategy.main(mainConfig, meta);
 
       const result = formatFileContents(mainConfig);
 
@@ -83,20 +87,19 @@ describe("CODEMOD: Material UI configuration", () => {
       const previewConfig = await readConfig(
         resolve(__dirname, "../fixtures/preview.fixture.ts")
       );
-      const packageJson: PackageJson = {
+      const meta: StorybookProjectMeta = {
         dependencies: {
           "@mui/material": "latest",
           "@emotion/react": "latest",
           "@emotion/styled": "latest",
         },
         devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/react-vite",
+        builder: SUPPORTED_BUILDERS.VITE,
       };
 
-      materialUIStrategy.preview(
-        previewConfig,
-        packageJson,
-        SUPPORTED_BUILDERS.WEBPACK
-      );
+      materialUIStrategy.preview(previewConfig, meta);
 
       const result = formatFileContents(previewConfig);
 
@@ -142,7 +145,8 @@ describe("CODEMOD: Material UI configuration", () => {
       const previewConfig = await readConfig(
         resolve(__dirname, "../fixtures/preview.fixture.ts")
       );
-      const packageJson: PackageJson = {
+
+      const meta: StorybookProjectMeta = {
         dependencies: {
           "@mui/material": "latest",
           "@emotion/react": "latest",
@@ -150,13 +154,12 @@ describe("CODEMOD: Material UI configuration", () => {
           "@fontsource/roboto": "latest",
         },
         devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/react-vite",
+        builder: SUPPORTED_BUILDERS.VITE,
       };
 
-      materialUIStrategy.preview(
-        previewConfig,
-        packageJson,
-        SUPPORTED_BUILDERS.WEBPACK
-      );
+      materialUIStrategy.preview(previewConfig, meta);
 
       const result = formatFileContents(previewConfig);
 

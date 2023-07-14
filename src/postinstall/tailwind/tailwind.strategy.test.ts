@@ -4,7 +4,7 @@ import { readConfig } from "@storybook/csf-tools";
 import { resolve } from "node:path";
 
 import { tailwindStrategy } from "./tailwind.strategy";
-import { SUPPORTED_BUILDERS } from "../types";
+import { SUPPORTED_BUILDERS, StorybookProjectMeta } from "../types";
 import { formatFileContents } from "../utils/configs.utils";
 
 describe("CODEMOD: tailwind configuration", () => {
@@ -34,14 +34,18 @@ describe("CODEMOD: tailwind configuration", () => {
   describe("MAIN: how should storybook be configured for tailwind", () => {
     it("VITE: addon-styling should be registered without options", async () => {
       const mainConfig = await readConfig(
-        resolve(__dirname, "../fixtures/main.fixture.ts")
+        resolve(__dirname, "../fixtures/main.react-vite.fixture.ts")
       );
-      const packageJson: PackageJson = {
+
+      const meta: StorybookProjectMeta = {
         dependencies: { tailwindcss: "latest" },
         devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/react-vite",
+        builder: SUPPORTED_BUILDERS.VITE,
       };
 
-      tailwindStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.VITE);
+      tailwindStrategy.main(mainConfig, meta);
 
       const result = formatFileContents(mainConfig);
 
@@ -71,23 +75,22 @@ describe("CODEMOD: tailwind configuration", () => {
 
     it("WEBPACK: addon-styling should be configured with postcss support", async () => {
       const mainConfig = await readConfig(
-        resolve(__dirname, "../fixtures/main.fixture.ts")
+        resolve(__dirname, "../fixtures/main.react-webpack5.fixture.ts")
       );
-      const packageJson: PackageJson = {
+      const meta: StorybookProjectMeta = {
         dependencies: { tailwindcss: "latest" },
         devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/react-webpack5",
+        builder: SUPPORTED_BUILDERS.WEBPACK,
       };
 
-      tailwindStrategy.main(
-        mainConfig,
-        packageJson,
-        SUPPORTED_BUILDERS.WEBPACK
-      );
+      tailwindStrategy.main(mainConfig, meta);
 
       const result = formatFileContents(mainConfig);
 
       expect(result).toMatchInlineSnapshot(`
-        "import type { StorybookConfig } from \\"@storybook/react-vite\\";
+        "import type { StorybookConfig } from \\"@storybook/react-webpack5\\";
         const config: StorybookConfig = {
           stories: [\\"../stories/**/*.stories.@(js|jsx|ts|tsx)\\"],
           addons: [
@@ -102,7 +105,7 @@ describe("CODEMOD: tailwind configuration", () => {
             },
           ],
           framework: {
-            name: \\"@storybook/react-vite\\",
+            name: \\"@storybook/react-webpack5\\",
             options: {},
           },
           docs: {
@@ -118,12 +121,15 @@ describe("CODEMOD: tailwind configuration", () => {
       const mainConfig = await readConfig(
         resolve(__dirname, "../fixtures/main.angular.fixture.ts")
       );
-      const packageJson: PackageJson = {
+      const meta: StorybookProjectMeta = {
         dependencies: { tailwindcss: "latest" },
         devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/angular",
+        builder: SUPPORTED_BUILDERS.WEBPACK,
       };
 
-      tailwindStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.VITE);
+      tailwindStrategy.main(mainConfig, meta);
 
       const result = formatFileContents(mainConfig);
 
@@ -150,43 +156,46 @@ describe("CODEMOD: tailwind configuration", () => {
         "
       `);
     });
-  });
 
-  it("NextJS: addon-styling should be registered without options", async () => {
-    const mainConfig = await readConfig(
-      resolve(__dirname, "../fixtures/main.nextjs.fixture.ts")
-    );
-    const packageJson: PackageJson = {
-      dependencies: { tailwindcss: "latest" },
-      devDependencies: { postcss: " latest" },
-    };
+    it("NextJS: addon-styling should be registered without options", async () => {
+      const mainConfig = await readConfig(
+        resolve(__dirname, "../fixtures/main.nextjs.fixture.ts")
+      );
+      const meta: StorybookProjectMeta = {
+        dependencies: { tailwindcss: "latest" },
+        devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/nextjs",
+        builder: SUPPORTED_BUILDERS.WEBPACK,
+      };
 
-    tailwindStrategy.main(mainConfig, packageJson, SUPPORTED_BUILDERS.WEBPACK);
+      tailwindStrategy.main(mainConfig, meta);
 
-    const result = formatFileContents(mainConfig);
+      const result = formatFileContents(mainConfig);
 
-    expect(result).toMatchInlineSnapshot(`
-      "import type { StorybookConfig } from \\"@storybook/nextjs\\";
-      const config: StorybookConfig = {
-        stories: [\\"../stories/**/*.stories.@(js|jsx|ts|tsx)\\"],
-        addons: [
-          \\"@storybook/addon-essentials\\",
-          {
-            name: \\"@storybook/addon-styling\\",
+      expect(result).toMatchInlineSnapshot(`
+        "import type { StorybookConfig } from \\"@storybook/nextjs\\";
+        const config: StorybookConfig = {
+          stories: [\\"../stories/**/*.stories.@(js|jsx|ts|tsx)\\"],
+          addons: [
+            \\"@storybook/addon-essentials\\",
+            {
+              name: \\"@storybook/addon-styling\\",
+              options: {},
+            },
+          ],
+          framework: {
+            name: \\"@storybook/nextjs\\",
             options: {},
           },
-        ],
-        framework: {
-          name: \\"@storybook/nextjs\\",
-          options: {},
-        },
-        docs: {
-          autodocs: true,
-        },
-      };
-      export default config;
-      "
-    `);
+          docs: {
+            autodocs: true,
+          },
+        };
+        export default config;
+        "
+      `);
+    });
   });
 
   describe("PREVIEW: how should storybook preview be configured for tailwind", () => {
@@ -194,16 +203,15 @@ describe("CODEMOD: tailwind configuration", () => {
       const previewConfig = await readConfig(
         resolve(__dirname, "../fixtures/preview.fixture.ts")
       );
-      const packageJson: PackageJson = {
+      const meta: StorybookProjectMeta = {
         dependencies: { tailwindcss: "latest" },
         devDependencies: { postcss: " latest" },
+        peerDependencies: {},
+        framework: "@storybook/react-vite",
+        builder: SUPPORTED_BUILDERS.VITE,
       };
 
-      tailwindStrategy.preview(
-        previewConfig,
-        packageJson,
-        SUPPORTED_BUILDERS.WEBPACK
-      );
+      tailwindStrategy.preview(previewConfig, meta);
 
       const result = formatFileContents(previewConfig);
 

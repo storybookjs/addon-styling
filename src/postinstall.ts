@@ -8,7 +8,10 @@ import {
   findConfig,
   writePrettyConfig,
 } from "./postinstall/utils/configs.utils";
-import { determineBuilder } from "./postinstall/utils/dependencies.utils";
+import {
+  buildStorybookProjectMeta,
+  determineBuilder,
+} from "./postinstall/utils/dependencies.utils";
 
 import { tailwindStrategy } from "./postinstall/tailwind/tailwind.strategy";
 import { materialUIStrategy } from "./postinstall/material-ui/material-ui.strategy";
@@ -53,21 +56,21 @@ const automigrate = async () => {
   const mainPath = await findConfig("main");
   const mainConfig = await readConfig(mainPath);
 
-  const builder = determineBuilder(mainConfig);
+  const projectMeta = buildStorybookProjectMeta(mainConfig, packageJson);
 
   const previewPath = await findConfig("preview");
   const previewConfig = await readConfig(previewPath);
 
   // Step 2: Determine project details
   logger.plain(`${colors.blue.bold("(1/3)")} Project summary`);
-  logger.plain(`  • Built with ${colors.green.bold(builder)}`);
+  logger.plain(`  • Built with ${colors.green.bold(projectMeta.builder)}`);
   logger.plain(`  • Styled with ${colors.green.bold(strategy.name)}`);
   logger.line(1);
 
   // Step 3: Make any required updates to .storybook/main.ts
   logger.plain(`${colors.blue.bold("(2/3)")} ${colors.purple.bold(mainPath)}`);
   if (strategy.main) {
-    strategy.main(mainConfig, packageJson, builder, { logger, colors });
+    strategy.main(mainConfig, projectMeta);
     await writePrettyConfig(mainConfig);
   } else {
     logger.plain(`  • No updates required.`);
@@ -80,7 +83,7 @@ const automigrate = async () => {
   );
   if (strategy.preview) {
     // Make updates to preview
-    strategy.preview(previewConfig, packageJson, builder, { logger, colors });
+    strategy.preview(previewConfig, projectMeta);
     await writePrettyConfig(previewConfig);
   } else {
     logger.plain(`  • No updates required.`);

@@ -14,7 +14,7 @@ const projectHasMaterialUI = (packageJson: PackageJson) =>
 export const materialUIStrategy: ToolConfigurationStrategy = {
   name: SUPPORTED_STYLING_TOOLS.MATERIAL_UI,
   predicate: projectHasMaterialUI,
-  main: (mainConfig, packageJson, builder) => {
+  main: (mainConfig, meta) => {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
     const [addonConfigNode] = stringToNode`({
@@ -26,14 +26,14 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
     let addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
 
     if (!addonsArrayNode) {
-      mainConfig.setFieldNode(addonsNodePath, t.arrayExpression());
+      mainConfig.setFieldNode(addonsNodePath, t.arrayExpression([]));
       addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
     }
 
     // @ts-expect-error
     addonsArrayNode.elements.push(addonConfigNode);
   },
-  preview: (previewConfig, packageJson, builder) => {
+  preview: (previewConfig, meta) => {
     logger.plain(
       `  • Adding imports for ${colors.green(
         SUPPORTED_STYLING_TOOLS.MATERIAL_UI
@@ -46,7 +46,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
         "withThemeFromJSXProvider"
       )} decorator`
     );
-    hasDependency(packageJson, "@fontsource/roboto")
+    hasDependency(meta, "@fontsource/roboto")
       ? logger.plain(`  • importing ${colors.blue("roboto")} font files.`)
       : logger.plain(
           `  • Could not detect ${colors.blue(
@@ -54,7 +54,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
           )} font. Skipping font import`
         );
 
-    const importsNode = hasDependency(packageJson, "@fontsource/roboto")
+    const importsNode = hasDependency(meta, "@fontsource/roboto")
       ? stringToNode`
     import { ThemeProvider, CssBaseline } from '@mui/material';
     import { withThemeFromJSXProvider } from '@storybook/addon-styling';
@@ -103,7 +103,7 @@ export const materialUIStrategy: ToolConfigurationStrategy = {
     let decoratorArrayNode = previewConfig.getFieldNode(decoratorNodePath);
 
     if (!decoratorArrayNode) {
-      previewConfig.setFieldNode(decoratorNodePath, t.arrayExpression());
+      previewConfig.setFieldNode(decoratorNodePath, t.arrayExpression([]));
       decoratorArrayNode = previewConfig.getFieldNode(decoratorNodePath);
     }
 

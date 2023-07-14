@@ -1,17 +1,28 @@
 import type { PackageJson } from "@storybook/types";
 import type { ConfigFile } from "@storybook/csf-tools";
-import { SUPPORTED_BUILDERS, SupportedBuilders } from "../types";
+import {
+  SUPPORTED_BUILDERS,
+  StorybookProjectMeta,
+  SupportedBuilders,
+} from "../types";
+
+const pluckDependencies = ({
+  dependencies = {},
+  devDependencies = {},
+  peerDependencies = {},
+}: PackageJson) => ({ dependencies, devDependencies, peerDependencies });
 
 export const hasDependency = (
-  packageJson: PackageJson,
+  {
+    dependencies = {},
+    devDependencies = {},
+    peerDependencies = {},
+  }: PackageJson,
   depName: string
-): boolean => {
-  const deps = packageJson?.dependencies || {};
-  const devDeps = packageJson?.devDependencies || {};
-  const peerDeps = packageJson?.peerDependencies || {};
-
-  return !!deps[depName] || !!devDeps[depName] || !!peerDeps[depName];
-};
+): boolean =>
+  !!dependencies[depName] ||
+  !!devDependencies[depName] ||
+  !!peerDependencies[depName];
 
 export const getFramework = (mainConfig: ConfigFile): string => {
   const frameworkValue = mainConfig.getFieldValue(["framework"]);
@@ -29,16 +40,31 @@ export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
     : SUPPORTED_BUILDERS.WEBPACK;
 };
 
-export const isAngular = (mainConfig: ConfigFile): boolean => {
-  const framework = getFramework(mainConfig);
+export const buildStorybookProjectMeta = (
+  mainConfig: ConfigFile,
+  packageJson: PackageJson
+): StorybookProjectMeta => ({
+  ...pluckDependencies(packageJson),
+  builder: determineBuilder(mainConfig),
+  framework: getFramework(mainConfig),
+});
 
-  return framework.includes("angular");
+const isAngular = (framework: string): boolean => framework.includes("angular");
+const isNextJs = (framework: string): boolean => framework.includes("nextjs");
+
+export const Frameworks = {
+  isAngular,
+  isNextJs,
 };
 
-export const isNextJs = (mainConfig: ConfigFile): boolean => {
-  const framework = getFramework(mainConfig);
+const isWebpack = (builder: SupportedBuilders): boolean =>
+  builder === SUPPORTED_BUILDERS.WEBPACK;
+const isVite = (builder: SupportedBuilders): boolean =>
+  builder === SUPPORTED_BUILDERS.VITE;
 
-  return framework.includes("nextjs");
+export const Builders = {
+  isWebpack,
+  isVite,
 };
 
 export const needsCssModulesConfiguration = (builder: SupportedBuilders) =>
