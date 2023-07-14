@@ -1,3 +1,15 @@
+# v1.3.4 (Fri Jul 14 2023)
+
+#### 🐛 Bug Fix
+
+- Don't configure styles for nextjs [#71](https://github.com/storybookjs/addon-styling/pull/71) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.3.3 (Thu Jul 13 2023)
 
 #### 🐛 Bug Fix
