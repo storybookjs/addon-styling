@@ -13,11 +13,16 @@ export const hasDependency = (
   return !!deps[depName] || !!devDeps[depName] || !!peerDeps[depName];
 };
 
-export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
+export const getFramework = (mainConfig: ConfigFile): string => {
   const frameworkValue = mainConfig.getFieldValue(["framework"]);
 
-  const framework =
-    typeof frameworkValue === "string" ? frameworkValue : frameworkValue?.name;
+  return typeof frameworkValue === "string"
+    ? frameworkValue
+    : frameworkValue?.name;
+};
+
+export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
+  const framework = getFramework(mainConfig);
 
   return framework.includes("vite") || framework.includes("sveltekit")
     ? SUPPORTED_BUILDERS.VITE
@@ -25,12 +30,15 @@ export const determineBuilder = (mainConfig: ConfigFile): SupportedBuilders => {
 };
 
 export const isAngular = (mainConfig: ConfigFile): boolean => {
-  const frameworkValue = mainConfig.getFieldValue(["framework"]);
-
-  const framework =
-    typeof frameworkValue === "string" ? frameworkValue : frameworkValue?.name;
+  const framework = getFramework(mainConfig);
 
   return framework.includes("angular");
+};
+
+export const isNextJs = (mainConfig: ConfigFile): boolean => {
+  const framework = getFramework(mainConfig);
+
+  return framework.includes("nextjs");
 };
 
 export const needsCssModulesConfiguration = (builder: SupportedBuilders) =>

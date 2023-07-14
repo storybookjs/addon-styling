@@ -2,7 +2,11 @@ import { PackageJson } from "@storybook/types";
 import { logger, colors } from "@storybook/node-logger";
 import * as t from "@babel/types";
 
-import { hasDependency, isAngular } from "../utils/dependencies.utils";
+import {
+  hasDependency,
+  isAngular,
+  isNextJs,
+} from "../utils/dependencies.utils";
 import {
   SUPPORTED_BUILDERS,
   SUPPORTED_STYLING_TOOLS,
@@ -21,13 +25,18 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
     logger.plain(`  • Registering ${colors.pink("@storybook/addon-styling")}.`);
 
     const usingAngular = isAngular(mainConfig);
+    const usingNextJs = isNextJs(mainConfig);
 
-    if (builder === SUPPORTED_BUILDERS.WEBPACK || usingAngular) {
+    if (
+      builder === SUPPORTED_BUILDERS.WEBPACK &&
+      !usingAngular &&
+      !usingNextJs
+    ) {
       logger.plain(`    • Configuring ${colors.green("postcss")}.`);
     }
 
     const [addonConfigNode] =
-      builder === SUPPORTED_BUILDERS.VITE || usingAngular
+      builder === SUPPORTED_BUILDERS.VITE || usingAngular || usingNextJs
         ? stringToNode`({
       name: "@storybook/addon-styling",
       options: {}
