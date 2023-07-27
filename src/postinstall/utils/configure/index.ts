@@ -6,6 +6,13 @@ import { generateCssRules } from "./css-rules";
 import { generateSassRules } from "./sass-rules";
 import { generateLessRules } from "./less-rules";
 
+const setConfigWithDefaults = (
+  configMap: Partial<ConfigurationMap>
+): ConfigurationMap => ({
+  ...DEFAULT_CONFIGURATION_MAP,
+  ...configMap,
+});
+
 export const buildImports = (configMap: Partial<ConfigurationMap>): string => {
   const { vanillaExtract } = setConfigWithDefaults(configMap);
 
@@ -13,7 +20,8 @@ export const buildImports = (configMap: Partial<ConfigurationMap>): string => {
     ? dedent`
     import { VanillaExtractPlugin } from "@vanilla-extract/webpack-plugin";
     import MiniCssExtractPlugin from "mini-css-extract-plugin";
-`
+
+    `
     : "";
 };
 
@@ -22,13 +30,6 @@ const buildPluginsArray = ({ vanillaExtract }: ConfigurationMap): string =>
     ? dedent`
     plugins: [new VanillaExtractPlugin(), new MiniCssExtractPlugin()],`
     : "";
-
-const setConfigWithDefaults = (
-  configMap: Partial<ConfigurationMap>
-): ConfigurationMap => ({
-  ...DEFAULT_CONFIGURATION_MAP,
-  ...configMap,
-});
 
 export const buildAddonConfig = (
   configMap: Partial<ConfigurationMap>

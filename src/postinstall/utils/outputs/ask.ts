@@ -51,7 +51,7 @@ Here's a list of things I know how to configure...`,
   );
   logger.line();
 
-  const { configurations } = await prompts({
+  const { configurations = [] } = await prompts({
     type: "multiselect",
     name: "configurations",
     message: "Select the styling tools that I should configure",
@@ -68,8 +68,10 @@ Here's a list of things I know how to configure...`,
 
   const configMap = configurations.reduce(
     (map: ConfigurationMap, key: keyof ConfigurationMap) => {
-      map[key] = true;
-      return map;
+      return {
+        ...map,
+        [key]: true,
+      };
     },
     DEFAULT_CONFIGURATION_MAP as ConfigurationMap
   );

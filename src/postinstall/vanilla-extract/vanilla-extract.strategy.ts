@@ -4,20 +4,27 @@ import * as t from "@babel/types";
 
 import { hasDependency } from "../utils/dependencies.utils";
 import { SUPPORTED_STYLING_TOOLS, ToolConfigurationStrategy } from "../types";
-import { createNode } from "../utils/babel.utils";
-import { buildAddonConfig } from "../utils/configure";
+import { addImports, createNode } from "../utils/babel.utils";
+import { buildAddonConfig, buildImports } from "../utils/configure";
 
-const projectHasTailwind = (packageJson: PackageJson) =>
-  hasDependency(packageJson, "tailwindcss") &&
-  hasDependency(packageJson, "postcss");
+const projectHasVanillaExtract = (packageJson: PackageJson) =>
+  hasDependency(packageJson, "@vanilla-extract/webpack-plugin");
 
-export const tailwindStrategy: ToolConfigurationStrategy = {
-  name: SUPPORTED_STYLING_TOOLS.TAILWIND,
-  predicate: projectHasTailwind,
+export const vanillaExtractStrategy: ToolConfigurationStrategy = {
+  name: SUPPORTED_STYLING_TOOLS.VANILLA_EXTRACT,
+  predicate: projectHasVanillaExtract,
   main: async (mainConfig, meta) => {
+    // Add imports for required plugins
+    const importsNode = createNode(
+      buildImports({
+        vanillaExtract: true,
+      })
+    );
+    addImports(mainConfig._ast, importsNode);
+
     const [addonConfigNode] = createNode(
       buildAddonConfig({
-        postcss: true,
+        vanillaExtract: true,
       })
     );
 
@@ -25,7 +32,7 @@ export const tailwindStrategy: ToolConfigurationStrategy = {
     let addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
 
     if (!addonsArrayNode) {
-      mainConfig.setFieldNode(addonsNodePath, t.arrayExpression());
+      mainConfig.setFieldNode(addonsNodePath, t.arrayExpression([]));
       addonsArrayNode = mainConfig.getFieldNode(addonsNodePath);
     }
 
