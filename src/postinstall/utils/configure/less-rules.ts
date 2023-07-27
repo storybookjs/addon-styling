@@ -29,7 +29,7 @@ export const generateLessRules = (configMap: ConfigurationMap): string =>
   configMap.less
     ? dedent`
     {
-        test: /\\.less$/,
+        test: /\.less$/,
         sideEffects: true,
         use: [
             require.resolve("style-loader"),

@@ -29,7 +29,7 @@ export const generateSassRules = (configMap: ConfigurationMap): string =>
   configMap.sass
     ? dedent`
     {
-        test: /\\.s[ac]ss$/,
+        test: /\.s[ac]ss$/,
         sideEffects: true,
         use: [
             require.resolve("style-loader"),

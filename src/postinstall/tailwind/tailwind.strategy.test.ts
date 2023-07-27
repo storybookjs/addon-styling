@@ -59,7 +59,7 @@ describe("CODEMOD: tailwind configuration", () => {
               options: {
                 rules: [
                   {
-                    test: /\\\\\\\\.css$/,
+                    test: /\\\\.css$/,
                     sideEffects: true,
                     use: [
                       require.resolve(\\"style-loader\\"),
