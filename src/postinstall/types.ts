@@ -1,6 +1,26 @@
 import { PackageJson } from "@storybook/types";
 import type { ConfigFile } from "@storybook/csf-tools";
 
+export const DEFAULT_CONFIGURATION_MAP = {
+  cssModules: false,
+  postcss: false,
+  sass: false,
+  less: false,
+  vanillaExtract: false,
+} as const;
+
+export type ConfigurationKey = keyof typeof DEFAULT_CONFIGURATION_MAP;
+
+export type ConfigurationMap = Record<ConfigurationKey, boolean>;
+
+export const CONFIGURATION_KEY_TO_NAME: Record<ConfigurationKey, string> = {
+  cssModules: "CSS Modules",
+  postcss: "postcss",
+  sass: "sass",
+  less: "less",
+  vanillaExtract: "vanilla-extract",
+};
+
 export const SUPPORTED_BUILDERS = {
   VITE: "vite",
   WEBPACK: "webpack",
@@ -10,11 +30,11 @@ export type SupportedBuilders =
   (typeof SUPPORTED_BUILDERS)[keyof typeof SUPPORTED_BUILDERS];
 
 export const SUPPORTED_STYLING_TOOLS = {
-  EMOTION: "emotion",
-  MATERIAL_UI: "material-ui",
-  SASS: "sass",
-  STYLED_COMPONENTS: "styled-components",
   TAILWIND: "tailwind",
+  VANILLA_EXTRACT: "vanilla-extract",
+
+  // Fallback scenario where no styling tool is found
+  FALLBACK: "fallback",
 } as const;
 
 export type SupportedStylingTools =
@@ -26,6 +46,11 @@ export interface StorybookProjectMeta {
   peerDependencies: PackageJson["peerDependencies"];
   builder: SupportedBuilders;
   framework: string;
+}
+
+export interface ChangeSummary {
+  changed: string[];
+  nextSteps: string[];
 }
 
 export interface ToolConfigurationStrategy {
@@ -44,11 +69,17 @@ export interface ToolConfigurationStrategy {
    * @param mainConfig Babel AST for the main.ts file
    * @param meta The project's meta information including the builder, framework, and dependencies
    */
-  main?: (mainConfig: ConfigFile, meta: StorybookProjectMeta) => void;
+  main?: (
+    mainConfig: ConfigFile,
+    meta: StorybookProjectMeta
+  ) => Promise<ChangeSummary>;
   /**
    * Transform function for a `.storybook/preview.ts` file
    * @param previewConfig Babel AST for the preview.ts file
    * @param meta The project's meta information including the builder, framework, and dependencies
    */
-  preview?: (previewConfig: ConfigFile, meta: StorybookProjectMeta) => void;
+  preview?: (
+    previewConfig: ConfigFile,
+    meta: StorybookProjectMeta
+  ) => Promise<ChangeSummary>;
 }
