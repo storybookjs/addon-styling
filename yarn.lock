@@ -2499,6 +2499,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kwsites/file-exists@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@kwsites/file-exists@npm:1.1.1"
+  dependencies:
+    debug: ^4.1.1
+  checksum: 4ff945de7293285133aeae759caddc71e73c4a44a12fac710fdd4f574cce2671a3f89d8165fdb03d383cfc97f3f96f677d8de3c95133da3d0e12a123a23109fe
+  languageName: node
+  linkType: hard
+
+"@kwsites/promise-deferred@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "@kwsites/promise-deferred@npm:1.1.1"
+  checksum: 07455477a0123d9a38afb503739eeff2c5424afa8d3dbdcc7f9502f13604488a4b1d9742fc7288832a52a6422cf1e1c0a1d51f69a39052f14d27c9a0420b6629
+  languageName: node
+  linkType: hard
+
 "@mdx-js/react@npm:^2.1.5":
   version: 2.3.0
   resolution: "@mdx-js/react@npm:2.3.0"
@@ -2976,18 +2992,20 @@ __metadata:
     "@storybook/theming": ^7.0.12
     "@storybook/types": ^7.0.12
     "@types/node": ^16.0.0
+    "@types/prompts": ^2.4.4
     "@vitejs/plugin-react": ^3.1.0
     auto: ^10.3.0
     babel-loader: ^8.1.0
     boxen: ^5.0.1
     concurrently: ^6.2.0
     css-loader: ^6.7.3
-    dedent: ^0.7.0
+    dedent: ^1.2.0
     less: ^4.0.0
     less-loader: ^11.1.0
     postcss: ^8.0.1
     postcss-loader: ^7.2.4
     prettier: ^2.8.0
+    prompts: ^2.4.0
     prop-types: ^15.7.2
     react: ^17.0.1
     react-dom: ^17.0.1
@@ -2995,6 +3013,7 @@ __metadata:
     resolve-url-loader: ^5.0.0
     rimraf: ^3.0.2
     sass-loader: ^13.2.2
+    simple-git: ^3.19.1
     storybook: ^7.0.12
     style-loader: ^3.3.2
     tsup: ^6.7.0
@@ -4177,6 +4196,16 @@ __metadata:
   version: 1.0.1
   resolution: "@types/pretty-hrtime@npm:1.0.1"
   checksum: a6cdee417eea6f7af914e4fcd13e05822864ce10b5d7646525632e86d69b79123eec55a5d3fff0155ba46b61902775e1644bcb80e1e4dffdac28e7febb089083
+  languageName: node
+  linkType: hard
+
+"@types/prompts@npm:^2.4.4":
+  version: 2.4.4
+  resolution: "@types/prompts@npm:2.4.4"
+  dependencies:
+    "@types/node": "*"
+    kleur: ^3.0.3
+  checksum: fa8d9a6f63f5e7f4a5b9bd4d40527ca4b8c8c6a63bf0864bf72ea85706a9e1b292d73c8c9a3b7423fb80a5d3e7d563d0069d6644384438c1251adbd9efc03a12
   languageName: node
   linkType: hard
 
@@ -6102,6 +6131,18 @@ __metadata:
   version: 0.7.0
   resolution: "dedent@npm:0.7.0"
   checksum: 87de191050d9a40dd70cad01159a0bcf05ecb59750951242070b6abf9569088684880d00ba92a955b4058804f16eeaf91d604f283929b4f614d181cd7ae633d2
+  languageName: node
+  linkType: hard
+
+"dedent@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "dedent@npm:1.2.0"
+  peerDependencies:
+    babel-plugin-macros: ^3.1.0
+  peerDependenciesMeta:
+    babel-plugin-macros:
+      optional: true
+  checksum: 239f12ddd443a1a59b210af10c9b30985bb0c177403a53353d3c450d13acec2e532ef03bc3ba31aee1ea6cfa54c865edcd5fa249a2f34ad447e68bdb6717e67b
   languageName: node
   linkType: hard
 
@@ -11211,6 +11252,17 @@ __metadata:
     figures: ^2.0.0
     pkg-conf: ^2.1.0
   checksum: a6a540e054096a1f4cf8b1f21fea62ca3e44a19faa63bd486723b736348609caab1fa59a87f16559de347dde8ae1fdebfc25a8b6723c88ae8239f176ffb0dda5
+  languageName: node
+  linkType: hard
+
+"simple-git@npm:^3.19.1":
+  version: 3.19.1
+  resolution: "simple-git@npm:3.19.1"
+  dependencies:
+    "@kwsites/file-exists": ^1.1.1
+    "@kwsites/promise-deferred": ^1.1.1
+    debug: ^4.3.4
+  checksum: ab7c6901130eadd5758c5f1b0d957573b13cd981549cb5853e757cf13f8cb53b79a50e1acde8eaceba88da814d252f90cf7feab9bd67c64db903250adc51b02f
   languageName: node
   linkType: hard
 
