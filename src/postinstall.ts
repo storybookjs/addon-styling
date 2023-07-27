@@ -1,5 +1,5 @@
 import { PackageJson } from "@storybook/types";
-import { logger, colors } from "@storybook/node-logger";
+import { logger } from "@storybook/node-logger";
 import { readConfig } from "@storybook/csf-tools";
 
 import type { ToolConfigurationStrategy } from "./postinstall/types";
@@ -8,87 +8,93 @@ import {
   findConfig,
   writePrettyConfig,
 } from "./postinstall/utils/configs.utils";
-import { buildStorybookProjectMeta } from "./postinstall/utils/dependencies.utils";
+import {
+  Builder,
+  buildStorybookProjectMeta,
+} from "./postinstall/utils/dependencies.utils";
+import {
+  printError,
+  printHeader,
+  askUser,
+  printScriptSummary,
+  ConfigSummary,
+} from "./postinstall/utils/outputs";
+import { isGitClean } from "./postinstall/utils/git.utils";
 
 import { tailwindStrategy } from "./postinstall/tailwind/tailwind.strategy";
-import { materialUIStrategy } from "./postinstall/material-ui/material-ui.strategy";
-import { emotionStrategy } from "./postinstall/emotion/emotion.strategy";
-import { styledComponentsStrategy } from "./postinstall/styled-components/styled-components.strategy";
+import { fallbackStrategy } from "./postinstall/fallback/fallback.strategy";
 
-const AUTO_CONFIG_STRATEGIES: ToolConfigurationStrategy[] = [
-  tailwindStrategy,
-  materialUIStrategy,
-  emotionStrategy,
-  styledComponentsStrategy,
-];
+const AUTO_CONFIG_STRATEGIES: ToolConfigurationStrategy[] = [tailwindStrategy];
 
 const selectStrategy = (packageJson: PackageJson) =>
-  AUTO_CONFIG_STRATEGIES.find(({ predicate }) => predicate(packageJson));
+  AUTO_CONFIG_STRATEGIES.find(({ predicate }) => predicate(packageJson)) ??
+  fallbackStrategy;
 
 const automigrate = async () => {
-  logger.plain(`
-=========================================
+  printHeader();
 
- 🧰 Configuring ${colors.pink.bold("@storybook/addon-styling")}
+  const isGitDirty = (await isGitClean()) === false;
 
-=========================================
-`);
+  if (isGitDirty) {
+    const shouldQuit = await askUser.shouldQuitWithDirtyGit();
+    if (shouldQuit) return;
+  }
 
-  // Step 1: Find configuration strategy
+  // Step 1: Find path to Storybook config files
+  const mainPath = await findConfig("main");
+  const previewPath = await findConfig("preview");
+
+  // Step 2: load package.json and Storybook config files
   const packageJson: PackageJson = getPackageJson();
-  const strategy = selectStrategy(packageJson);
+  const mainConfig = await readConfig(mainPath);
+  const previewConfig = await readConfig(previewPath);
 
-  if (!strategy) {
-    logger.plain(
-      `📣 ${colors.orange.bold(
-        "No supported tool detected. Skipping auto-configuration."
-      )}
-      
-  Check out the documentation for how to manually configure the addon.
-  ${colors.pink("https://storybook.js.org/addons/@storybook/addon-styling/")}`
-    );
+  // Step 3: Build project meta
+  const projectMeta = buildStorybookProjectMeta(mainConfig, packageJson);
+
+  if (Builder.isNot.webpack(projectMeta)) {
+    printError.unsupportedBuilder();
     return;
   }
 
-  const mainPath = await findConfig("main");
-  const mainConfig = await readConfig(mainPath);
+  // Step 4: Determine configuration strategy
+  const strategy = selectStrategy(packageJson);
 
-  const projectMeta = buildStorybookProjectMeta(mainConfig, packageJson);
+  const summary: ConfigSummary = {
+    strategy: strategy.name,
+    changed: [],
+    nextSteps: [],
+  };
 
-  const previewPath = await findConfig("preview");
-  const previewConfig = await readConfig(previewPath);
-
-  // Step 2: Determine project details
-  logger.plain(`${colors.blue.bold("(1/3)")} Project summary`);
-  logger.plain(`  • Built with ${colors.green.bold(projectMeta.builder)}`);
-  logger.plain(`  • Styled with ${colors.green.bold(strategy.name)}`);
-  logger.line(1);
-
-  // Step 3: Make any required updates to .storybook/main.ts
-  logger.plain(`${colors.blue.bold("(2/3)")} ${colors.purple.bold(mainPath)}`);
-  if (strategy.main) {
-    strategy.main(mainConfig, projectMeta);
+  // Step 5: Make any required updates to .storybook/main.ts
+  if (strategy?.main) {
+    const { changed, nextSteps } = await strategy?.main(
+      mainConfig,
+      projectMeta
+    );
     await writePrettyConfig(mainConfig);
-  } else {
-    logger.plain(`  • No updates required.`);
-  }
-  logger.line(1);
+    logger.line();
 
-  // Step 4: Make any required updates to .storybook/preview.ts
-  logger.plain(
-    `${colors.blue.bold("(3/3)")} ${colors.purple.bold(previewPath)}`
-  );
-  if (strategy.preview) {
+    summary.changed.push(...changed);
+    summary.nextSteps.push(...nextSteps);
+  }
+
+  // Step 6: Make any required updates to .storybook/preview.ts
+  if (strategy?.preview) {
     // Make updates to preview
-    strategy.preview(previewConfig, projectMeta);
+    const { changed, nextSteps } = await strategy?.preview(
+      previewConfig,
+      projectMeta
+    );
     await writePrettyConfig(previewConfig);
-  } else {
-    logger.plain(`  • No updates required.`);
-  }
-  logger.line(1);
+    logger.line();
 
-  // Step 5: Profit
-  logger.plain("✨ Done");
+    summary.changed.push(...changed);
+    summary.nextSteps.push(...nextSteps);
+  }
+
+  // Step 7: End of script
+  printScriptSummary(summary);
 };
 
 automigrate();
