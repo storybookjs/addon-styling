@@ -17,7 +17,15 @@ export function webpackFinal(
   }
 
   if (rules) {
-    config?.module?.rules
+    const configRules = config.module?.rules;
+
+    if (!configRules) {
+      throw new Error(
+        "webpackFinal received a rules option but config.module.rules is not an array"
+      );
+    }
+
+    configRules
       // Remove any existing rules for styles
       .filter((rule) => typeof rule === "object" && !isRuleForStyles(rule))
       // Add the new rules for styles
