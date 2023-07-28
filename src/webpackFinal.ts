@@ -17,7 +17,7 @@ export function webpackFinal(
   }
 
   if (rules) {
-    const configRules = config.module?.rules;
+    let configRules = config.module?.rules;
 
     if (!configRules) {
       throw new Error(
@@ -25,11 +25,12 @@ export function webpackFinal(
       );
     }
 
-    configRules
+    configRules = configRules
       // Remove any existing rules for styles
-      .filter((rule) => typeof rule === "object" && !isRuleForStyles(rule))
-      // Add the new rules for styles
-      .push(...rules);
+      .filter((rule) => typeof rule === "object" && !isRuleForStyles(rule));
+
+    // Add the new rules for styles
+    configRules.push(...rules);
   }
 
   return config;
