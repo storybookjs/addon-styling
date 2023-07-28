@@ -1,3 +1,20 @@
+# v1.3.5 (Fri Jul 28 2023)
+
+#### 🐛 Bug Fix
+
+- fix: @storybook/addon-styling in CJS require environments [#77](https://github.com/storybookjs/addon-styling/pull/77) ([@valentinpalkovic](https://github.com/valentinpalkovic))
+
+#### 🏠 Internal
+
+- Refactor codemods [#72](https://github.com/storybookjs/addon-styling/pull/72) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 2
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+- Valentin Palkovic ([@valentinpalkovic](https://github.com/valentinpalkovic))
+
+---
+
 # v1.3.4 (Fri Jul 14 2023)
 
 #### 🐛 Bug Fix
