@@ -25,12 +25,15 @@ const shouldQuitWithDirtyGit = async (): Promise<boolean> => {
   );
   logger.line();
 
-  const { shouldQuit } = await prompts({
-    type: "confirm",
-    name: "shouldQuit",
-    message: "Do you want to quit?",
-    initial: true,
-  });
+  const { shouldQuit } = await prompts(
+    {
+      type: "confirm",
+      name: "shouldQuit",
+      message: "Do you want to quit?",
+      initial: true,
+    },
+    { onCancel: () => process.exit(0) }
+  );
 
   return shouldQuit;
 };
@@ -51,20 +54,23 @@ Here's a list of things I know how to configure...`,
   );
   logger.line();
 
-  const { configurations = [] } = await prompts({
-    type: "multiselect",
-    name: "configurations",
-    message: "Select the styling tools that I should configure",
-    instructions: false,
-    choices: [
-      { title: "CSS Modules", value: "cssModules" },
-      { title: "PostCSS", value: "postcss" },
-      { title: "Sass", value: "sass" },
-      { title: "Less", value: "less" },
-      { title: "Vanilla Extract", value: "vanillaExtract" },
-    ],
-    hint: "- Space to select. Return to submit",
-  });
+  const { configurations = [] } = await prompts(
+    {
+      type: "multiselect",
+      name: "configurations",
+      message: "Select the styling tools that I should configure",
+      instructions: false,
+      choices: [
+        { title: "CSS Modules", value: "cssModules" },
+        { title: "PostCSS", value: "postcss" },
+        { title: "Sass", value: "sass" },
+        { title: "Less", value: "less" },
+        { title: "Vanilla Extract", value: "vanillaExtract" },
+      ],
+      hint: "- Space to select. Return to submit",
+    },
+    { onCancel: () => process.exit(0) }
+  );
 
   const configMap = configurations.reduce(
     (map: ConfigurationMap, key: keyof ConfigurationMap) => {
