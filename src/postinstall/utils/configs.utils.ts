@@ -1,8 +1,6 @@
 import fs from "node:fs/promises";
-import prettier from 'prettier';
-import * as recast from 'recast';
+import * as recast from "recast";
 
-import { logger } from "@storybook/node-logger";
 import { type ConfigFile, readConfig } from "@storybook/csf-tools";
 
 const SUPPORTED_EXTENSIONS = ["js", "ts", "tsx", "jsx"] as const;
@@ -36,32 +34,16 @@ export const getMainConfig = async (): Promise<ConfigFile> => {
 
 export const formatFileContents = (config: ConfigFile): string => {
   const fname = config.fileName;
-  if (!fname) throw new Error('Please specify a fileName for writeConfig');
+  if (!fname) throw new Error("Please specify a fileName for writeConfig");
 
-  let output = recast.print(config._ast, {}).code
-
-  try {
-    const prettierConfig = prettier.resolveConfig.sync('.', { editorconfig: true }) || {
-      printWidth: 100,
-      tabWidth: 2,
-      bracketSpacing: true,
-      trailingComma: 'es5',
-      singleQuote: true,
-    };
-
-    output = prettier.format(output, { ...prettierConfig, filepath: fname });
-  } catch (e) {
-    logger.info(`Failed applying prettier to ${fname}.`);
-  }
+  let output = recast.print(config._ast, {}).code;
 
   return output;
-}
+};
 
 export const writePrettyConfig = async (config: ConfigFile): Promise<void> => {
   const fname = config.fileName;
   const output = formatFileContents(config);
 
   await fs.writeFile(fname, output);
-}
-
-
+};

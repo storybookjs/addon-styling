@@ -1,3 +1,3 @@
-import { webpackFinal as webpack } from "./webpack/webpackFinal";
+import { webpackFinal as webpack } from "./webpackFinal";
 
 export const webpackFinal = webpack as any;

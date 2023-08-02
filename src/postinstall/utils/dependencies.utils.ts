@@ -54,9 +54,15 @@ const isAngular = ({ framework }: StorybookProjectMeta): boolean =>
 const isNextJs = ({ framework }: StorybookProjectMeta): boolean =>
   framework.includes("nextjs");
 
-export const Frameworks = {
-  isAngular,
-  isNextJs,
+export const Framework = {
+  is: {
+    angular: isAngular,
+    nextJs: isNextJs,
+  },
+  isNot: {
+    angular: (meta: StorybookProjectMeta) => !isAngular(meta),
+    nextJs: (meta: StorybookProjectMeta) => !isNextJs(meta),
+  },
 };
 
 const isWebpack = ({ builder }: StorybookProjectMeta): boolean =>
@@ -64,9 +70,15 @@ const isWebpack = ({ builder }: StorybookProjectMeta): boolean =>
 const isVite = ({ builder }: StorybookProjectMeta): boolean =>
   builder === SUPPORTED_BUILDERS.VITE;
 
-export const Builders = {
-  isWebpack,
-  isVite,
+export const Builder = {
+  is: {
+    webpack: isWebpack,
+    vite: isVite,
+  },
+  isNot: {
+    webpack: (meta: StorybookProjectMeta) => !isWebpack(meta),
+    vite: (meta: StorybookProjectMeta) => !isVite(meta),
+  },
 };
 
 export const needsCssModulesConfiguration = ({
