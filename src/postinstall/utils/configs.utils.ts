@@ -1,5 +1,4 @@
 import fs from "node:fs/promises";
-import prettier from "prettier";
 import * as recast from "recast";
 
 import { logger } from "@storybook/node-logger";
@@ -39,22 +38,6 @@ export const formatFileContents = (config: ConfigFile): string => {
   if (!fname) throw new Error("Please specify a fileName for writeConfig");
 
   let output = recast.print(config._ast, {}).code;
-
-  try {
-    const prettierConfig = prettier.resolveConfig.sync(".", {
-      editorconfig: true,
-    }) || {
-      printWidth: 100,
-      tabWidth: 2,
-      bracketSpacing: true,
-      trailingComma: "es5",
-      singleQuote: true,
-    };
-
-    output = prettier.format(output, { ...prettierConfig, filepath: fname });
-  } catch (e) {
-    logger.info(`Failed applying prettier to ${fname}.`);
-  }
 
   return output;
 };
