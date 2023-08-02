@@ -52,35 +52,30 @@ describe("CODEMOD: tailwind configuration", () => {
         "import type { StorybookConfig } from \\"@storybook/react-webpack5\\";
         const config: StorybookConfig = {
           stories: [\\"../stories/**/*.stories.@(js|jsx|ts|tsx)\\"],
-          addons: [
-            \\"@storybook/addon-essentials\\",
-            {
-              name: \\"@storybook/addon-styling\\",
-              options: {
-                rules: [
-                  {
-                    test: /\\\\.css$/,
-                    sideEffects: true,
-                    use: [
-                      require.resolve(\\"style-loader\\"),
-                      {
-                        loader: require.resolve(\\"css-loader\\"),
-                        options: {
-                          importLoaders: 1,
-                        },
-                      },
-                      {
-                        loader: require.resolve(\\"postcss-loader\\"),
-                        options: {
-                          implementation: require.resolve(\\"postcss\\"),
-                        },
-                      },
-                    ],
-                  },
-                ],
-              },
-            },
-          ],
+          addons: [\\"@storybook/addon-essentials\\", ({
+            name: \\"@storybook/addon-styling\\",
+            options: {
+              rules: [{
+            test: /\\\\.css$/,
+            sideEffects: true,
+            use: [
+                require.resolve(\\"style-loader\\"),
+                {
+                    loader: require.resolve(\\"css-loader\\"),
+                    options: {
+                        
+                        importLoaders: 1,
+                    },
+                },{
+          loader: require.resolve(\\"postcss-loader\\"),
+          options: {
+          implementation: require.resolve(\\"postcss\\"),
+          },
+          },
+            ],
+          },],
+            }
+          })],
           framework: {
             name: \\"@storybook/react-webpack5\\",
             options: {},
