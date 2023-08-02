@@ -1,7 +1,6 @@
 import fs from "node:fs/promises";
 import * as recast from "recast";
 
-import { logger } from "@storybook/node-logger";
 import { type ConfigFile, readConfig } from "@storybook/csf-tools";
 
 const SUPPORTED_EXTENSIONS = ["js", "ts", "tsx", "jsx"] as const;
