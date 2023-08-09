@@ -1,3 +1,15 @@
+# v1.3.6 (Wed Aug 09 2023)
+
+#### 🐛 Bug Fix
+
+- Fix typo [#81](https://github.com/storybookjs/addon-styling/pull/81) ([@Karibash](https://github.com/Karibash))
+
+#### Authors: 1
+
+- Karibash ([@Karibash](https://github.com/Karibash))
+
+---
+
 # v1.3.5 (Fri Jul 28 2023)
 
 #### 🐛 Bug Fix
