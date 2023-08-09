@@ -97,4 +97,4 @@ const automigrate = async () => {
   printScriptSummary(summary);
 };
 
-automigrate();
+export default automigrate;
