@@ -34,7 +34,7 @@ export const styledComponentsStrategy: ToolConfigurationStrategy = {
   preview: (previewConfig, meta) => {
     logger.plain(
       `  • Adding imports for ${colors.green(
-        SUPPORTED_STYLING_TOOLS.EMOTION
+        SUPPORTED_STYLING_TOOLS.STYLED_COMPONENTS
       )}, ${colors.blue("ThemeProvider")}, ${colors.blue(
         "Global"
       )}, and ${colors.blue("css")}`
