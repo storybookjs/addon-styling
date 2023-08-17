@@ -1,2 +1,4 @@
 #!/usr/bin/env node
-require("./bin/postinstall.js");
+const autoConfig = require("./bin/postinstall.js");
+
+module.exports = autoConfig;
