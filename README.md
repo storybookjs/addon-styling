@@ -1,3 +1,22 @@
+⚠️ **This addon is officially deprecated** ⚠️
+
+Since it's release, addon-styling has been a great way to get your styles configured in Storybook. However, as the addon quickly evolved, it became clear that it was trying to do too much. It was trying to be a configuration tool, a theming tool, and a housed bulky code mods as well. This made it difficult to maintain and added a lot of dependencies that most users didn't need.
+
+To address this, I've split the addon into two separate addons, [`@storybook/addon-styling-webpack`](https://github.com/storybookjs/addon-styling-webpack) and [`@storybook/addon-themes`](https://github.com/storybookjs/storybook/tree/next/code/addons/themes). These addons are much more focused and will allow us to iterate on them more quickly.
+
+`@storybook/addon-styling-webpack` will be specifically for configuring your **Webpack based Storybooks** with popular tools like Tailwind, Post CSS, SCSS, Less, and Vanilla-extract.
+
+`@storybook/addon-themes` will be focused on providing and switching between multiple themes in Storybook regardless of what building tool that you use.
+
+I've also moved the codemods to a separate package so that they can be used through `npx`/ `yarn dlx` / `pnpm dlx` without having a bulky codemod staying in your `node_modules`.
+
+I'll have a migration guide up soon, but in the meantime, please check out the new addons and let me know what you think!
+
+All the best,
+Shaun Evening
+
+---
+
 # `@storybook/addon-styling`
 
 Get started in Storybook 7 faster with popular styling tools.
@@ -8,7 +27,7 @@ Get started in Storybook 7 faster with popular styling tools.
 
 ## ✨ Features
 
-- 🤖 **NEW**: Zero-config for popular tools through codemods. [Read more](https://github.com/storybookjs/addon-styling/tree/main/docs/auto-configuration.md).
+- 🤖 Zero-config for popular tools through codemods. [Read more](https://github.com/storybookjs/addon-styling/tree/main/docs/auto-configuration.md).
 - 🧩 Configuration templates for popular tools
 - ⚡️ Options for css modules, postCss, Sass, and Less
 - 🎨 Provide themes
