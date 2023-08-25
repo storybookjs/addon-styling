@@ -1,3 +1,15 @@
+# v1.3.7 (Fri Aug 25 2023)
+
+#### 🐛 Bug Fix
+
+- Registry: Stop addon from being registered twice [#88](https://github.com/storybookjs/addon-styling/pull/88) ([@Integrayshaun](https://github.com/Integrayshaun))
+
+#### Authors: 1
+
+- Shaun Evening ([@Integrayshaun](https://github.com/Integrayshaun))
+
+---
+
 # v1.3.6 (Wed Aug 09 2023)
 
 #### 🐛 Bug Fix
