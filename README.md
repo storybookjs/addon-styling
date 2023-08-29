@@ -10,7 +10,7 @@ To address this, I've split the addon into two separate addons, [`@storybook/add
 
 I've also moved the codemods to a separate package so that they can be used through `npx`/ `yarn dlx` / `pnpm dlx` without having a bulky codemod staying in your `node_modules`.
 
-I'll have a migration guide up soon, but in the meantime, please check out the new addons and let me know what you think!
+I've added a [migration guide](./MIGRATION.md) to help you migrate to the new addons. If you have any questions, please feel free to reach out to me on [Twitter](https://twitter.com/integrayshaun) or the support channel in the [Storybook Discord](https://discord.com/channels/486522875931656193/1035683992684478534).
 
 All the best,
 Shaun Evening
