@@ -76,6 +76,10 @@ After:
 
 ### 📦 Remove `@storybook/addon-styling`
 
+You can now remove `@storybook/addon-styling` from your project dependencies and addons array in your `.storybook/main.ts` file.
+
+If you were also using `@storybook/addon-styling` for theme switching capabilities, read the section below on how to migrate to `@storybook/addon-themes`.
+
 ## `@storybook/addon-styling` to `@storybook/addon-themes`
 
 This guide will walk you through the steps to migrate from `@storybook/addon-styling` to `@storybook/addon-themes` for configuring your Storybook to use theme switching capabilities.
